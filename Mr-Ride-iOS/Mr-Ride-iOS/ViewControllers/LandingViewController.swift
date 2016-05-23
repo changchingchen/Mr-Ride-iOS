@@ -12,20 +12,20 @@ class LandingViewController: UIViewController {
 
     @IBOutlet weak var scrollView: UIScrollView!
     
-    private let leftMenuWidth: CGFloat = 260
+    private let leftSideMenuWidth: CGFloat = 260
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.scrollView.showsHorizontalScrollIndicator = false
-        dispatch_async(dispatch_get_main_queue()) {
+        
+        // Initially close menu programmatically.  This needs to be done on the main thread initially in order to work.
+        dispatch_async(GlobalMainQueue) {
 //            self.closeMenu(false)
-             self.scrollView.setContentOffset(CGPoint(x: self.leftMenuWidth, y: 0), animated: false)
+             self.scrollView.setContentOffset(CGPoint(x: self.leftSideMenuWidth, y: 0), animated: false)
         }
 
         
-       
-        print("scrollView.contentOffset.x: \(scrollView.contentOffset.x)")
 
         // Do any additional setup after loading the view.
     }
@@ -47,9 +47,9 @@ class LandingViewController: UIViewController {
     */
 
 }
-
-extension LandingViewController: UIScrollViewDelegate {
-    func scrollViewDidScroll(scrollView: UIScrollView) {
-        print("scrollView.contentOffset.x: \(scrollView.contentOffset.x)")
-    }
-}
+//
+//extension LandingViewController: UIScrollViewDelegate {
+//    func scrollViewDidScroll(scrollView: UIScrollView) {
+//        print("scrollView.contentOffset.x: \(scrollView.contentOffset.x)")
+//    }
+//}

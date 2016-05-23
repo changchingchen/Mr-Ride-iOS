@@ -12,7 +12,14 @@
 		532FF3711CF2AB6400EF9E14 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 532FF36F1CF2AB6400EF9E14 /* Main.storyboard */; };
 		532FF3731CF2AB6400EF9E14 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 532FF3721CF2AB6400EF9E14 /* Assets.xcassets */; };
 		532FF3761CF2AB6400EF9E14 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 532FF3741CF2AB6400EF9E14 /* LaunchScreen.storyboard */; };
-		532FF3801CF2D21600EF9E14 /* LandingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532FF37F1CF2D21600EF9E14 /* LandingViewController.swift */; };
+		532FF3831CF2ED1A00EF9E14 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532FF3821CF2ED1A00EF9E14 /* Utilities.swift */; };
+		532FF3921CF2F42C00EF9E14 /* UIColor+YBKAdditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532FF3901CF2F42C00EF9E14 /* UIColor+YBKAdditions.swift */; };
+		532FF3931CF2F42C00EF9E14 /* UIFont+YBKAdditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532FF3911CF2F42C00EF9E14 /* UIFont+YBKAdditions.swift */; };
+		532FF39C1CF3011D00EF9E14 /* LandingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532FF39A1CF3011D00EF9E14 /* LandingViewController.swift */; };
+		532FF39D1CF3011D00EF9E14 /* LeftSideMenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532FF39B1CF3011D00EF9E14 /* LeftSideMenuTableViewController.swift */; };
+		532FF39F1CF3017300EF9E14 /* MyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532FF39E1CF3017300EF9E14 /* MyTableViewCell.swift */; };
+		532FF3A61CF3025400EF9E14 /* LeftSideMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532FF3A41CF3025400EF9E14 /* LeftSideMenuTableViewCell.swift */; };
+		532FF3A71CF3025400EF9E14 /* LeftSideMenuTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 532FF3A51CF3025400EF9E14 /* LeftSideMenuTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,7 +30,14 @@
 		532FF3721CF2AB6400EF9E14 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		532FF3751CF2AB6400EF9E14 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		532FF3771CF2AB6400EF9E14 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		532FF37F1CF2D21600EF9E14 /* LandingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LandingViewController.swift; sourceTree = "<group>"; };
+		532FF3821CF2ED1A00EF9E14 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		532FF3901CF2F42C00EF9E14 /* UIColor+YBKAdditions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+YBKAdditions.swift"; sourceTree = "<group>"; };
+		532FF3911CF2F42C00EF9E14 /* UIFont+YBKAdditions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+YBKAdditions.swift"; sourceTree = "<group>"; };
+		532FF39A1CF3011D00EF9E14 /* LandingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LandingViewController.swift; sourceTree = "<group>"; };
+		532FF39B1CF3011D00EF9E14 /* LeftSideMenuTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftSideMenuTableViewController.swift; sourceTree = "<group>"; };
+		532FF39E1CF3017300EF9E14 /* MyTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyTableViewCell.swift; sourceTree = "<group>"; };
+		532FF3A41CF3025400EF9E14 /* LeftSideMenuTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftSideMenuTableViewCell.swift; sourceTree = "<group>"; };
+		532FF3A51CF3025400EF9E14 /* LeftSideMenuTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LeftSideMenuTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,9 +76,40 @@
 				532FF3721CF2AB6400EF9E14 /* Assets.xcassets */,
 				532FF3741CF2AB6400EF9E14 /* LaunchScreen.storyboard */,
 				532FF3771CF2AB6400EF9E14 /* Info.plist */,
-				532FF37F1CF2D21600EF9E14 /* LandingViewController.swift */,
+				532FF3991CF3011D00EF9E14 /* ViewControllers */,
+				532FF3941CF3010700EF9E14 /* TableViewCells */,
+				532FF3811CF2ED1A00EF9E14 /* Resources */,
 			);
 			path = "Mr-Ride-iOS";
+			sourceTree = "<group>";
+		};
+		532FF3811CF2ED1A00EF9E14 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				532FF3901CF2F42C00EF9E14 /* UIColor+YBKAdditions.swift */,
+				532FF3911CF2F42C00EF9E14 /* UIFont+YBKAdditions.swift */,
+				532FF3821CF2ED1A00EF9E14 /* Utilities.swift */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		532FF3941CF3010700EF9E14 /* TableViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				532FF3A41CF3025400EF9E14 /* LeftSideMenuTableViewCell.swift */,
+				532FF3A51CF3025400EF9E14 /* LeftSideMenuTableViewCell.xib */,
+				532FF39E1CF3017300EF9E14 /* MyTableViewCell.swift */,
+			);
+			path = TableViewCells;
+			sourceTree = "<group>";
+		};
+		532FF3991CF3011D00EF9E14 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				532FF39A1CF3011D00EF9E14 /* LandingViewController.swift */,
+				532FF39B1CF3011D00EF9E14 /* LeftSideMenuTableViewController.swift */,
+			);
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -127,6 +172,7 @@
 			files = (
 				532FF3761CF2AB6400EF9E14 /* LaunchScreen.storyboard in Resources */,
 				532FF3731CF2AB6400EF9E14 /* Assets.xcassets in Resources */,
+				532FF3A71CF3025400EF9E14 /* LeftSideMenuTableViewCell.xib in Resources */,
 				532FF3711CF2AB6400EF9E14 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -138,8 +184,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				532FF3931CF2F42C00EF9E14 /* UIFont+YBKAdditions.swift in Sources */,
+				532FF39C1CF3011D00EF9E14 /* LandingViewController.swift in Sources */,
+				532FF3921CF2F42C00EF9E14 /* UIColor+YBKAdditions.swift in Sources */,
+				532FF39D1CF3011D00EF9E14 /* LeftSideMenuTableViewController.swift in Sources */,
+				532FF39F1CF3017300EF9E14 /* MyTableViewCell.swift in Sources */,
 				532FF36E1CF2AB6400EF9E14 /* ViewController.swift in Sources */,
-				532FF3801CF2D21600EF9E14 /* LandingViewController.swift in Sources */,
+				532FF3A61CF3025400EF9E14 /* LeftSideMenuTableViewCell.swift in Sources */,
+				532FF3831CF2ED1A00EF9E14 /* Utilities.swift in Sources */,
 				532FF36C1CF2AB6400EF9E14 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

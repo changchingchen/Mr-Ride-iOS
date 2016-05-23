@@ -12,6 +12,7 @@
 		532FF3711CF2AB6400EF9E14 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 532FF36F1CF2AB6400EF9E14 /* Main.storyboard */; };
 		532FF3731CF2AB6400EF9E14 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 532FF3721CF2AB6400EF9E14 /* Assets.xcassets */; };
 		532FF3761CF2AB6400EF9E14 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 532FF3741CF2AB6400EF9E14 /* LaunchScreen.storyboard */; };
+		532FF3801CF2D21600EF9E14 /* LandingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532FF37F1CF2D21600EF9E14 /* LandingViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		532FF3721CF2AB6400EF9E14 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		532FF3751CF2AB6400EF9E14 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		532FF3771CF2AB6400EF9E14 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		532FF37F1CF2D21600EF9E14 /* LandingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LandingViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +62,7 @@
 				532FF3721CF2AB6400EF9E14 /* Assets.xcassets */,
 				532FF3741CF2AB6400EF9E14 /* LaunchScreen.storyboard */,
 				532FF3771CF2AB6400EF9E14 /* Info.plist */,
+				532FF37F1CF2D21600EF9E14 /* LandingViewController.swift */,
 			);
 			path = "Mr-Ride-iOS";
 			sourceTree = "<group>";
@@ -136,6 +139,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				532FF36E1CF2AB6400EF9E14 /* ViewController.swift in Sources */,
+				532FF3801CF2D21600EF9E14 /* LandingViewController.swift in Sources */,
 				532FF36C1CF2AB6400EF9E14 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -286,6 +290,7 @@
 				532FF37C1CF2AB6400EF9E14 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

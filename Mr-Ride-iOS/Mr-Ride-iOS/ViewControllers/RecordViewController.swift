@@ -8,11 +8,17 @@
 
 import UIKit
 
-class TrackingViewController: UIViewController {
+class RecordViewController: UIViewController {
 
+    @IBAction func cancel(sender: UIBarButtonItem) {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
 
+
+        
+//        self.navigationController?.navigationBar.topItem?.title = "Tracking View Controller"
         // Do any additional setup after loading the view.
     }
 

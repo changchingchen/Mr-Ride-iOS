@@ -12,6 +12,8 @@ class LeftSideMenuTableViewCell: UITableViewCell {
 
     @IBOutlet weak var leftSideMenuItemLabel: UILabel!
     
+    @IBOutlet weak var leftSideMenuItemBackgroundView: UIView!
+    
     struct Constant {
         static let identifier = "LeftSideMenuTableViewCell"
     }
@@ -20,8 +22,10 @@ class LeftSideMenuTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
         
-        leftSideMenuItemLabel.textColor = UIColor.mrBlack25Color()
+        leftSideMenuItemLabel.textColor = UIColor.mrWhiteColor()
         leftSideMenuItemLabel.font = UIFont.mrTextStyleFontSFUITextMedium(24)
+        
+        leftSideMenuItemBackgroundView.backgroundColor = UIColor.mrDarkSlateBlueColor()
         
     }
 

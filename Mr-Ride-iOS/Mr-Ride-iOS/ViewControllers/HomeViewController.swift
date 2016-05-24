@@ -13,9 +13,11 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var startRidingButton: UIButton!
     
     
-    @IBAction func tapStartRidingButton(sender: UIButton) {
-        
-    }
+//    @IBAction func tapStartRidingButton(sender: UIButton) {
+//        let trackingViewController = self.storyboard?.instantiateViewControllerWithIdentifier("TrackingViewController") as! TrackingViewController
+//        self.navigationController?.pushViewController(trackingViewController, animated: true)
+//
+//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

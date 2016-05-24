@@ -30,7 +30,7 @@
                                         </connections>
                                     </containerView>
                                     <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zXf-bd-qVv" userLabel="MainPageContainerView">
-                                        <rect key="frame" x="259" y="0.0" width="600" height="600"/>
+                                        <rect key="frame" x="260" y="0.0" width="600" height="600"/>
                                         <connections>
                                             <segue destination="Jtt-98-jAT" kind="embed" id="ZTA-eG-Kc5"/>
                                         </connections>
@@ -41,7 +41,7 @@
                                     <constraint firstAttribute="trailing" secondItem="zXf-bd-qVv" secondAttribute="trailing" id="GEg-Dn-zfL"/>
                                     <constraint firstItem="zXf-bd-qVv" firstAttribute="top" secondItem="u5D-Bt-Ywi" secondAttribute="top" id="JlU-hf-U0U"/>
                                     <constraint firstAttribute="bottom" secondItem="bUs-Lr-Vnn" secondAttribute="bottom" id="VA6-Ll-lPB"/>
-                                    <constraint firstItem="zXf-bd-qVv" firstAttribute="leading" secondItem="bUs-Lr-Vnn" secondAttribute="trailing" constant="-1" id="Vnx-Da-KyN"/>
+                                    <constraint firstItem="zXf-bd-qVv" firstAttribute="leading" secondItem="bUs-Lr-Vnn" secondAttribute="trailing" id="Vnx-Da-KyN"/>
                                     <constraint firstItem="bUs-Lr-Vnn" firstAttribute="leading" secondItem="u5D-Bt-Ywi" secondAttribute="leading" id="ozH-lF-msx"/>
                                     <constraint firstAttribute="bottom" secondItem="zXf-bd-qVv" secondAttribute="bottom" id="t7s-q2-HIa"/>
                                     <constraint firstItem="bUs-Lr-Vnn" firstAttribute="centerY" secondItem="u5D-Bt-Ywi" secondAttribute="centerY" id="wHz-IM-RdY"/>
@@ -95,9 +95,9 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xfB-Zb-AEO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="611" y="1420"/>
+            <point key="canvasLocation" x="473" y="1420"/>
         </scene>
-        <!--Home View Controller-->
+        <!--Home Page-->
         <scene sceneID="R9n-NR-hjh">
             <objects>
                 <viewController storyboardIdentifier="HomeViewController" id="DRh-0e-vPt" customClass="HomeViewController" customModule="Mr_Ride_iOS" customModuleProvider="target" sceneMemberID="viewController">
@@ -116,7 +116,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="224" height="60"/>
                                         <state key="normal" title="Button"/>
                                         <connections>
-                                            <action selector="tapStartRidingButton:" destination="DRh-0e-vPt" eventType="touchUpInside" id="LB8-6M-uyG"/>
+                                            <segue destination="pOR-Y1-hyB" kind="presentation" id="ZeS-RW-kef"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -136,8 +136,8 @@
                             <constraint firstItem="gYt-sk-i3g" firstAttribute="top" secondItem="uTo-k3-pSG" secondAttribute="bottom" constant="112" id="nTZ-Wn-dA1"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="glu-zc-1il">
-                        <barButtonItem key="leftBarButtonItem" title="Item" id="RcN-vc-jNR"/>
+                    <navigationItem key="navigationItem" title="Home Page" id="glu-zc-1il">
+                        <barButtonItem key="leftBarButtonItem" title="Menu" id="RcN-vc-jNR"/>
                     </navigationItem>
                     <connections>
                         <outlet property="startRidingButton" destination="SvV-ca-wiR" id="bil-1m-vhb"/>
@@ -145,7 +145,35 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lZs-FH-Ku9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2079" y="1420"/>
+            <point key="canvasLocation" x="1729" y="1420"/>
+        </scene>
+        <!--Record Page-->
+        <scene sceneID="x4L-OX-NcI">
+            <objects>
+                <viewController storyboardIdentifier="RecordViewController" id="2y3-tZ-R2m" customClass="RecordViewController" customModule="Mr_Ride_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="7PW-ec-6cm"/>
+                        <viewControllerLayoutGuide type="bottom" id="4QL-T5-Z9o"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="c5S-ys-Dqt">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Record Page" id="Fuq-pH-INj">
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="DRl-Ev-gRb">
+                            <connections>
+                                <action selector="cancel:" destination="2y3-tZ-R2m" id="SGt-6h-its"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Finish" id="uqP-dB-ObS"/>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zd9-gB-oTW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3245" y="1420"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="8CS-I3-aVG">
@@ -163,7 +191,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2H4-Ds-TLU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1267" y="1420"/>
+            <point key="canvasLocation" x="981" y="1420"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="qZI-rb-nVh">
@@ -182,6 +210,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cdp-T8-hjc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="139" y="1420"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="dKb-5W-sn0">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="pOR-Y1-hyB" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="qjh-Po-CSh">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="2y3-tZ-R2m" kind="relationship" relationship="rootViewController" id="wnx-ow-lVJ"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="scQ-fX-Qma" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2433" y="1420"/>
         </scene>
     </scenes>
 </document>

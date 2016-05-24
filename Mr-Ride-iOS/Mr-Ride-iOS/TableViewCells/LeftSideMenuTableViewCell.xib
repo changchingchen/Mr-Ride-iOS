@@ -40,6 +40,7 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="leftSideMenuItemBackgroundView" destination="g0z-mu-Mv3" id="3LJ-wK-akP"/>
                 <outlet property="leftSideMenuItemLabel" destination="72h-L8-Hi0" id="Sf7-2K-GmN"/>
             </connections>
         </tableViewCell>

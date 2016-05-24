@@ -2,37 +2,38 @@
 //  LandingViewController.swift
 //  Mr-Ride-iOS
 //
-//  Created by SK on 5/23/16.
+//  Created by SK on 5/24/16.
 //  Copyright © 2016 AppWorks School Snakeking. All rights reserved.
 //
 
 import UIKit
 
-class LandingViewController: UIViewController {
+class HomeViewController: UIViewController {
 
-    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var startRidingButton: UIButton!
     
-    private let leftSideMenuWidth: CGFloat = 260
+    
+    @IBAction func tapStartRidingButton(sender: UIButton) {
+        
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.scrollView.showsHorizontalScrollIndicator = false
-        
-        // Initially close menu programmatically.  This needs to be done on the main thread initially in order to work.
-        dispatch_async(GlobalMainQueue) {
-//            self.closeMenu(false)
-             self.scrollView.setContentOffset(CGPoint(x: self.leftSideMenuWidth, y: 0), animated: false)
-        }
+        view.backgroundColor = UIColor.mrLightblueColor()
 
+        startRidingButton.setTitle("Let's Ride".localized, forState: UIControlState.Normal)
         
-
+     
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.translucent = true
         // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+        
     }
     
 
@@ -47,9 +48,3 @@ class LandingViewController: UIViewController {
     */
 
 }
-//
-//extension LandingViewController: UIScrollViewDelegate {
-//    func scrollViewDidScroll(scrollView: UIScrollView) {
-//        print("scrollView.contentOffset.x: \(scrollView.contentOffset.x)")
-//    }
-//}

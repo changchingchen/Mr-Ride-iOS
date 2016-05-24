@@ -7,25 +7,29 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5306C0841CF3E06E00FAC567 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5306C0831CF3E06E00FAC567 /* HomeViewController.swift */; };
+		5306C0891CF3EA1900FAC567 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5306C08B1CF3EA1900FAC567 /* Localizable.strings */; };
 		532FF36C1CF2AB6400EF9E14 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532FF36B1CF2AB6400EF9E14 /* AppDelegate.swift */; };
-		532FF36E1CF2AB6400EF9E14 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532FF36D1CF2AB6400EF9E14 /* ViewController.swift */; };
 		532FF3711CF2AB6400EF9E14 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 532FF36F1CF2AB6400EF9E14 /* Main.storyboard */; };
 		532FF3731CF2AB6400EF9E14 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 532FF3721CF2AB6400EF9E14 /* Assets.xcassets */; };
 		532FF3761CF2AB6400EF9E14 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 532FF3741CF2AB6400EF9E14 /* LaunchScreen.storyboard */; };
 		532FF3831CF2ED1A00EF9E14 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532FF3821CF2ED1A00EF9E14 /* Utilities.swift */; };
 		532FF3921CF2F42C00EF9E14 /* UIColor+YBKAdditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532FF3901CF2F42C00EF9E14 /* UIColor+YBKAdditions.swift */; };
 		532FF3931CF2F42C00EF9E14 /* UIFont+YBKAdditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532FF3911CF2F42C00EF9E14 /* UIFont+YBKAdditions.swift */; };
-		532FF39C1CF3011D00EF9E14 /* LandingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532FF39A1CF3011D00EF9E14 /* LandingViewController.swift */; };
+		532FF39C1CF3011D00EF9E14 /* LandingContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532FF39A1CF3011D00EF9E14 /* LandingContainerViewController.swift */; };
 		532FF39D1CF3011D00EF9E14 /* LeftSideMenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532FF39B1CF3011D00EF9E14 /* LeftSideMenuTableViewController.swift */; };
-		532FF39F1CF3017300EF9E14 /* MyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532FF39E1CF3017300EF9E14 /* MyTableViewCell.swift */; };
 		532FF3A61CF3025400EF9E14 /* LeftSideMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532FF3A41CF3025400EF9E14 /* LeftSideMenuTableViewCell.swift */; };
 		532FF3A71CF3025400EF9E14 /* LeftSideMenuTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 532FF3A51CF3025400EF9E14 /* LeftSideMenuTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5306C0831CF3E06E00FAC567 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		5306C0851CF3E85200FAC567 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Main.strings"; sourceTree = "<group>"; };
+		5306C0861CF3E85200FAC567 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		5306C08A1CF3EA1900FAC567 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		5306C08C1CF3EA1C00FAC567 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		532FF3681CF2AB6300EF9E14 /* Mr-Ride-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mr-Ride-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		532FF36B1CF2AB6400EF9E14 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		532FF36D1CF2AB6400EF9E14 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		532FF3701CF2AB6400EF9E14 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		532FF3721CF2AB6400EF9E14 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		532FF3751CF2AB6400EF9E14 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -33,9 +37,8 @@
 		532FF3821CF2ED1A00EF9E14 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		532FF3901CF2F42C00EF9E14 /* UIColor+YBKAdditions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+YBKAdditions.swift"; sourceTree = "<group>"; };
 		532FF3911CF2F42C00EF9E14 /* UIFont+YBKAdditions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+YBKAdditions.swift"; sourceTree = "<group>"; };
-		532FF39A1CF3011D00EF9E14 /* LandingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LandingViewController.swift; sourceTree = "<group>"; };
+		532FF39A1CF3011D00EF9E14 /* LandingContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LandingContainerViewController.swift; sourceTree = "<group>"; };
 		532FF39B1CF3011D00EF9E14 /* LeftSideMenuTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftSideMenuTableViewController.swift; sourceTree = "<group>"; };
-		532FF39E1CF3017300EF9E14 /* MyTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyTableViewCell.swift; sourceTree = "<group>"; };
 		532FF3A41CF3025400EF9E14 /* LeftSideMenuTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftSideMenuTableViewCell.swift; sourceTree = "<group>"; };
 		532FF3A51CF3025400EF9E14 /* LeftSideMenuTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LeftSideMenuTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -54,6 +57,7 @@
 		532FF35F1CF2AB6300EF9E14 = {
 			isa = PBXGroup;
 			children = (
+				5306C08B1CF3EA1900FAC567 /* Localizable.strings */,
 				532FF36A1CF2AB6400EF9E14 /* Mr-Ride-iOS */,
 				532FF3691CF2AB6400EF9E14 /* Products */,
 			);
@@ -71,7 +75,6 @@
 			isa = PBXGroup;
 			children = (
 				532FF36B1CF2AB6400EF9E14 /* AppDelegate.swift */,
-				532FF36D1CF2AB6400EF9E14 /* ViewController.swift */,
 				532FF36F1CF2AB6400EF9E14 /* Main.storyboard */,
 				532FF3721CF2AB6400EF9E14 /* Assets.xcassets */,
 				532FF3741CF2AB6400EF9E14 /* LaunchScreen.storyboard */,
@@ -98,7 +101,6 @@
 			children = (
 				532FF3A41CF3025400EF9E14 /* LeftSideMenuTableViewCell.swift */,
 				532FF3A51CF3025400EF9E14 /* LeftSideMenuTableViewCell.xib */,
-				532FF39E1CF3017300EF9E14 /* MyTableViewCell.swift */,
 			);
 			path = TableViewCells;
 			sourceTree = "<group>";
@@ -106,8 +108,9 @@
 		532FF3991CF3011D00EF9E14 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				532FF39A1CF3011D00EF9E14 /* LandingViewController.swift */,
+				532FF39A1CF3011D00EF9E14 /* LandingContainerViewController.swift */,
 				532FF39B1CF3011D00EF9E14 /* LeftSideMenuTableViewController.swift */,
+				5306C0831CF3E06E00FAC567 /* HomeViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -154,6 +157,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hant",
 			);
 			mainGroup = 532FF35F1CF2AB6300EF9E14;
 			productRefGroup = 532FF3691CF2AB6400EF9E14 /* Products */;
@@ -170,6 +174,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5306C0891CF3EA1900FAC567 /* Localizable.strings in Resources */,
 				532FF3761CF2AB6400EF9E14 /* LaunchScreen.storyboard in Resources */,
 				532FF3731CF2AB6400EF9E14 /* Assets.xcassets in Resources */,
 				532FF3A71CF3025400EF9E14 /* LeftSideMenuTableViewCell.xib in Resources */,
@@ -185,11 +190,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				532FF3931CF2F42C00EF9E14 /* UIFont+YBKAdditions.swift in Sources */,
-				532FF39C1CF3011D00EF9E14 /* LandingViewController.swift in Sources */,
+				532FF39C1CF3011D00EF9E14 /* LandingContainerViewController.swift in Sources */,
+				5306C0841CF3E06E00FAC567 /* HomeViewController.swift in Sources */,
 				532FF3921CF2F42C00EF9E14 /* UIColor+YBKAdditions.swift in Sources */,
 				532FF39D1CF3011D00EF9E14 /* LeftSideMenuTableViewController.swift in Sources */,
-				532FF39F1CF3017300EF9E14 /* MyTableViewCell.swift in Sources */,
-				532FF36E1CF2AB6400EF9E14 /* ViewController.swift in Sources */,
 				532FF3A61CF3025400EF9E14 /* LeftSideMenuTableViewCell.swift in Sources */,
 				532FF3831CF2ED1A00EF9E14 /* Utilities.swift in Sources */,
 				532FF36C1CF2AB6400EF9E14 /* AppDelegate.swift in Sources */,
@@ -199,10 +203,20 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		5306C08B1CF3EA1900FAC567 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5306C08A1CF3EA1900FAC567 /* Base */,
+				5306C08C1CF3EA1C00FAC567 /* zh-Hant */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		532FF36F1CF2AB6400EF9E14 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				532FF3701CF2AB6400EF9E14 /* Base */,
+				5306C0851CF3E85200FAC567 /* zh-Hant */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -211,6 +225,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				532FF3751CF2AB6400EF9E14 /* Base */,
+				5306C0861CF3E85200FAC567 /* zh-Hant */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";

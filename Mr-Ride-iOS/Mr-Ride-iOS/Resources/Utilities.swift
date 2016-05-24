@@ -31,3 +31,9 @@ var GlobalBackgroundQueue: dispatch_queue_t {
 var GlobalPriorityDefaultQueue: dispatch_queue_t {
     return dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
 }
+
+extension String {
+    var localized: String {
+        return NSLocalizedString(self, comment: "")
+    }
+}

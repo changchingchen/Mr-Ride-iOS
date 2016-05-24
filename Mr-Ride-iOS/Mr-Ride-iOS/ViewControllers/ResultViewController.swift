@@ -1,5 +1,5 @@
 //
-//  TrackingViewController.swift
+//  ResultViewController.swift
 //  Mr-Ride-iOS
 //
 //  Created by SK on 5/24/16.
@@ -8,18 +8,11 @@
 
 import UIKit
 
-class RecordViewController: UIViewController {
+class ResultViewController: UIViewController {
 
-    @IBAction func cancel(sender: UIBarButtonItem) {
-        dismissViewControllerAnimated(true, completion: nil)
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-
-        
-//        self.navigationController?.navigationBar.topItem?.title = "Tracking View Controller"
         // Do any additional setup after loading the view.
     }
 

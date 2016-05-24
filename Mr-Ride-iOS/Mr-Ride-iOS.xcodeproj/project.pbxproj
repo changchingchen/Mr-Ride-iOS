@@ -21,6 +21,7 @@
 		532FF39D1CF3011D00EF9E14 /* LeftSideMenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532FF39B1CF3011D00EF9E14 /* LeftSideMenuTableViewController.swift */; };
 		532FF3A61CF3025400EF9E14 /* LeftSideMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532FF3A41CF3025400EF9E14 /* LeftSideMenuTableViewCell.swift */; };
 		532FF3A71CF3025400EF9E14 /* LeftSideMenuTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 532FF3A51CF3025400EF9E14 /* LeftSideMenuTableViewCell.xib */; };
+		53D465E41CF4288C00B71062 /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D465E31CF4288C00B71062 /* ResultViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +44,7 @@
 		532FF39B1CF3011D00EF9E14 /* LeftSideMenuTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftSideMenuTableViewController.swift; sourceTree = "<group>"; };
 		532FF3A41CF3025400EF9E14 /* LeftSideMenuTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftSideMenuTableViewCell.swift; sourceTree = "<group>"; };
 		532FF3A51CF3025400EF9E14 /* LeftSideMenuTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LeftSideMenuTableViewCell.xib; sourceTree = "<group>"; };
+		53D465E31CF4288C00B71062 /* ResultViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +116,7 @@
 				532FF39B1CF3011D00EF9E14 /* LeftSideMenuTableViewController.swift */,
 				5306C0831CF3E06E00FAC567 /* HomeViewController.swift */,
 				5306C08D1CF3F08700FAC567 /* RecordViewController.swift */,
+				53D465E31CF4288C00B71062 /* ResultViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -197,6 +200,7 @@
 				532FF39C1CF3011D00EF9E14 /* LandingContainerViewController.swift in Sources */,
 				5306C0841CF3E06E00FAC567 /* HomeViewController.swift in Sources */,
 				532FF3921CF2F42C00EF9E14 /* UIColor+YBKAdditions.swift in Sources */,
+				53D465E41CF4288C00B71062 /* ResultViewController.swift in Sources */,
 				532FF39D1CF3011D00EF9E14 /* LeftSideMenuTableViewController.swift in Sources */,
 				532FF3A61CF3025400EF9E14 /* LeftSideMenuTableViewCell.swift in Sources */,
 				532FF3831CF2ED1A00EF9E14 /* Utilities.swift in Sources */,

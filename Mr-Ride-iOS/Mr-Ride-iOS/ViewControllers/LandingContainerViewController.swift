@@ -10,24 +10,39 @@ import UIKit
 
 class LandingContainerViewController: UIViewController {
 
+    struct Constant {
+        static let identifier = "LandingContainerViewController"
+    }
+    
     @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var mainPageContainerView: UIView!
+    @IBOutlet weak var leftSideMenuContainerView: UIView!
     
-    private let leftSideMenuWidth: CGFloat = 260
+    private var leftSideMenuWidth: CGFloat {
+        return leftSideMenuContainerView.bounds.width
+    }
     
+    private var mainContainerViewController: MainContainerViewController?
+    
+    var activeViewController: UIViewController? {
+        willSet {
+            showLeftSideMenu(show: false, animated: true)
+            if let mainContainerVC = mainContainerViewController {
+                mainContainerVC.activeViewController = newValue
+            }
+        }
+    }
+   
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.scrollView.showsHorizontalScrollIndicator = false
-        
+
         // Initially close menu programmatically.  This needs to be done on the main thread initially in order to work.
         dispatch_async(GlobalMainQueue) {
-//            self.closeMenu(false)
-             self.scrollView.setContentOffset(CGPoint(x: self.leftSideMenuWidth, y: 0), animated: false)
+            self.showLeftSideMenu(show: false, animated: false)
         }
 
-        
-
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
@@ -35,18 +50,35 @@ class LandingContainerViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    
+    func showLeftSideMenu(show show: Bool, animated: Bool) {
+        scrollView.setContentOffset(show ? CGPointZero : CGPoint(x: leftSideMenuWidth, y: 0), animated: animated)
+    }
 
-    /*
+
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        
+        if let segueIdentifier = segue.identifier {
+            switch segueIdentifier {
+            case "MainContainerViewSegue":
+                let navigationController = segue.destinationViewController as! UINavigationController
+                mainContainerViewController = navigationController.topViewController as? MainContainerViewController
+            default:
+                return
+            }
+        }
+
     }
-    */
+    
+    
 
 }
+
+
 //
 //extension LandingViewController: UIScrollViewDelegate {
 //    func scrollViewDidScroll(scrollView: UIScrollView) {

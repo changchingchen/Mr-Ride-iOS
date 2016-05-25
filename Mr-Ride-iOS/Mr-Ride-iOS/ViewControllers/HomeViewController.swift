@@ -10,6 +10,10 @@ import UIKit
 
 class HomeViewController: UIViewController {
 
+    struct Constant {
+        static let identifier = "HomeViewController"
+    }
+    
     @IBOutlet weak var startRidingButton: UIButton!
     
     
@@ -25,11 +29,12 @@ class HomeViewController: UIViewController {
 
         startRidingButton.setTitle("Let's Ride".localized, forState: UIControlState.Normal)
         
-     
+        navigationController?.navigationBar.clipsToBounds = true
+
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.translucent = true
-        // Do any additional setup after loading the view.
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -49,4 +54,10 @@ class HomeViewController: UIViewController {
     }
     */
 
+}
+
+extension HomeViewController {
+    class func controller() -> HomeViewController {
+        return UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(Constant.identifier) as! HomeViewController
+    }
 }

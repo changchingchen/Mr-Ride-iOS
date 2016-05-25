@@ -24,13 +24,20 @@ class LeftSideMenuTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        
         let cellReuseIdentifier = LeftSideMenuTableViewCell.Constant.identifier
         let nib = UINib(nibName: cellReuseIdentifier, bundle: nil)
         tableView.registerNib(nib, forCellReuseIdentifier: cellReuseIdentifier)
+
         
-        
-        
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.translucent = true
+
         self.tableView.backgroundColor = UIColor.mrDarkSlateBlueColor()
+        
+
 
         
         
@@ -119,3 +126,19 @@ extension LeftSideMenuTableViewController {
     }
     
 }
+
+// MARK: - Table view delegate
+
+
+extension LeftSideMenuTableViewController {
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        switch leftSideMenuItems[indexPath.row] {
+        case .Home:
+            (self.navigationController?.parentViewController as! LandingContainerViewController).activeViewController = HomeViewController.controller()
+        case .History:
+            (self.navigationController?.parentViewController as! LandingContainerViewController).activeViewController = HistoryViewController.controller()
+        }
+        
+    }
+}
+

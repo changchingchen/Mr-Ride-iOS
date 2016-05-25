@@ -10,9 +10,21 @@ import UIKit
 
 class RecordViewController: UIViewController {
 
+    struct Constant {
+        static let identifier = "RecordViewController"
+    }
+    
+    
     @IBAction func cancel(sender: UIBarButtonItem) {
         dismissViewControllerAnimated(true, completion: nil)
     }
+    
+    @IBAction func finish(sender: UIBarButtonItem) {
+        let resultViewContoller = self.storyboard?.instantiateViewControllerWithIdentifier(ResultViewController.Constant.identifier) as! ResultViewController
+        resultViewContoller.isPushedFromRecordViewController = true
+        self.navigationController?.pushViewController(resultViewContoller, animated: true)
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -10,15 +10,29 @@ import UIKit
 
 class ResultViewController: UIViewController {
 
+    struct Constant {
+        static let identifier = "ResultViewController"
+    }
+    
+    var isPushedFromRecordViewController = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
-    }
+        self.navigationItem.hidesBackButton = isPushedFromRecordViewController
+        if isPushedFromRecordViewController {
+            self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Close", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(close(_:)))
+        }
 
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func close(sender: UIBarButtonItem) {
+        dismissViewControllerAnimated(true, completion: nil)
     }
     
 

@@ -24,6 +24,8 @@ class LandingContainerViewController: UIViewController {
     
     private var mainContainerViewController: MainContainerViewController?
     
+    var isShowingSideMenu = false
+    
     var activeViewController: UIViewController? {
         willSet {
             showLeftSideMenu(show: false, animated: true)
@@ -36,11 +38,12 @@ class LandingContainerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.scrollView.showsHorizontalScrollIndicator = false
+        scrollView.delegate = self
+        scrollView.showsHorizontalScrollIndicator = false
 
         // Initially close menu programmatically.  This needs to be done on the main thread initially in order to work.
         dispatch_async(GlobalMainQueue) {
-            self.showLeftSideMenu(show: false, animated: false)
+            self.showLeftSideMenu(show: self.isShowingSideMenu, animated: false)
         }
 
     }
@@ -53,6 +56,7 @@ class LandingContainerViewController: UIViewController {
     
     func showLeftSideMenu(show show: Bool, animated: Bool) {
         scrollView.setContentOffset(show ? CGPointZero : CGPoint(x: leftSideMenuWidth, y: 0), animated: animated)
+        isShowingSideMenu = show
     }
 
 
@@ -78,10 +82,12 @@ class LandingContainerViewController: UIViewController {
 
 }
 
+// MARK: - UIScrollVIewDelegate
 
-//
-//extension LandingViewController: UIScrollViewDelegate {
-//    func scrollViewDidScroll(scrollView: UIScrollView) {
-//        print("scrollView.contentOffset.x: \(scrollView.contentOffset.x)")
-//    }
-//}
+extension LandingContainerViewController: UIScrollViewDelegate {
+    
+    func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+        isShowingSideMenu = CGPointEqualToPoint(CGPointZero, scrollView.contentOffset)
+    }
+    
+}

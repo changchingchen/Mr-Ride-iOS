@@ -180,7 +180,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="c06-UX-SXf"/>
+                    <navigationItem key="navigationItem" id="c06-UX-SXf">
+                        <barButtonItem key="leftBarButtonItem" image="icon-menu" id="fTm-xc-jo2">
+                            <connections>
+                                <action selector="tapLeftSideMenuBarButton:" destination="V8f-xk-gqm" id="gNO-cI-96A"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hyq-Vh-MKf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -291,4 +297,7 @@
             <point key="canvasLocation" x="3749" y="2168"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="icon-menu" width="30" height="30"/>
+    </resources>
 </document>

@@ -27,6 +27,12 @@ class MainContainerViewController: UIViewController {
         
     }
     
+    @IBAction func tapLeftSideMenuBarButton(sender: UIBarButtonItem) {
+        let landingContainerViewController = self.navigationController?.parentViewController as! LandingContainerViewController
+        
+        landingContainerViewController.showLeftSideMenu(show: !landingContainerViewController.isShowingSideMenu, animated: true)
+        
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,6 +73,5 @@ class MainContainerViewController: UIViewController {
             activeVC.didMoveToParentViewController(self)
         }
     }
-
 
 }

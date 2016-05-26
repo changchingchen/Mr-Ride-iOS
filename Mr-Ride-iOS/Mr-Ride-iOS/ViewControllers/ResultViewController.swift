@@ -23,7 +23,7 @@ class ResultViewController: UIViewController {
         if isPushedFromRecordViewController {
             self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Close", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(close(_:)))
         }
-
+        self.title = "Result"
     }
     
     override func didReceiveMemoryWarning() {
@@ -35,6 +35,10 @@ class ResultViewController: UIViewController {
         dismissViewControllerAnimated(true, completion: nil)
     }
     
+    deinit {
+        print("ResultViewController destroy!")
+    }
+
 
     /*
     // MARK: - Navigation

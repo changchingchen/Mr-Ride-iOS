@@ -14,9 +14,6 @@ class MainContainerViewController: UIViewController {
         static let identifier = "MainContainerViewController"
     }
     
-    private lazy var homeViewController = HomeViewController.controller()
-    private lazy var historyViewController = HistoryViewController.controller()
-    
     var activeViewController: UIViewController? {
         didSet {
             removeInactiveViewController(oldValue)

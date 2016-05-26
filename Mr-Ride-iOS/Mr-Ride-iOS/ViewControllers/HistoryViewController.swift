@@ -14,10 +14,20 @@ class HistoryViewController: UIViewController {
         static let identifier = "HistoryViewController"
     }
     
+    @IBOutlet weak var historyResultsTableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.greenColor()
         
+        historyResultsTableView.delegate = self
+        historyResultsTableView.dataSource = self
+        
+        let cellReuseIdentifier = "ResultTableViewCell"
+        let nib = UINib(nibName: cellReuseIdentifier, bundle: nil)
+        historyResultsTableView.registerNib(nib, forCellReuseIdentifier: cellReuseIdentifier)
+        
+        self.navigationController?.navigationBar.topItem?.title = "History"
     }
 
     override func didReceiveMemoryWarning() {
@@ -25,6 +35,16 @@ class HistoryViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        print("\(HistoryViewController.Constant.identifier) viewDidAppear")
+        (self.navigationController?.parentViewController as! LandingContainerViewController).scrollView.scrollEnabled = true
+    }
+    
+    
+    deinit {
+        print("HistoryViewController destroy!")
+    }
 
     /*
     // MARK: - Navigation
@@ -37,6 +57,34 @@ class HistoryViewController: UIViewController {
     */
 
 }
+
+extension HistoryViewController: UITableViewDelegate {
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let resultViewController = self.storyboard?.instantiateViewControllerWithIdentifier(ResultViewController.Constant.identifier) as! ResultViewController
+        self.navigationController?.pushViewController(resultViewController, animated: true)
+        (self.navigationController?.parentViewController as! LandingContainerViewController).scrollView.scrollEnabled = false
+    }
+}
+
+extension HistoryViewController: UITableViewDataSource {
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 10
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("ResultTableViewCell", forIndexPath: indexPath) as! ResultTableViewCell
+        
+        return cell
+    }
+    
+    
+}
+
 
 extension HistoryViewController {
     class func controller() -> HistoryViewController {

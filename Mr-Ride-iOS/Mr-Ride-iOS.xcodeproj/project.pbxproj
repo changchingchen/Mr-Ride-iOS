@@ -21,6 +21,8 @@
 		532FF39D1CF3011D00EF9E14 /* LeftSideMenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532FF39B1CF3011D00EF9E14 /* LeftSideMenuTableViewController.swift */; };
 		532FF3A61CF3025400EF9E14 /* LeftSideMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532FF3A41CF3025400EF9E14 /* LeftSideMenuTableViewCell.swift */; };
 		532FF3A71CF3025400EF9E14 /* LeftSideMenuTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 532FF3A51CF3025400EF9E14 /* LeftSideMenuTableViewCell.xib */; };
+		5357B4B71CF5A0CA006357F3 /* ResultTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5357B4B51CF5A0CA006357F3 /* ResultTableViewCell.swift */; };
+		5357B4B81CF5A0CA006357F3 /* ResultTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5357B4B61CF5A0CA006357F3 /* ResultTableViewCell.xib */; };
 		53D465E41CF4288C00B71062 /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D465E31CF4288C00B71062 /* ResultViewController.swift */; };
 		53D465E61CF42CD000B71062 /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D465E51CF42CD000B71062 /* HistoryViewController.swift */; };
 		53D465E81CF435F700B71062 /* MainContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D465E71CF435F700B71062 /* MainContainerViewController.swift */; };
@@ -46,6 +48,8 @@
 		532FF39B1CF3011D00EF9E14 /* LeftSideMenuTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftSideMenuTableViewController.swift; sourceTree = "<group>"; };
 		532FF3A41CF3025400EF9E14 /* LeftSideMenuTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftSideMenuTableViewCell.swift; sourceTree = "<group>"; };
 		532FF3A51CF3025400EF9E14 /* LeftSideMenuTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LeftSideMenuTableViewCell.xib; sourceTree = "<group>"; };
+		5357B4B51CF5A0CA006357F3 /* ResultTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultTableViewCell.swift; sourceTree = "<group>"; };
+		5357B4B61CF5A0CA006357F3 /* ResultTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ResultTableViewCell.xib; sourceTree = "<group>"; };
 		53D465E31CF4288C00B71062 /* ResultViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
 		53D465E51CF42CD000B71062 /* HistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
 		53D465E71CF435F700B71062 /* MainContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainContainerViewController.swift; sourceTree = "<group>"; };
@@ -109,6 +113,8 @@
 			children = (
 				532FF3A41CF3025400EF9E14 /* LeftSideMenuTableViewCell.swift */,
 				532FF3A51CF3025400EF9E14 /* LeftSideMenuTableViewCell.xib */,
+				5357B4B51CF5A0CA006357F3 /* ResultTableViewCell.swift */,
+				5357B4B61CF5A0CA006357F3 /* ResultTableViewCell.xib */,
 			);
 			path = TableViewCells;
 			sourceTree = "<group>";
@@ -188,6 +194,7 @@
 			files = (
 				5306C0891CF3EA1900FAC567 /* Localizable.strings in Resources */,
 				532FF3761CF2AB6400EF9E14 /* LaunchScreen.storyboard in Resources */,
+				5357B4B81CF5A0CA006357F3 /* ResultTableViewCell.xib in Resources */,
 				532FF3731CF2AB6400EF9E14 /* Assets.xcassets in Resources */,
 				532FF3A71CF3025400EF9E14 /* LeftSideMenuTableViewCell.xib in Resources */,
 				532FF3711CF2AB6400EF9E14 /* Main.storyboard in Resources */,
@@ -210,6 +217,7 @@
 				53D465E41CF4288C00B71062 /* ResultViewController.swift in Sources */,
 				532FF39D1CF3011D00EF9E14 /* LeftSideMenuTableViewController.swift in Sources */,
 				532FF3A61CF3025400EF9E14 /* LeftSideMenuTableViewCell.swift in Sources */,
+				5357B4B71CF5A0CA006357F3 /* ResultTableViewCell.swift in Sources */,
 				532FF3831CF2ED1A00EF9E14 /* Utilities.swift in Sources */,
 				53D465E61CF42CD000B71062 /* HistoryViewController.swift in Sources */,
 				532FF36C1CF2AB6400EF9E14 /* AppDelegate.swift in Sources */,

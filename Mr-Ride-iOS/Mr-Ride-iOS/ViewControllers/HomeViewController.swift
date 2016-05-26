@@ -26,7 +26,7 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.mrLightblueColor()
-
+        
         startRidingButton.setTitle("Let's Ride".localized, forState: UIControlState.Normal)
         
         navigationController?.navigationBar.clipsToBounds = true
@@ -34,6 +34,7 @@ class HomeViewController: UIViewController {
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.translucent = true
+        
 
     }
 
@@ -43,6 +44,10 @@ class HomeViewController: UIViewController {
         
     }
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        self.navigationController?.navigationBar.topItem?.title = "Home"
+    }
 
     /*
     // MARK: - Navigation
@@ -53,6 +58,10 @@ class HomeViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    deinit {
+        print("HomeViewController destroy!")
+    }
 
 }
 

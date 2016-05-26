@@ -31,7 +31,7 @@ class RecordViewController: UIViewController {
 
 
         
-//        self.navigationController?.navigationBar.topItem?.title = "Tracking View Controller"
+        self.navigationController?.navigationBar.topItem?.title = "Record"
         // Do any additional setup after loading the view.
     }
 
@@ -40,6 +40,9 @@ class RecordViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    deinit {
+        print("RecordViewController destroy!")
+    }
 
     /*
     // MARK: - Navigation

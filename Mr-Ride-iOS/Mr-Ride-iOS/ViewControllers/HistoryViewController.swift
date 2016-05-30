@@ -16,6 +16,15 @@ class HistoryViewController: UIViewController {
     
     @IBOutlet weak var historyResultsTableView: UITableView!
     
+    var parentVC: LandingContainerViewController {
+        return self.navigationController?.parentViewController as! LandingContainerViewController
+    }
+    
+    var isShowingLeftSideMenu: Bool {
+        return parentVC.isShowingSideMenu
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.greenColor()
@@ -38,7 +47,7 @@ class HistoryViewController: UIViewController {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         print("\(HistoryViewController.Constant.identifier) viewDidAppear")
-        (self.navigationController?.parentViewController as! LandingContainerViewController).scrollView.scrollEnabled = true
+        parentVC.scrollView.scrollEnabled = true
     }
     
     
@@ -60,9 +69,11 @@ class HistoryViewController: UIViewController {
 
 extension HistoryViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let resultViewController = self.storyboard?.instantiateViewControllerWithIdentifier(ResultViewController.Constant.identifier) as! ResultViewController
-        self.navigationController?.pushViewController(resultViewController, animated: true)
-        (self.navigationController?.parentViewController as! LandingContainerViewController).scrollView.scrollEnabled = false
+        if !isShowingLeftSideMenu {
+            let resultViewController = self.storyboard?.instantiateViewControllerWithIdentifier(ResultViewController.Constant.identifier) as! ResultViewController
+            self.navigationController?.pushViewController(resultViewController, animated: true)
+            parentVC.scrollView.scrollEnabled = false
+        }
     }
 }
 

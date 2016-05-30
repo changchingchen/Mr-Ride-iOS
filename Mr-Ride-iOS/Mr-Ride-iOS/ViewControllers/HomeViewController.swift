@@ -14,14 +14,24 @@ class HomeViewController: UIViewController {
         static let identifier = "HomeViewController"
     }
     
+    var parentVC: LandingContainerViewController {
+        return self.navigationController?.parentViewController as! LandingContainerViewController
+    }
+    
+    var isShowingLeftSideMenu: Bool {
+        return parentVC.isShowingSideMenu
+    }
+    
     @IBOutlet weak var startRidingButton: UIButton!
     
-    
-//    @IBAction func tapStartRidingButton(sender: UIButton) {
-//        let trackingViewController = self.storyboard?.instantiateViewControllerWithIdentifier("TrackingViewController") as! TrackingViewController
-//        self.navigationController?.pushViewController(trackingViewController, animated: true)
-//
-//    }
+    @IBAction func tapStartRidingButton(sender: UIButton) {
+        
+        if !isShowingLeftSideMenu {
+            let recordViewController = self.storyboard?.instantiateViewControllerWithIdentifier("RecordViewNavigationController") as! UINavigationController
+            self.navigationController?.presentViewController(recordViewController, animated: true, completion: nil)
+        }
+
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

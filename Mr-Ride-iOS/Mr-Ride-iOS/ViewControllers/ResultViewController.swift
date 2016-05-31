@@ -16,6 +16,9 @@ class ResultViewController: UIViewController {
     
     var isPushedFromRecordViewController = false
     
+    var totalElapsedTime = NSTimeInterval()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -24,6 +27,8 @@ class ResultViewController: UIViewController {
             self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Close", style: UIBarButtonItemStyle.Plain, target: self, action: "close:")
         }
         self.title = "Result"
+        
+        print(totalElapsedTime)
     }
     
     override func didReceiveMemoryWarning() {

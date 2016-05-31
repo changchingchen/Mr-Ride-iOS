@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MapKit
 
 class ResultViewController: UIViewController {
 
@@ -17,6 +18,10 @@ class ResultViewController: UIViewController {
     var isPushedFromRecordViewController = false
     
     var totalElapsedTime = NSTimeInterval()
+    
+    var paths = [[CLLocation]]()
+    
+    private var mapViewController: MapViewController!
     
     
     override func viewDidLoad() {
@@ -29,6 +34,9 @@ class ResultViewController: UIViewController {
         self.title = "Result"
         
         print(totalElapsedTime)
+        
+        mapViewController.paths = paths
+        mapViewController.drawRoutes()
     }
     
     override func didReceiveMemoryWarning() {
@@ -45,14 +53,15 @@ class ResultViewController: UIViewController {
     }
 
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        mapViewController = segue.destinationViewController as! MapViewController
     }
-    */
+
 
 }

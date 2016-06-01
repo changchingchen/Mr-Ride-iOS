@@ -29,7 +29,7 @@ class ResultViewController: UIViewController {
 
         self.navigationItem.hidesBackButton = isPushedFromRecordViewController
         if isPushedFromRecordViewController {
-            self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Close", style: UIBarButtonItemStyle.Plain, target: self, action: "close:")
+            self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Close", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(close(_:)))
         }
         self.title = "Result"
         

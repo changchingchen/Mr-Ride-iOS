@@ -37,7 +37,7 @@ class RecordViewController: UIViewController {
     
     func startTimer() {
         timerState = .Run
-        timer = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: Selector("updateTime"), userInfo: nil, repeats: true)
+        timer = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
         startTime = NSDate.timeIntervalSinceReferenceDate()
         mapViewController.startUpdatingLocation()
 
@@ -128,7 +128,7 @@ class RecordViewController: UIViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
-        mapViewController = segue.destinationViewController as! MapViewController
+        mapViewController = segue.destinationViewController as? MapViewController
         
         
     }

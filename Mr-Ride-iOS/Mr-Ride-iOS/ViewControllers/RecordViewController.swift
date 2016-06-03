@@ -18,6 +18,9 @@ class RecordViewController: UIViewController {
     @IBOutlet weak var timerLabel: UILabel!
     @IBOutlet weak var timerButton: UIButton!
     
+    private var record = Record()
+    private var calories = 0.0
+    let dataRecorder = DataRecorder.sharedManager
     
     // Properties for timer => Try to move timer to Model
     private enum TimerState {
@@ -30,11 +33,10 @@ class RecordViewController: UIViewController {
     private var totalElapsedTime = NSTimeInterval()
     private var elapsedTimeOneRound = NSTimeInterval()
     private var timerState = TimerState.Pause
-    
-    let date = NSDate()
+    private var hasTappedTimerButton = false
+    private var date = NSDate()
     let calendar = NSCalendar.currentCalendar()
-    
-    
+
     func startTimer() {
         timerState = .Run
         timer = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
@@ -73,6 +75,11 @@ class RecordViewController: UIViewController {
     
     @IBAction func tapTimerButton(sender: UIButton) {
 
+        if !hasTappedTimerButton {
+            date = NSDate() // Record the start date and time
+            hasTappedTimerButton = true
+        }
+        
         switch timerState {
         case .Pause:
             startTimer()
@@ -94,11 +101,31 @@ class RecordViewController: UIViewController {
        
         let resultViewContoller = self.storyboard?.instantiateViewControllerWithIdentifier(ResultViewController.Constant.identifier) as! ResultViewController
         resultViewContoller.isPushedFromRecordViewController = true
-        resultViewContoller.totalElapsedTime = totalElapsedTime
-        resultViewContoller.paths = mapViewController.paths
+        resultViewContoller.date = date
+        updateCurrentRecord()
+        
+        self.dataRecorder.createRecord(record)
+        
         self.navigationController?.pushViewController(resultViewContoller, animated: true)
     }
 
+    
+    
+    private func updateCurrentRecord() {
+        self.record.distance = mapViewController.distance
+        self.record.duration = self.totalElapsedTime
+        self.record.calories = self.calories
+        self.record.date = self.date
+        for (index, path) in mapViewController.paths.enumerate() {
+            self.record.paths.append([])
+            
+            for location in path {
+                self.record.paths[index].append(location)
+            }
+        }
+
+    }
+    
     
     // MARK: - Properties for MapView
 
@@ -109,6 +136,9 @@ class RecordViewController: UIViewController {
         super.viewDidLoad()
         
         self.navigationController?.navigationBar.topItem?.title = "Record"
+        
+        
+        // Finish Button should appear only when hasTappedTimerButton == true
 
     }
 

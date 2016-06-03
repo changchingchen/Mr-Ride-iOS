@@ -38,6 +38,8 @@ class HomeViewController: UIViewController {
         view.backgroundColor = UIColor.mrLightblueColor()
         
         startRidingButton.setTitle("Let's Ride".localized, forState: UIControlState.Normal)
+        startRidingButton.layer.cornerRadius = 30
+        
         
         navigationController?.navigationBar.clipsToBounds = true
 

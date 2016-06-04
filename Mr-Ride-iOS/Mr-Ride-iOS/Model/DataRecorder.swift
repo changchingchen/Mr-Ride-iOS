@@ -82,6 +82,47 @@ extension DataRecorder {
 
     }
     
+    func createRecord2(record: Record) {
+        
+        let newRecord = NSEntityDescription.insertNewObjectForEntityForName("RideRecord", inManagedObjectContext: self.dataRecorderMOC)
+        
+        newRecord.setValue(record.calories, forKey: "calories")
+        newRecord.setValue(record.distance, forKey: "distance")
+        newRecord.setValue(record.duration, forKey: "duration")
+        newRecord.setValue(record.date,forKey: "date")
+        
+        do {
+            try newRecord.managedObjectContext?.save()
+        } catch {
+            let saveError = error as NSError
+            print(saveError)
+        }
+        
+        let newRecordID = String(newRecord.objectID.URIRepresentation()) // The Object ID will be changed after saved
+        
+        for (index, path) in record.paths.enumerate() {
+            for location in path {
+                let newLocation = NSEntityDescription.insertNewObjectForEntityForName("PathLocation", inManagedObjectContext: self.dataRecorderMOC)
+                newLocation.setValue(index, forKey: "pathNumber")
+                newLocation.setValue(location.timestamp, forKey: "createdTimestamp")
+                newLocation.setValue(location.latitude, forKey: "latitude")
+                newLocation.setValue(location.longitude, forKey: "longitude")
+                newLocation.setValue(newRecordID, forKey: "belongsToRideRecordObjectID")
+                newRecord.mutableOrderedSetValueForKey("locations").addObject(newLocation)
+            }
+        }
+        
+        do {
+            try newRecord.managedObjectContext?.save()
+        } catch {
+            let saveError = error as NSError
+            print(saveError)
+        }
+        
+        
+        
+    }
+    
     
     func readRecord(date: NSDate) -> Record? {
     

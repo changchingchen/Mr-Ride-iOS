@@ -18,6 +18,6 @@ extension RideRecord {
     @NSManaged var date: NSDate?
     @NSManaged var distance: NSNumber?
     @NSManaged var duration: NSNumber?
-    @NSManaged var locations: NSSet?
+    @NSManaged var locations: NSOrderedSet?
 
 }

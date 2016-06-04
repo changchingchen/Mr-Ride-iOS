@@ -22,15 +22,19 @@ extension UIFont {
     }
 
     class func mrTextStyleFontSFUITextBold(fontSize: CGFloat) -> UIFont? {
-        return UIFont(name: "SFUIText-Bold", size: fontSize)
+        return systemFontOfSize(fontSize, weight: UIFontWeightBold)
     }
     
     class func mrTextStyleFontSFUITextMedium(fontSize: CGFloat) -> UIFont? {
-        return UIFont(name: "SFUIText-Medium", size: fontSize)
+        return systemFontOfSize(fontSize, weight: UIFontWeightMedium)
     }
     
     class func mrTextStyleFontSFUITextRegular(fontSize: CGFloat) -> UIFont? {
-        return UIFont(name: "SFUIText-Regular", size: fontSize)
+        return systemFontOfSize(fontSize, weight: UIFontWeightRegular)
+    }
+
+    class func mrTextStyleFontSFUITextSemibold(fontSize: CGFloat) -> UIFont? {
+        return systemFontOfSize(fontSize, weight: UIFontWeightSemibold)
     }
 
 }

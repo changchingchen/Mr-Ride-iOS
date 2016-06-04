@@ -19,10 +19,12 @@ class MapViewController: UIViewController {
     
     let locationManager = CLLocationManager()
     var previousLocation: CLLocation?
-    var paths = [[CLLocation]]()
-    var path = [CLLocation]()
-    var isTimerRunning = false
+    var paths = [[LocationRecord]]() // collection of all path segment
+    var path = [LocationRecord]() // one path segment
     var distance = 0.0
+    
+    var isTimerRunning = false
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,7 +64,7 @@ class MapViewController: UIViewController {
         mapView.showsUserLocation = false
         
         for path in paths {
-            var coordinates = path.map{$0.coordinate}
+            var coordinates = path.map{CLLocationCoordinate2D(latitude: $0.latitude, longitude: $0.longitude)}
             allCoordinates += coordinates
             let polyline = MKPolyline(coordinates: &coordinates , count: coordinates.count)
             mapView.addOverlay(polyline)
@@ -108,7 +110,9 @@ extension MapViewController: CLLocationManagerDelegate {
             let center = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
             let region = MKCoordinateRegionMakeWithDistance(center, 500, 500)
             self.mapView.setRegion(region, animated: true)
-            path.append(location)
+            
+            let locationRecord = LocationRecord(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude, timestamp: location.timestamp)
+            path.append(locationRecord)
             
             if previousLocation != nil {
                 distance += location.distanceFromLocation(previousLocation!)

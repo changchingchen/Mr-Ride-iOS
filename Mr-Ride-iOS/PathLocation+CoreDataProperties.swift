@@ -1,8 +1,8 @@
 //
-//  Record+CoreDataProperties.swift
+//  PathLocation+CoreDataProperties.swift
 //  Mr-Ride-iOS
 //
-//  Created by admin on 5/30/16.
+//  Created by Chang-Ching CHEN on 6/3/16.
 //  Copyright © 2016 AppWorks School Snakeking. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -12,13 +12,13 @@
 import Foundation
 import CoreData
 
-extension Record {
+extension PathLocation {
 
+    @NSManaged var createdTimestamp: NSDate?
     @NSManaged var latitude: NSNumber?
-    @NSManaged var logitude: NSNumber?
-    @NSManaged var calorie: NSNumber?
-    @NSManaged var distance: NSNumber?
-    @NSManaged var date: NSDate?
-    @NSManaged var time: NSDate?
+    @NSManaged var longitude: NSNumber?
+    @NSManaged var pathNumber: NSNumber?
+    @NSManaged var belongsToRideRecordObjectID: String?
+    @NSManaged var record: RideRecord?
 
 }

@@ -16,10 +16,12 @@ class ResultViewController: UIViewController {
     }
     
     var isPushedFromRecordViewController = false
-    
     var totalElapsedTime = NSTimeInterval()
+    var paths = [[LocationRecord]]()
+    private var record: Record?
+    var date = NSDate()
     
-    var paths = [[CLLocation]]()
+    let dataRecorder = DataRecorder.sharedManager
     
     private var mapViewController: MapViewController!
     
@@ -29,14 +31,23 @@ class ResultViewController: UIViewController {
 
         self.navigationItem.hidesBackButton = isPushedFromRecordViewController
         if isPushedFromRecordViewController {
-            self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Close", style: UIBarButtonItemStyle.Plain, target: self, action: "close:")
+            self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Close", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(close(_:)))
         }
         self.title = "Result"
         
         print(totalElapsedTime)
         
-        mapViewController.paths = paths
-        mapViewController.drawRoutes()
+        
+        
+        if let record = dataRecorder.readRecord(date) {
+            
+            print("read data success!!")
+            mapViewController.paths = record.paths
+            mapViewController.drawRoutes()
+        }
+    
+        
+
     }
     
     override func didReceiveMemoryWarning() {

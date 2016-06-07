@@ -2,7 +2,7 @@
 //  PathLocation.swift
 //  Mr-Ride-iOS
 //
-//  Created by Chang-Ching CHEN on 6/3/16.
+//  Created by Chang-Ching CHEN on 6/6/16.
 //  Copyright © 2016 AppWorks School Snakeking. All rights reserved.
 //
 

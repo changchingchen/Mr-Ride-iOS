@@ -8,15 +8,16 @@
         <attribute name="pathNumber" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <relationship name="record" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="RideRecord" inverseName="locations" inverseEntity="RideRecord" syncable="YES"/>
     </entity>
-    <entity name="RideRecord" representedClassName=".Record" syncable="YES">
+    <entity name="RideRecord" representedClassName=".RideRecord" syncable="YES">
         <attribute name="calories" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="dateForSections" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="distance" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="duration" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
-        <relationship name="locations" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="PathLocation" inverseName="record" inverseEntity="PathLocation" syncable="YES"/>
+        <relationship name="locations" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PathLocation" inverseName="record" inverseEntity="PathLocation" syncable="YES"/>
     </entity>
     <elements>
-        <element name="PathLocation" positionX="160" positionY="-9" width="128" height="133"/>
-        <element name="RideRecord" positionX="-54" positionY="-9" width="128" height="120"/>
+        <element name="RideRecord" positionX="-45" positionY="0" width="128" height="133"/>
+        <element name="PathLocation" positionX="216" positionY="17" width="128" height="133"/>
     </elements>
 </model>

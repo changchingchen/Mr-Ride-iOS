@@ -33,6 +33,21 @@ class DataRecorder {
     static let sharedManager = DataRecorder()
     private init() { }
     private let dataRecorderMOC = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+    
+    struct Constant {
+        static let rideRecordEntityID = "RideRecord"
+        static let pathLocationEntityID = "PathLocation"
+    }
+    
+    enum RideRecordKeys: String {
+        case Calories = "calories"
+        case Date = "date"
+        case Distance = "distance"
+        case Duration = "duration"
+        case Paths = "paths"
+    }
+    
+    var records = [Record]()
 
     
 }
@@ -49,7 +64,14 @@ extension DataRecorder {
         newRecord.setValue(record.distance, forKey: "distance")
         newRecord.setValue(record.duration, forKey: "duration")
         newRecord.setValue(record.date,forKey: "date")
-       
+        
+        let calendar = NSCalendar.currentCalendar()
+        let components = calendar.components([.Year, .Month, .Day, .Hour, .Minute, .Second], fromDate:record.date)
+        let dateForSections = components.year * 100 + components.month
+        
+//        let dateForSections = components.hour * 10000 + components.minute * 100 + components.second
+        newRecord.setValue(dateForSections, forKey: "dateForSections")
+        
         do {
             try newRecord.managedObjectContext?.save()
         } catch {
@@ -84,41 +106,41 @@ extension DataRecorder {
     
     func createRecord2(record: Record) {
         
-        let newRecord = NSEntityDescription.insertNewObjectForEntityForName("RideRecord", inManagedObjectContext: self.dataRecorderMOC)
+        if let newRecord = NSEntityDescription.insertNewObjectForEntityForName("RideRecord", inManagedObjectContext: self.dataRecorderMOC) as? RideRecord {
         
-        newRecord.setValue(record.calories, forKey: "calories")
-        newRecord.setValue(record.distance, forKey: "distance")
-        newRecord.setValue(record.duration, forKey: "duration")
-        newRecord.setValue(record.date,forKey: "date")
-        
-        do {
-            try newRecord.managedObjectContext?.save()
-        } catch {
-            let saveError = error as NSError
-            print(saveError)
-        }
-        
-        let newRecordID = String(newRecord.objectID.URIRepresentation()) // The Object ID will be changed after saved
-        
-        for (index, path) in record.paths.enumerate() {
-            for location in path {
-                let newLocation = NSEntityDescription.insertNewObjectForEntityForName("PathLocation", inManagedObjectContext: self.dataRecorderMOC)
-                newLocation.setValue(index, forKey: "pathNumber")
-                newLocation.setValue(location.timestamp, forKey: "createdTimestamp")
-                newLocation.setValue(location.latitude, forKey: "latitude")
-                newLocation.setValue(location.longitude, forKey: "longitude")
-                newLocation.setValue(newRecordID, forKey: "belongsToRideRecordObjectID")
-                newRecord.mutableOrderedSetValueForKey("locations").addObject(newLocation)
+            newRecord.calories = record.calories
+            newRecord.distance = record.distance
+            newRecord.duration = record.duration
+            newRecord.date = record.date
+            
+            do {
+                try newRecord.managedObjectContext?.save()
+            } catch {
+                let saveError = error as NSError
+                print(saveError)
+            }
+            
+            let newRecordID = String(newRecord.objectID.URIRepresentation()) // The Object ID will be changed after saved
+            
+            for (index, path) in record.paths.enumerate() {
+                for location in path {
+                    if let newLocation = NSEntityDescription.insertNewObjectForEntityForName("PathLocation", inManagedObjectContext: self.dataRecorderMOC) as? PathLocation {
+                        newLocation.pathNumber = index
+                        newLocation.createdTimestamp = location.timestamp
+                        newLocation.latitude = location.latitude
+                        newLocation.longitude = location.longitude
+                        newLocation.belongsToRideRecordObjectID = newRecordID
+                        newRecord.mutableSetValueForKey("locations").addObject(newLocation)
+                    }
+                }
+            }
+            
+            do {
+                try newRecord.managedObjectContext?.save()
+            } catch let error {
+                print("CoreData Error: \(error)")
             }
         }
-        
-        do {
-            try newRecord.managedObjectContext?.save()
-        } catch {
-            let saveError = error as NSError
-            print(saveError)
-        }
-        
         
         
     }
@@ -224,6 +246,38 @@ extension DataRecorder {
     
     func deleteData() {
     
+    }
+    
+    func readAllRecords() {
+        records.removeAll()
+        
+        let rideRecordFetchReqeust = NSFetchRequest(entityName: Constant.rideRecordEntityID)
+//        rideRecordFetchReqeust.predicate = NSPredicate(format: "date ", date)
+        let sortDescriptor = NSSortDescriptor(key: "date", ascending: false)
+        rideRecordFetchReqeust.sortDescriptors = [sortDescriptor]
+        
+        do {
+            let results = try self.dataRecorderMOC.executeFetchRequest(rideRecordFetchReqeust)
+            
+            for result in results {
+                let rideRecord = result as! NSManagedObject
+                var record = Record()
+                if let date = rideRecord.valueForKey(RideRecordKeys.Date.rawValue) as? NSDate,
+                    let distatnce = rideRecord.valueForKey(RideRecordKeys.Distance.rawValue) as? Double,
+                    let duration = rideRecord.valueForKey(RideRecordKeys.Duration.rawValue) as? Double {
+                    record.date = date
+                    record.distance = distatnce
+                    record.duration = duration
+                    records.append(record)
+                }
+            }
+            
+        } catch {
+            let fetchError = error as NSError
+            print(fetchError)
+        }
+        
+        
     }
     
 }

@@ -11,7 +11,7 @@ import UIKit
 class LeftSideMenuTableViewController: UITableViewController {
 
     struct Constant {
-        static let identifier = "LeftSideMenuTableViewController"
+        static let Identifier = "LeftSideMenuTableViewController"
     }
     
     private enum LeftSideMenuItem: String {
@@ -26,7 +26,7 @@ class LeftSideMenuTableViewController: UITableViewController {
         
         
         
-        let cellReuseIdentifier = LeftSideMenuTableViewCell.Constant.identifier
+        let cellReuseIdentifier = LeftSideMenuTableViewCell.Constant.Identifier
         let nib = UINib(nibName: cellReuseIdentifier, bundle: nil)
         tableView.registerNib(nib, forCellReuseIdentifier: cellReuseIdentifier)
 

@@ -12,7 +12,7 @@ import UIKit
 class RecordViewController: UIViewController {
 
     struct Constant {
-        static let identifier = "RecordViewController"
+        static let Identifier = "RecordViewController"
     }
     
     @IBOutlet weak var timerLabel: UILabel!
@@ -109,7 +109,7 @@ class RecordViewController: UIViewController {
         
         stopTimer()
        
-        let resultViewContoller = self.storyboard?.instantiateViewControllerWithIdentifier(ResultViewController.Constant.identifier) as! ResultViewController
+        let resultViewContoller = self.storyboard?.instantiateViewControllerWithIdentifier(ResultViewController.Constant.Identifier) as! ResultViewController
         resultViewContoller.isPushedFromRecordViewController = true
         resultViewContoller.date = date
         updateCurrentRecord()

@@ -20,7 +20,49 @@ extension UIFont {
     class func mrTextStyleFontPingFangTCMedium(fontSize: CGFloat) -> UIFont? {
         return UIFont(name: "PingFangTC-Medium", size: fontSize)
     }
+    
+    // Roboto Mono
+    class func mrTextStyleFontRobotoMonoBold(fontSize: CGFloat) -> UIFont? {
+        return UIFont(name: "RobotoMono-Bold", size: fontSize)
+    }
+    
+    class func mrTextStyleFontRobotoMonoBoldItalic(fontSize: CGFloat) -> UIFont? {
+        return UIFont(name: "RobotoMono-BoldItalic", size: fontSize)
+    }
+    
+    class func mrTextStyleFontRobotoMonoItalic(fontSize: CGFloat) -> UIFont? {
+        return UIFont(name: "RobotoMono-Italic", size: fontSize)
+    }
+    
+    class func mrTextStyleFontRobotoMonoLight(fontSize: CGFloat) -> UIFont? {
+        return UIFont(name: "RobotoMono-Light", size: fontSize)
+    }
+    
+    class func mrTextStyleFontRobotoMonoLightItalic(fontSize: CGFloat) -> UIFont? {
+        return UIFont(name: "RobotoMono-LightItalic", size: fontSize)
+    }
 
+    class func mrTextStyleFontRobotoMonoMedium(fontSize: CGFloat) -> UIFont? {
+        return UIFont(name: "RobotoMono-Medium", size: fontSize)
+    }
+    
+    class func mrTextStyleFontRobotoMonoMediumItalic(fontSize: CGFloat) -> UIFont? {
+        return UIFont(name: "RobotoMono-MediumItalic", size: fontSize)
+    }
+    
+    class func mrTextStyleFontRobotoMonoRegular(fontSize: CGFloat) -> UIFont? {
+        return UIFont(name: "RobotoMono-Regular", size: fontSize)
+    }
+    
+    class func mrTextStyleFontRobotoMonoThin(fontSize: CGFloat) -> UIFont? {
+        return UIFont(name: "RobotoMono-Thin", size: fontSize)
+    }
+    
+    class func mrTextStyleFontRobotoMonoThinItalic(fontSize: CGFloat) -> UIFont? {
+        return UIFont(name: "RobotoMono-ThinItalic", size: fontSize)
+    }
+
+    // System Font
     class func mrTextStyleFontSFUITextBold(fontSize: CGFloat) -> UIFont? {
         return systemFontOfSize(fontSize, weight: UIFontWeightBold)
     }

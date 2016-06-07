@@ -12,7 +12,7 @@ import MapKit
 class MapViewController: UIViewController {
 
     struct Constant {
-        static let identifier = "MapViewController"
+        static let Identifier = "MapViewController"
     }
     
     @IBOutlet weak var mapView: MKMapView!
@@ -89,7 +89,7 @@ class MapViewController: UIViewController {
 
 extension MapViewController {
     class func controller() -> MapViewController {
-        return UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(Constant.identifier) as! MapViewController
+        return UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(Constant.Identifier) as! MapViewController
     }
 }
 

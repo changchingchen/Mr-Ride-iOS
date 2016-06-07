@@ -11,7 +11,7 @@ import UIKit
 class LandingContainerViewController: UIViewController {
 
     struct Constant {
-        static let identifier = "LandingContainerViewController"
+        static let Identifier = "LandingContainerViewController"
     }
     
     @IBOutlet weak var scrollView: UIScrollView!

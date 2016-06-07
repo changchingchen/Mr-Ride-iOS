@@ -11,7 +11,7 @@ import UIKit
 class HomeViewController: UIViewController {
 
     struct Constant {
-        static let identifier = "HomeViewController"
+        static let Identifier = "HomeViewController"
     }
     
     var parentVC: LandingContainerViewController {
@@ -46,7 +46,6 @@ class HomeViewController: UIViewController {
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.translucent = true
-        
 
     }
 
@@ -79,6 +78,6 @@ class HomeViewController: UIViewController {
 
 extension HomeViewController {
     class func controller() -> HomeViewController {
-        return UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(Constant.identifier) as! HomeViewController
+        return UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(Constant.Identifier) as! HomeViewController
     }
 }

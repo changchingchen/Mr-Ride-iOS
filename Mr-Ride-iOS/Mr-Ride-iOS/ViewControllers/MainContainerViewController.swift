@@ -11,16 +11,17 @@ import UIKit
 class MainContainerViewController: UIViewController {
 
     struct Constant {
-        static let identifier = "MainContainerViewController"
+        static let Identifier = "MainContainerViewController"
     }
     
     var activeViewController: UIViewController? {
         didSet {
             removeInactiveViewController(oldValue)
+            updateActiveViewController(activeViewController)
         }
-        willSet {
-            updateActiveViewController(newValue)
-        }
+//        willSet {
+//            updateActiveViewController(newValue)
+//        }
         
     }
     

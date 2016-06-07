@@ -15,7 +15,7 @@ class LeftSideMenuTableViewCell: UITableViewCell {
     @IBOutlet weak var leftSideMenuItemBackgroundView: UIView!
     
     struct Constant {
-        static let identifier = "LeftSideMenuTableViewCell"
+        static let Identifier = "LeftSideMenuTableViewCell"
     }
     
     override func awakeFromNib() {

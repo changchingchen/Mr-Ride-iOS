@@ -36,7 +36,20 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-    <key>NSLocationWhenInUseUsageDescription</key>
-    <string>Show your location on the map</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>RobotoMono-Bold.ttf</string>
+		<string>RobotoMono-BoldItalic.ttf</string>
+		<string>RobotoMono-Italic.ttf</string>
+		<string>RobotoMono-Light.ttf</string>
+		<string>RobotoMono-LightItalic.ttf</string>
+		<string>RobotoMono-Medium.ttf</string>
+		<string>RobotoMono-MediumItalic.ttf</string>
+		<string>RobotoMono-Regular.ttf</string>
+		<string>RobotoMono-Thin.ttf</string>
+		<string>RobotoMono-ThinItalic.ttf</string>
+	</array>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Show your location on the map</string>
 </dict>
 </plist>

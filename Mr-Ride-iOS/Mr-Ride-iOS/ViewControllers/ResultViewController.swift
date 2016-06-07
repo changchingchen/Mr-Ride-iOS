@@ -7,12 +7,13 @@
 //
 
 import UIKit
-import MapKit
+
+
 
 class ResultViewController: UIViewController {
 
     struct Constant {
-        static let identifier = "ResultViewController"
+        static let Identifier = "ResultViewController"
     }
     
     var isPushedFromRecordViewController = false

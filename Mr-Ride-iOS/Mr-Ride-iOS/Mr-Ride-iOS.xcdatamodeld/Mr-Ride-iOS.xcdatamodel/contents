@@ -17,7 +17,7 @@
         <relationship name="locations" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PathLocation" inverseName="record" inverseEntity="PathLocation" syncable="YES"/>
     </entity>
     <elements>
-        <element name="RideRecord" positionX="-45" positionY="0" width="128" height="133"/>
         <element name="PathLocation" positionX="216" positionY="17" width="128" height="133"/>
+        <element name="RideRecord" positionX="-45" positionY="0" width="128" height="133"/>
     </elements>
 </model>

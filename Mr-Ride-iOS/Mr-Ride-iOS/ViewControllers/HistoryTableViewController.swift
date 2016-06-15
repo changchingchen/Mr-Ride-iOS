@@ -82,7 +82,10 @@ class HistoryTableViewController: UITableViewController, NSFetchedResultsControl
         let nib = UINib(nibName: cellReuseIdentifier, bundle: nil)
         tableView.registerNib(nib, forCellReuseIdentifier: cellReuseIdentifier)
         
+//        self.navigationController?.navigationBarHidden = true
+        
         tableView.backgroundColor = UIColor.clearColor()
+//        tableView.backgroundColor = UIColor.redColor()
         
         
         
@@ -148,6 +151,7 @@ class HistoryTableViewController: UITableViewController, NSFetchedResultsControl
         return 24.0
     }
     
+
 //    override func sectionIndexTitlesForTableView(tableView: UITableView) -> [String]? {
 //        return fetchedResultsController?.sectionIndexTitles
 //    }

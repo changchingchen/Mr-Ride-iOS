@@ -17,27 +17,30 @@ class LeftSideMenuTableViewController: UITableViewController {
     private enum LeftSideMenuItem: String {
         case Home
         case History
+        case Map
     }
-
-    private let leftSideMenuItems = [LeftSideMenuItem.Home, .History]
+    
+    private let leftSideMenuItems = [LeftSideMenuItem.Home, .History, .Map]
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
         
         let cellReuseIdentifier = LeftSideMenuTableViewCell.Constant.Identifier
         let nib = UINib(nibName: cellReuseIdentifier, bundle: nil)
         tableView.registerNib(nib, forCellReuseIdentifier: cellReuseIdentifier)
 
         
+        // Hide the navigation bar
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.translucent = true
+        navigationController!.navigationBar.barStyle = .Black
 
+        
         self.tableView.backgroundColor = UIColor.mrDarkSlateBlueColor()
         
-
+        
 
         
         
@@ -53,6 +56,12 @@ class LeftSideMenuTableViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        tableView.selectRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), animated: false, scrollPosition: .None)
+        
+    }
     
     /*
     // Override to support conditional editing of the table view.
@@ -119,9 +128,10 @@ extension LeftSideMenuTableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCellWithIdentifier("LeftSideMenuTableViewCell", forIndexPath: indexPath) as! LeftSideMenuTableViewCell
-        
+
+        cell.selectionStyle = .None
         cell.leftSideMenuItemLabel.text = leftSideMenuItems[indexPath.row].rawValue
-        
+       
         return cell
     }
     
@@ -131,14 +141,25 @@ extension LeftSideMenuTableViewController {
 
 
 extension LeftSideMenuTableViewController {
+    
+
+    
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
         switch leftSideMenuItems[indexPath.row] {
         case .Home:
             (self.navigationController?.parentViewController as! LandingContainerViewController).activeViewController = HomeViewController.controller()
         case .History:
+//            let navigationVC = self.storyboard?.instantiateViewControllerWithIdentifier("HistoryViewNavigationController") as! UINavigationController
             (self.navigationController?.parentViewController as! LandingContainerViewController).activeViewController = HistoryViewController.controller()
+//            (self.navigationController?.parentViewController as! LandingContainerViewController).activeViewController = navigationVC
+
+        case .Map:
+            break
         }
         
     }
+    
+
 }
 

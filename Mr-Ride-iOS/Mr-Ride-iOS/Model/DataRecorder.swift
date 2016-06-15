@@ -35,8 +35,8 @@ class DataRecorder {
     private let dataRecorderMOC = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
     struct Constant {
-        static let rideRecordEntityID = "RideRecord"
-        static let pathLocationEntityID = "PathLocation"
+        static let RideRecordEntityID = "RideRecord"
+        static let PathLocationEntityID = "PathLocation"
     }
     
     enum RideRecordKeys: String {
@@ -48,7 +48,7 @@ class DataRecorder {
     }
     
     var records = [Record]()
-
+    var distances = [Double]()
     
 }
 
@@ -251,7 +251,7 @@ extension DataRecorder {
     func readAllRecords() {
         records.removeAll()
         
-        let rideRecordFetchReqeust = NSFetchRequest(entityName: Constant.rideRecordEntityID)
+        let rideRecordFetchReqeust = NSFetchRequest(entityName: Constant.RideRecordEntityID)
 //        rideRecordFetchReqeust.predicate = NSPredicate(format: "date ", date)
         let sortDescriptor = NSSortDescriptor(key: "date", ascending: false)
         rideRecordFetchReqeust.sortDescriptors = [sortDescriptor]
@@ -277,6 +277,32 @@ extension DataRecorder {
             print(fetchError)
         }
         
+        
+    }
+    
+    func fetchLastestNumberOfDistanceDataWithNumber(number: Int) {
+        
+        distances.removeAll()
+        
+        let rideRecordFetchRequest = NSFetchRequest(entityName: Constant.RideRecordEntityID)
+        let rideRecordSortDesciptor = NSSortDescriptor(key: "date", ascending: false)
+        rideRecordFetchRequest.sortDescriptors = [rideRecordSortDesciptor]
+        rideRecordFetchRequest.fetchLimit = number
+        
+        do {
+            let results = try self.dataRecorderMOC.executeFetchRequest(rideRecordFetchRequest)
+            print(results.count)
+            for result in results {
+                if let rideRecord = result as? RideRecord {
+                    if let distance = rideRecord.distance as? Double {
+                        distances.append(distance)
+                    }
+                }
+            }
+            
+        } catch let error {
+            print(error)
+        }
         
     }
     

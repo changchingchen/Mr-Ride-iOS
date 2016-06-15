@@ -37,10 +37,10 @@ class LandingContainerViewController: UIViewController {
    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
+
         scrollView.delegate = self
         scrollView.showsHorizontalScrollIndicator = false
-
         // Initially close menu programmatically.  This needs to be done on the main thread initially in order to work.
         dispatch_async(GlobalMainQueue) {
             self.showLeftSideMenu(show: self.isShowingSideMenu, animated: false)

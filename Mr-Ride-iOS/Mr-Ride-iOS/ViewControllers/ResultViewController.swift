@@ -29,16 +29,24 @@ class ResultViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        initView()
+        
         self.navigationItem.hidesBackButton = isPushedFromRecordViewController
         if isPushedFromRecordViewController {
+
             self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Close", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(close(_:)))
+            self.navigationItem.leftBarButtonItem?.tintColor = UIColor.whiteColor()
+            
+            view.backgroundColor = UIColor.clearColor()
         }
-        self.title = "Result"
+        let calendar = NSCalendar.currentCalendar()
+        let components = calendar.components([.Year, .Month, .Day], fromDate: date)
+        self.title = String(format: "%4d / %02d / %02d", components.year, components.month, components.day)
         
         print(totalElapsedTime)
         
-        
+        print(date)
         
         if let record = dataRecorder.readRecord(date) {
             
@@ -57,6 +65,10 @@ class ResultViewController: UIViewController {
     }
     
     func close(sender: UIBarButtonItem) {
+        if let homeVC = self.navigationController?.delegate as? HomeViewController {
+            homeVC.resumeLabels()
+            homeVC.updateDistanceData()
+        }
         dismissViewControllerAnimated(true, completion: nil)
     }
     
@@ -65,14 +77,23 @@ class ResultViewController: UIViewController {
     }
 
 
+    func initView() {
+        view.backgroundColor = UIColor.mrLightblueColor()
+        let gradientBackgroundLayer = CAGradientLayer()
+        let gradientTopColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.6).CGColor
+        let gradientBottomColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.4).CGColor
+        gradientBackgroundLayer.colors = [gradientTopColor, gradientBottomColor]
+        gradientBackgroundLayer.locations = [0.0, 1.0]
+        gradientBackgroundLayer.frame = view.frame
+        view.layer.insertSublayer(gradientBackgroundLayer, atIndex: 0)
+    }
     
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-        mapViewController = segue.destinationViewController as! MapViewController
+
+        mapViewController = segue.destinationViewController as? MapViewController
+
     }
 
 

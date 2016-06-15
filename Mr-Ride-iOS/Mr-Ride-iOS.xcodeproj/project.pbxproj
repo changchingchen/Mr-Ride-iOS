@@ -34,6 +34,9 @@
 		847254C81CFECB44000E6C61 /* DataRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847254C71CFECB44000E6C61 /* DataRecorder.swift */; };
 		848D81D91CFD287E00BD9C98 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848D81D81CFD287E00BD9C98 /* Timer.swift */; };
 		848D81DB1CFD655E00BD9C98 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848D81DA1CFD655E00BD9C98 /* MapViewController.swift */; };
+		84CAAD6D1D0BB4E900EA5AF0 /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CAAD6C1D0BB4E900EA5AF0 /* ChartView.swift */; };
+		84CAADAC1D0FE18C00EA5AF0 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CAADAB1D0FE18C00EA5AF0 /* HeaderView.swift */; };
+		84CAADB01D0FE1E100EA5AF0 /* HeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84CAADAF1D0FE1E100EA5AF0 /* HeaderView.xib */; };
 		84F7C3581D0263A600BA08E7 /* HistoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F7C3571D0263A600BA08E7 /* HistoryTableViewController.swift */; };
 		84F7C3631D02782100BA08E7 /* RobotoMono-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 84F7C3591D02779700BA08E7 /* RobotoMono-Bold.ttf */; };
 		84F7C3641D02783300BA08E7 /* RobotoMono-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 84F7C35A1D02779800BA08E7 /* RobotoMono-BoldItalic.ttf */; };
@@ -80,6 +83,9 @@
 		847254C71CFECB44000E6C61 /* DataRecorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataRecorder.swift; sourceTree = "<group>"; };
 		848D81D81CFD287E00BD9C98 /* Timer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
 		848D81DA1CFD655E00BD9C98 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		84CAAD6C1D0BB4E900EA5AF0 /* ChartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
+		84CAADAB1D0FE18C00EA5AF0 /* HeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
+		84CAADAF1D0FE1E100EA5AF0 /* HeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HeaderView.xib; sourceTree = "<group>"; };
 		84F7C3571D0263A600BA08E7 /* HistoryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryTableViewController.swift; sourceTree = "<group>"; };
 		84F7C3591D02779700BA08E7 /* RobotoMono-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoMono-Bold.ttf"; sourceTree = "<group>"; };
 		84F7C35A1D02779800BA08E7 /* RobotoMono-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoMono-BoldItalic.ttf"; sourceTree = "<group>"; };
@@ -130,6 +136,7 @@
 				532FF36F1CF2AB6400EF9E14 /* Main.storyboard */,
 				532FF3741CF2AB6400EF9E14 /* LaunchScreen.storyboard */,
 				532FF3771CF2AB6400EF9E14 /* Info.plist */,
+				84CAAD6C1D0BB4E900EA5AF0 /* ChartView.swift */,
 				848D81D71CFD286B00BD9C98 /* Model */,
 				532FF3991CF3011D00EF9E14 /* ViewControllers */,
 				532FF3941CF3010700EF9E14 /* TableViewCells */,
@@ -165,6 +172,8 @@
 				532FF3A51CF3025400EF9E14 /* LeftSideMenuTableViewCell.xib */,
 				5357B4B51CF5A0CA006357F3 /* ResultTableViewCell.swift */,
 				5357B4B61CF5A0CA006357F3 /* ResultTableViewCell.xib */,
+				84CAADAB1D0FE18C00EA5AF0 /* HeaderView.swift */,
+				84CAADAF1D0FE1E100EA5AF0 /* HeaderView.xib */,
 			);
 			path = TableViewCells;
 			sourceTree = "<group>";
@@ -273,6 +282,7 @@
 				532FF3711CF2AB6400EF9E14 /* Main.storyboard in Resources */,
 				84F7C3631D02782100BA08E7 /* RobotoMono-Bold.ttf in Resources */,
 				84F7C3641D02783300BA08E7 /* RobotoMono-BoldItalic.ttf in Resources */,
+				84CAADB01D0FE1E100EA5AF0 /* HeaderView.xib in Resources */,
 				84F7C3651D02783300BA08E7 /* RobotoMono-Italic.ttf in Resources */,
 				84F7C3661D02783300BA08E7 /* RobotoMono-Light.ttf in Resources */,
 				84F7C3671D02783300BA08E7 /* RobotoMono-LightItalic.ttf in Resources */,
@@ -305,7 +315,9 @@
 				8469C9461D05B09900D97DB3 /* PathLocation.swift in Sources */,
 				532FF39D1CF3011D00EF9E14 /* LeftSideMenuTableViewController.swift in Sources */,
 				532FF3A61CF3025400EF9E14 /* LeftSideMenuTableViewCell.swift in Sources */,
+				84CAAD6D1D0BB4E900EA5AF0 /* ChartView.swift in Sources */,
 				5357B4B71CF5A0CA006357F3 /* ResultTableViewCell.swift in Sources */,
+				84CAADAC1D0FE18C00EA5AF0 /* HeaderView.swift in Sources */,
 				848D81DB1CFD655E00BD9C98 /* MapViewController.swift in Sources */,
 				532FF3831CF2ED1A00EF9E14 /* Utilities.swift in Sources */,
 				8469C9431D05B09900D97DB3 /* RideRecord+CoreDataProperties.swift in Sources */,

@@ -95,4 +95,24 @@ extension UIColor {
 	class func mrLightblueColor() -> UIColor {
 		return UIColor(red: 99.0 / 255.0, green: 215.0 / 255.0, blue: 246.0 / 255.0, alpha: 1.0)
 	}
+    
+    class func mrBrightSkyBlue() -> UIColor {
+        return UIColor(red: 0.0 / 255.0, green: 190.0 / 255.0, blue: 240.0 / 255.0, alpha: 1.0)
+    }
+    
+    class func mrTurquoiseBlue() -> UIColor {
+        return UIColor(red: 0.0 / 255.0, green: 156.0 / 255.0, blue: 197.0 / 255.0, alpha: 1.0)
+    }
+   
+    class func mrWaterBlue() -> UIColor {
+        return UIColor(red: 11.0 / 255.0, green: 151.0 / 255.0, blue: 189.0 / 255.0, alpha: 1.0)
+    }
+    
+    class func mrRobinsEggBlue0() -> UIColor {
+        return UIColor(red: 146.0 / 255.0, green: 225.0 / 255.0, blue: 246.0 / 255.0, alpha: 0.0)
+    }
+    
+    class func mrWhiteColorWithAlpha(alpha: CGFloat) -> UIColor {
+        return UIColor(white: 255.0 / 255.0, alpha: alpha)
+    }
 }

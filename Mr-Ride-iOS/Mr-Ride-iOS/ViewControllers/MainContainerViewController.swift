@@ -35,8 +35,9 @@ class MainContainerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        
         activeViewController = HomeViewController.controller()
-        // Do any additional setup after loading the view.
+
     }
 
     override func didReceiveMemoryWarning() {

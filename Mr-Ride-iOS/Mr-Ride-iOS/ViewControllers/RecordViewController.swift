@@ -16,6 +16,8 @@ class RecordViewController: UIViewController {
     }
     
     @IBOutlet weak var timerLabel: UILabel!
+    
+    @IBOutlet weak var timerButtonContainerView: UIView!
     @IBOutlet weak var timerButton: UIButton!
     
     @IBOutlet weak var distanceLabel: UILabel!
@@ -25,6 +27,8 @@ class RecordViewController: UIViewController {
     private var record = Record()
     private var calories = 0.0
     let dataRecorder = DataRecorder.sharedManager
+    
+//    var resultViewController: ResultViewController?
     
     // Properties for timer => Try to move timer to Model
     private enum TimerState {
@@ -54,6 +58,7 @@ class RecordViewController: UIViewController {
         timer.invalidate()
         totalElapsedTime += elapsedTimeOneRound // Calculate the total elapsed time from the beginning
         mapViewController.stopUpdatingLocation()
+        mapViewController.previousLocation = nil
     }
     
     func updateTime() {
@@ -75,7 +80,8 @@ class RecordViewController: UIViewController {
             = String(format: "%02d:%02d:%02d.%02d", hour, minute, second, tenMillisecond)
         
         distanceLabel.text = "\(Int(mapViewController.distance)) m"
-//        speedLabel.text = "\(mapViewController.speed)"
+        let speedInKmPerHour = mapViewController.speed * 3600 / 1000
+        speedLabel.text = String(format: "%.2f km/hr", speedInKmPerHour)
         
     }
     
@@ -84,9 +90,11 @@ class RecordViewController: UIViewController {
         if !hasTappedTimerButton {
             date = NSDate() // Record the start date and time
             hasTappedTimerButton = true
-
+            
             self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Finish", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(finish(_:)))
             self.navigationItem.rightBarButtonItem?.tintColor = UIColor.whiteColor()
+//            self.navigationItem.rightBarButtonItem?.enabled = true
+            
 
         }
         
@@ -94,29 +102,44 @@ class RecordViewController: UIViewController {
         case .Pause:
             startTimer()
             mapViewController.isTimerRunning = true
+            UIView.animateWithDuration(0.6, animations: {
+                self.timerButton.transform = CGAffineTransformMakeScale(0.5, 0.5)
+                self.timerButton.layer.cornerRadius = 8.0
+            })
         case .Run:
             stopTimer()
+            UIView.animateWithDuration(0.6, animations: {
+                self.timerButton.transform = CGAffineTransformMakeScale(1.0, 1.0)
+                self.timerButton.layer.cornerRadius = self.timerButton.bounds.size.width / 2
+            })
             mapViewController.isTimerRunning = false
         }
     }
     
     @IBAction func cancel(sender: UIBarButtonItem) {
         stopTimer()
+        if let homeViewVC = self.navigationController?.delegate as? HomeViewController {
+            homeViewVC.resumeLabels()
+        }
         dismissViewControllerAnimated(true, completion: nil)
     }
     
+//    @IBAction func finish(sender: UIBarButtonItem) {
     func finish(sender: UIBarButtonItem) {
-        
+    
         stopTimer()
        
-        let resultViewContoller = self.storyboard?.instantiateViewControllerWithIdentifier(ResultViewController.Constant.Identifier) as! ResultViewController
-        resultViewContoller.isPushedFromRecordViewController = true
-        resultViewContoller.date = date
+        let resultViewController = self.storyboard?.instantiateViewControllerWithIdentifier(ResultViewController.Constant.Identifier) as! ResultViewController
+        resultViewController.isPushedFromRecordViewController = true
+        resultViewController.date = date
+//        print("爸我在這")
+//        resultViewController?.date = date
+//        print(date)
         updateCurrentRecord()
         
         self.dataRecorder.createRecord(record)
-        
-        self.navigationController?.pushViewController(resultViewContoller, animated: true)
+       
+        self.navigationController?.pushViewController(resultViewController, animated: true)
     }
 
     
@@ -145,6 +168,8 @@ class RecordViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+//        self.navigationItem.rightBarButtonItem?.enabled = false
+
         initView()
         
         
@@ -172,14 +197,16 @@ class RecordViewController: UIViewController {
         // Set Navigation Bar
         self.navigationController?.navigationBar.topItem?.title = String(format: "%4d / %02d / %02d", components.year, components.month, components.day)
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
-        
+//        navigationController?.navigationBar.backgroundColor = UIColor.mrLightblueColor()
+        self.navigationController?.navigationBar.barTintColor = UIColor.mrLightblueColor()
+        self.navigationController?.navigationBar.barStyle = .Black
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
-        self.navigationController?.navigationBar.translucent = true
+        self.navigationController?.navigationBar.translucent = false
         
-//, NSFontAttributeName: UIFont.mrTextStyleFontSFUITextSemibold(17.0)?
+
         // Set View Background
-        view.backgroundColor = UIColor.mrLightblueColor()
+        view.backgroundColor = UIColor.clearColor()
         let gradientBackgroundLayer = CAGradientLayer()
         let gradientTopColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.6).CGColor
         let gradientBottomColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.4).CGColor
@@ -187,7 +214,14 @@ class RecordViewController: UIViewController {
         gradientBackgroundLayer.locations = [0.0, 1.0]
         gradientBackgroundLayer.frame = view.frame
         view.layer.insertSublayer(gradientBackgroundLayer, atIndex: 0)
+//
         
+        timerButtonContainerView.backgroundColor = .clearColor()
+        timerButtonContainerView.layer.cornerRadius = timerButtonContainerView.bounds.size.width / 2
+        timerButtonContainerView.layer.borderColor = UIColor.whiteColor().CGColor
+        timerButtonContainerView.layer.borderWidth = 4.0
+        
+        timerButton.layer.cornerRadius = timerButton.bounds.size.width / 2
         
         // Set Label Colors and Font
         distanceLabel.textColor = UIColor.whiteColor()
@@ -198,6 +232,9 @@ class RecordViewController: UIViewController {
         
         caloriesLabel.textColor = UIColor.whiteColor()
         caloriesLabel.font = UIFont.mrTextStyleFontSFUITextRegular(30.0)
+        
+        timerLabel.textColor = UIColor.whiteColor()
+        timerLabel.font = UIFont.mrTextStyleFontRobotoMonoLight(30.0)
 
         
     }
@@ -208,10 +245,42 @@ class RecordViewController: UIViewController {
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-        mapViewController = segue.destinationViewController as? MapViewController
         
+//        var destinationVC = segue.destinationViewController
+//        
+//        
+//        if let identifier = segue.identifier {
+//            switch identifier {
+//            case "showResultView":
+//                if let resultVC = segue.destinationViewController as? ResultViewController {
+//
+//                    print("finished button")
+//
+//                    resultViewController = resultVC
+//                    
+//                    resultVC.isPushedFromRecordViewController = true
+//                    resultVC.date = self.date
+//
+//                    let calendar = NSCalendar.currentCalendar()
+//                    let components = calendar.components([.Year, .Month, .Day], fromDate: date)
+//                    
+//                    resultVC.navigationItem.title = String(format: "%4d / %02d / %02d", components.year, components.month, components.day)
+//
+//                    print("媽我在這")
+//                    
+//                }
+//            default:
+//                break
+//            }
+//        }
+        
+        mapViewController = segue.destinationViewController as? MapViewController
+//        if segue.destinationViewController is MapViewController {
+//            print("MapViewController")
+//        }
+//        if segue.destinationViewController is ResultViewController {
+//            print("ResultViewController")
+//        }
         
     }
 

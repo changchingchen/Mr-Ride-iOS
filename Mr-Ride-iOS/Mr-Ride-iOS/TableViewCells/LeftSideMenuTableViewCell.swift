@@ -10,9 +10,11 @@ import UIKit
 
 class LeftSideMenuTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var leftSideMenuItemLabel: UILabel!
+    @IBOutlet weak var leftSideMenuItemLabel: UILabel! { didSet{ initLeftSideMenuItemLabel() } }
     
-    @IBOutlet weak var leftSideMenuItemBackgroundView: UIView!
+    @IBOutlet weak var leftSideMenuItemBackgroundView: UIView! { didSet { initLeftSideMenuItemBackgroundView() } }
+    
+    @IBOutlet weak var pointView: UIView! { didSet{ initPointView() } }
     
     struct Constant {
         static let Identifier = "LeftSideMenuTableViewCell"
@@ -21,19 +23,41 @@ class LeftSideMenuTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        
-        leftSideMenuItemLabel.textColor = UIColor.mrWhiteColor()
-        leftSideMenuItemLabel.font = UIFont.mrTextStyleFontSFUITextMedium(24)
-        
-        leftSideMenuItemBackgroundView.backgroundColor = UIColor.mrDarkSlateBlueColor()
-        
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
+        
+        if selected {
+            leftSideMenuItemLabel.textColor = UIColor.mrWhiteColor()
+            pointView.hidden = false
+        } else {
+            leftSideMenuItemLabel.textColor = UIColor.mrWhite50Color()
+            pointView.hidden = true
+        }
 
-        // Configure the view for the selected state
-//        leftSideMenuItemLabel.textColor = UIColor.mrWhiteColor()
+    }
+    
+    private func initLeftSideMenuItemLabel() {
+        leftSideMenuItemLabel.textColor = UIColor.mrWhite50Color()
+        leftSideMenuItemLabel.layer.shadowColor = UIColor.mrBlack25Color().CGColor
+        leftSideMenuItemLabel.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
+        leftSideMenuItemLabel.layer.shadowRadius = 2.0
+        leftSideMenuItemLabel.layer.shadowOpacity = 1.0
+        leftSideMenuItemLabel.font = UIFont.mrTextStyleFontSFUITextMedium(24)
+    }
+    
+    private func initLeftSideMenuItemBackgroundView() {
+        leftSideMenuItemBackgroundView.backgroundColor = UIColor.mrDarkSlateBlueColor()
+    }
+    
+    private func initPointView() {
+        pointView.backgroundColor = UIColor.mrWhiteColor()
+        pointView.layer.cornerRadius = pointView.bounds.size.width / 2
+        pointView.layer.shadowColor = UIColor.mrBlack25Color().CGColor
+        pointView.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
+        pointView.layer.shadowRadius = 2.0
+        pointView.layer.shadowOpacity = 1.0
     }
     
 }

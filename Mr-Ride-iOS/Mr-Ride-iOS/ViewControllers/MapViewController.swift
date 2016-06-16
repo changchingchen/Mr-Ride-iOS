@@ -22,12 +22,15 @@ class MapViewController: UIViewController {
     var paths = [[LocationRecord]]() // collection of all path segment
     var path = [LocationRecord]() // one path segment
     var distance = 0.0
+    var speed = 0.0
     
     var isTimerRunning = false
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestWhenInUseAuthorization()
@@ -119,6 +122,7 @@ extension MapViewController: CLLocationManagerDelegate {
                 print("Distance: \(distance)")
             }
             previousLocation = location
+            speed = location.speed
             print(location)
             
         }

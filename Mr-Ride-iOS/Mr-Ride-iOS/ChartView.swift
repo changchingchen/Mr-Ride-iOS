@@ -13,8 +13,10 @@ class ChartView: UIView {
 
     
     var graphPoints = [Double]() { didSet { setNeedsDisplay() } }
+    var graphPointXLabels = [String]()
     var needsToMarkToday = false
     var todayLabel: UILabel!
+    var xLabels: [UILabel]?
     private let maxGraphHeight: CGFloat = 153.0
     
     override func drawRect(rect: CGRect) {
@@ -124,6 +126,23 @@ class ChartView: UIView {
                 todayLabel.font = UIFont.mrTextStyleFontSFUITextRegular(10.0)
                 todayLabel.textAlignment = .Center
                 self.addSubview(todayLabel)
+            } else {
+                
+//                let todayPointRadius: CGFloat = 4.0
+//                let todayPointDiameter = todayPointRadius * 2
+//                for graphPointIndex in 0..<graphPoints.count {
+//                    var todayPoint = CGPoint(
+//                        x: calculateXPoint(margin: margin, horizontalSpace: horizontalSpace, column: graphPointIndex),
+//                        y: calculateYPoint(topBorder: topBorder, graphHeight: graphHeight, maxGraphPoint: maxGraphPoint, graphPoint: graphPoints[graphPointIndex])
+//                    )
+//                    todayPoint.x -= todayPointRadius
+//                    todayPoint.y -= todayPointRadius
+//                    
+//                    let circle = UIBezierPath(ovalInRect: CGRect(origin: todayPoint, size: CGSize(width: todayPointDiameter, height: todayPointDiameter)))
+//                    UIColor.mrWhiteColorWithAlpha(0.7).setFill()
+//                    circle.fill()
+//                }
+               
             }
             
             
@@ -141,42 +160,6 @@ class ChartView: UIView {
             linePath.lineWidth = 0.5
             linePath.stroke()
         }
-//        graphPath.lineWidth = 2.0
-//        graphPath.stroke()
-        
-//        for i in 0..<graphPoints.count {
-//            var point = CGPoint(x: columnXPoint(i), y: columnYPoint(graphPoints[i]))
-//            point.x -= 5.0/2
-//            point.y -= 5.0/2
-//            
-//            let circle = UIBezierPath(
-//                ovalInRect: CGRect(origin: point,
-//                    size: CGSize(width: 5.0, height: 5.0)))
-//            circle.fill()
-//        }
-        
-
-        
-        
-//        let graphPath = UIBezierPath()
-//        graphPath.moveToPoint(
-//            CGPoint(
-//                x: calculateXPoint(margin: margin, horizontalSpace: horizontalSpace, column: 0),
-//                y: calculateYPoint(topBorder: topBorder, graphHeight: graphHeight, maxGraphPoint: maxGraphPoint, graphPoint: graphPoints[0])
-//                    )
-//            )
-//        for index in 1..<graphPoints.count {
-//            let nextPoint = CGPoint(
-//                x: calculateXPoint(margin: margin, horizontalSpace: horizontalSpace, column: index),
-//                y: calculateYPoint(topBorder: topBorder, graphHeight: graphHeight, maxGraphPoint: maxGraphPoint, graphPoint: graphPoints[index])
-//            )
-//            graphPath.addLineToPoint(nextPoint)
-//        }
-//        
-//        UIColor.redColor().setStroke()
-//        graphPath.stroke()
-        
-
         
     }
     

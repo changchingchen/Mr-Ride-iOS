@@ -31,23 +31,10 @@ class HistoryViewController: UIViewController {
     private var chartView: ChartView!
     private var isFirstLaunched = true
     private var distances = [Double]()
+    private let maxDataPointsOnChart = 14 // this should be multiple of 7
     
 //    private var historyTableViewController: HistoryTableViewController!
-    
-    enum Month: Int {
-        case January = 1
-        case February
-        case March
-        case April
-        case May
-        case June
-        case July
-        case August
-        case September
-        case October
-        case November
-        case December
-    }
+
     
     var managedObjectContext: NSManagedObjectContext? = (UIApplication.sharedApplication().delegate as? AppDelegate)?.managedObjectContext
     
@@ -58,7 +45,7 @@ class HistoryViewController: UIViewController {
         fetchRequest.sortDescriptors = [dateForSectionsSortDescriptor, dateSortDescriptor]
         
         // Need to be further consider whether ! is good or not
-        let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext!, sectionNameKeyPath: "dateForSections", cacheName: nil)
+        let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext!, sectionNameKeyPath: "headerForSection", cacheName: nil)
         fetchedResultsController.delegate = self
         
         return fetchedResultsController
@@ -104,13 +91,9 @@ class HistoryViewController: UIViewController {
         
         if let fetchedResults = fetchedResultsController?.fetchedObjects as? [RideRecord] {
             distances = fetchedResults.map {$0.distance!.doubleValue}
-            let distancesSlice = distances[0...20]
-            distances = Array(distancesSlice)
-//            print(distances[0...20])
-            print(distances)
         }
         
-        print(fetchedResultsController?.fetchedObjects?.count)
+        
         
         
     }
@@ -130,7 +113,11 @@ class HistoryViewController: UIViewController {
         if isFirstLaunched {
             chartView = ChartView(frame: CGRect(x: 0.0, y: 0.0, width: chartContainerView.bounds.size.width, height: chartContainerView.bounds.size.height))
             chartView.backgroundColor = UIColor.clearColor()
-            chartView.graphPoints = distances.reverse()
+            
+            let endIndex = min(distances.count, maxDataPointsOnChart)
+            let distancesSlice = distances[0..<endIndex]
+            let distancesOnChart = (endIndex < maxDataPointsOnChart) ? Array(distancesSlice) + [Double](count: maxDataPointsOnChart-endIndex, repeatedValue: 0.0) : Array(distancesSlice)
+            chartView.graphPoints = distancesOnChart.reverse()
             chartView.needsToMarkToday = false
             chartContainerView.addSubview(chartView)
             chartContainerView.backgroundColor = .clearColor()
@@ -178,8 +165,20 @@ extension HistoryViewController: NSFetchedResultsControllerDelegate {
 
 // MARK: - Table view data source
 extension HistoryViewController: UITableViewDataSource {
-//extension HistoryViewController {
-
+    
+    private func getFetchObjectsIndexFromIndexPath(indexPath: NSIndexPath) -> Int {
+        
+        var index = 0
+        
+        for section in 0..<indexPath.section {
+            index += tableView.numberOfRowsInSection(section)
+        }
+        
+        index += indexPath.row
+        
+        return index
+        
+    }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         
@@ -187,42 +186,15 @@ extension HistoryViewController: UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let sections = fetchedResultsController?.sections where sections.count > 0 {
-            return sections[section].numberOfObjects
-        } else {
-            return 0
-        }
-        //        return dataRecorder.records.count
+
+        return fetchedResultsController?.sections?[section].numberOfObjects ?? 0
+        
     }
     
-//    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-//        if let sections = fetchedResultsController?.sections where sections.count > 0 {
-//            var year = 0
-//            var month = ""
-//            
-//            if let yearAndMonth = Int(sections[section].name) {
-//                year = yearAndMonth / 100
-//                month = String(Month(rawValue: yearAndMonth % 100)!)
-//            }
-//            return "\(month), \(year)"
-//        } else {
-//            return nil
-//        }
-//    }
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = tableView.dequeueReusableHeaderFooterViewWithIdentifier(HeaderView.Constant.Identifier) as! HeaderView
-        if let sections = fetchedResultsController?.sections where sections.count > 0 {
-            var year = 0
-            var month = ""
-            
-            if let yearAndMonth = Int(sections[section].name) {
-                year = yearAndMonth / 100
-                month = String(Month(rawValue: yearAndMonth % 100)!)
-            }
-            headerView.headerTitleLabel.text = "\(month), \(year)"
-        }
-        
+        headerView.headerTitleLabel.text = fetchedResultsController?.sections?[section].name
         
         return headerView
     }
@@ -270,13 +242,6 @@ extension HistoryViewController: UITableViewDataSource {
         }
         
         
-        //        let record = dataRecorder.records[indexPath.row]
-        //
-        //        if let resultTableViewCell = cell as? ResultTableViewCell {
-        //            resultTableViewCell.record = record
-        //        }
-        
-        
         return cell
     }
     
@@ -295,7 +260,7 @@ extension HistoryViewController: UITableViewDelegate {
             if let rideRecord = fetchedResultsController?.objectAtIndexPath(indexPath) as? RideRecord {
                 resultVC.date = rideRecord.date!
             }
-            //            resultVC.date = dataRecorder.records[indexPath.row].date
+
             self.navigationController?.pushViewController(resultVC, animated: true)
             parentVC.scrollView.scrollEnabled = false
         }
@@ -303,7 +268,21 @@ extension HistoryViewController: UITableViewDelegate {
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
         if scrollView === tableView {
-            print(tableView.visibleCells)
+            if let topVisibleIndexPath = tableView.indexPathsForVisibleRows?.first {
+                let fetchObjectsIndex = getFetchObjectsIndexFromIndexPath(topVisibleIndexPath)
+                
+                let startIndex = fetchObjectsIndex
+                let endIndex = min(distances.count, startIndex + maxDataPointsOnChart)
+                let distancesSlice = distances[startIndex..<endIndex]
+                let distancesOnChart = (endIndex-startIndex < maxDataPointsOnChart) ? Array(distancesSlice) + [Double](count: maxDataPointsOnChart-(endIndex-startIndex), repeatedValue: 0.0) : Array(distancesSlice)
+                chartView.graphPoints = distancesOnChart.reverse()
+                
+            }
+//            let fetchObjectsIndex = getFetchObjectsIndexFromIndexPath(tableView.indexPathsForVisibleRows?.first?)
+//            print(tableView.visibleCells.first)
+//            print(tableView.indexPathsForVisibleRows)
+//            
+//            print(tableView.visibleCells.count)
         }
     }
 

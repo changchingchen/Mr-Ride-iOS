@@ -75,6 +75,8 @@ class HomeViewController: UIViewController {
         
         updateDistanceData()
        
+//        dataRecorder.createUserInfo()
+        updateLabels()
 
 
 //        navigationController?.navigationBar.clipsToBounds = true // not sure what this for 
@@ -94,6 +96,27 @@ class HomeViewController: UIViewController {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
 //        self.navigationController?.navigationBar.topItem?.title = "Home"
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        print("\(self.dynamicType): \(#function)")
+
+    }
+    
+    func updateLabels() {
+        if let overallResult = dataRecorder.readUserInfo() {
+
+            let distance = overallResult.totalDistance
+            let duration = overallResult.totalDuration
+            
+            let averageSpeed = (duration == 0.0) ? 0.0 : (distance / duration * (3600 / 1000)) //unit: km/hr
+            
+            totalDistanceLabel.text = String(format: "%.1f km", distance / 1000)
+            totalCountLabel.text = "\(overallResult.totalRidingTimes) Times"
+            averageSpeedLabel.text = String(format: "%.2f km/hr", averageSpeed)
+            
+        }
     }
     
     

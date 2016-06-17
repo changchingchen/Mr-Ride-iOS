@@ -26,6 +26,12 @@ struct Record {
     var paths = [[LocationRecord]]()
 }
 
+struct OverallResult {
+    var totalDistance = 0.0
+    var totalDuration = 0.0
+    var totalRidingTimes = 0
+    var weight = 0.0
+}
 
 
 // Data Recorder is a singleton
@@ -55,6 +61,103 @@ class DataRecorder {
 
 // MARK: - Core Data
 extension DataRecorder {
+    
+    
+    func createUserInfo() {
+        if let newUserInfo = NSEntityDescription.insertNewObjectForEntityForName("UserInfo", inManagedObjectContext: self.dataRecorderMOC) as? UserInfo {
+            newUserInfo.height = 175.0
+            newUserInfo.weight = 65.0
+            newUserInfo.totalDistance = 0.0
+            newUserInfo.totalRidingTimes = 0
+            newUserInfo.totalDuration = 0.0
+            newUserInfo.userEmail = "snakeking0103@gmail.com"
+            
+            do {
+                try newUserInfo.managedObjectContext?.save()
+            } catch let error {
+                print(error)
+            }
+            
+        }
+        
+    }
+    
+    func updateUserInfo(distance: Double, duration: Double) {
+        let userEmail = "snakeking0103@gmail.com"
+        
+        let userInfoFetchRequest = NSFetchRequest(entityName: "UserInfo")
+        userInfoFetchRequest.predicate = NSPredicate(format: "userEmail == %@", userEmail)
+        
+        do {
+            let results = try self.dataRecorderMOC.executeFetchRequest(userInfoFetchRequest)
+            
+            if !results.isEmpty {
+                
+                
+                guard let userInfo = results.first as? UserInfo else {
+                    print("Fail to get data in updateUserInfo")
+                    return
+                }
+                
+                guard let currentDistance = userInfo.totalDistance as? Double,
+                    let currentDuration = userInfo.totalDistance as? Double,
+                    let currentRidingTimes = userInfo.totalRidingTimes as? Int
+                    else {
+                        return
+                }
+                userInfo.totalDistance = currentDistance + distance
+                userInfo.totalRidingTimes = currentRidingTimes + 1
+                userInfo.totalDuration = currentDuration + duration
+                
+                do {
+                    try userInfo.managedObjectContext?.save()
+                } catch let error {
+                    print(error)
+                }
+                
+                
+            }
+        } catch let error {
+            print(error)
+        }
+    }
+    
+    func readUserInfo() -> OverallResult? {
+        let userEmail = "snakeking0103@gmail.com"
+        
+        let userInfoFetchRequest = NSFetchRequest(entityName: "UserInfo")
+        userInfoFetchRequest.predicate = NSPredicate(format: "userEmail == %@", userEmail)
+        
+        do {
+            let results = try self.dataRecorderMOC.executeFetchRequest(userInfoFetchRequest)
+            
+            if !results.isEmpty {
+                
+                
+                guard let userInfo = results.first as? UserInfo else {
+                    print("Fail to get data in updateUserInfo")
+                    return nil
+                }
+        
+                var overallResult = OverallResult()
+                
+                overallResult.totalDistance = userInfo.totalDistance!.doubleValue
+                overallResult.totalDuration = userInfo.totalDuration!.doubleValue
+                overallResult.weight = userInfo.weight!.doubleValue
+                if let totalRidingTimes = userInfo.totalRidingTimes as? Int {
+                    print(totalRidingTimes)
+                    overallResult.totalRidingTimes = totalRidingTimes
+                }
+                
+                return overallResult
+                
+            }
+        } catch let error {
+            print(error)
+        }
+        
+        return nil
+    }
     
     func createRecord(record: Record) {
         
@@ -155,7 +258,6 @@ extension DataRecorder {
 
             
             let results = try dataRecorderMOC.executeFetchRequest(rideRecordFetchRequest)
-            print(results.count)
             
             if !results.isEmpty {
                 let result = results[0] as! NSManagedObject

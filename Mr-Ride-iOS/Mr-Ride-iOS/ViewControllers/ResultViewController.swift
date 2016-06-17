@@ -61,7 +61,7 @@ class ResultViewController: UIViewController {
             let distance = record.distance // unit: m
             var duration = record.duration // unit: s
             print(duration)
-            let averageSpeed = distance / duration * (3600 / 1000) //unit: km/hr
+            let averageSpeed = (duration == 0.0) ? 0.0 : distance / duration * (3600 / 1000) //unit: km/hr
 
             let hour = UInt8(duration / 3600.0)
             duration %= 3600
@@ -76,7 +76,7 @@ class ResultViewController: UIViewController {
             
             totalTimeLabel.text
                 = String(format: "%02d:%02d:%02d.%02d", hour, minute, second, tenMillisecond)
-            
+            caloriesLabel.text = String(format: "%.2f kCal", record.calories)
             
             mapViewController.paths = record.paths
             mapViewController.drawRoutes()
@@ -93,6 +93,7 @@ class ResultViewController: UIViewController {
     
     func close(sender: UIBarButtonItem) {
         if let homeVC = self.navigationController?.delegate as? HomeViewController {
+            homeVC.updateLabels()
             homeVC.resumeLabels()
             homeVC.updateDistanceData()
         }

@@ -31,7 +31,8 @@ class HistoryViewController: UIViewController {
     private var chartView: ChartView!
     private var isFirstLaunched = true
     private var distances = [Double]()
-    private let maxDataPointsOnChart = 14 // this should be multiple of 7
+    private var dateLabels = [String]()
+    private let maxDataPointsOnChart = 7 * 2 // this should be multiple of 7
     
 //    private var historyTableViewController: HistoryTableViewController!
 
@@ -77,8 +78,7 @@ class HistoryViewController: UIViewController {
 
 
         tableView.backgroundColor = UIColor.clearColor()
-        
-        
+
         
         
         do {
@@ -91,8 +91,13 @@ class HistoryViewController: UIViewController {
         
         if let fetchedResults = fetchedResultsController?.fetchedObjects as? [RideRecord] {
             distances = fetchedResults.map {$0.distance!.doubleValue}
+            dateLabels = fetchedResults.map {
+                let dateFormatter = NSDateFormatter()
+                dateFormatter.dateFormat = "M/dd"
+                return dateFormatter.stringFromDate($0.date!)
+            }
+            
         }
-        
         
         
         
@@ -107,6 +112,13 @@ class HistoryViewController: UIViewController {
         super.viewDidAppear(animated)
         print("\(HistoryViewController.Constant.Identifier) viewDidAppear")
         parentVC.scrollView.scrollEnabled = true
+        
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+
+
     }
     
     override func viewDidLayoutSubviews() {
@@ -117,7 +129,10 @@ class HistoryViewController: UIViewController {
             let endIndex = min(distances.count, maxDataPointsOnChart)
             let distancesSlice = distances[0..<endIndex]
             let distancesOnChart = (endIndex < maxDataPointsOnChart) ? Array(distancesSlice) + [Double](count: maxDataPointsOnChart-endIndex, repeatedValue: 0.0) : Array(distancesSlice)
+            let dateLabelsSlice = dateLabels[0..<endIndex]
+            let dateLabelsOnChart = (endIndex < maxDataPointsOnChart) ? Array(dateLabelsSlice) + [String](count: maxDataPointsOnChart-endIndex, repeatedValue: "") : Array(dateLabelsSlice)
             chartView.graphPoints = distancesOnChart.reverse()
+            chartView.graphPointXLabels = dateLabelsOnChart.reverse()
             chartView.needsToMarkToday = false
             chartContainerView.addSubview(chartView)
             chartContainerView.backgroundColor = .clearColor()
@@ -126,6 +141,10 @@ class HistoryViewController: UIViewController {
         }
     }
     
+//    override func viewWillAppear(animated: Bool) {
+//        super.viewWillAppear(animated)
+//        UIApplication.sharedApplication().statusBarStyle = .LightContent
+//    }
     
     deinit {
         print("HistoryViewController destroy!")
@@ -275,14 +294,13 @@ extension HistoryViewController: UITableViewDelegate {
                 let endIndex = min(distances.count, startIndex + maxDataPointsOnChart)
                 let distancesSlice = distances[startIndex..<endIndex]
                 let distancesOnChart = (endIndex-startIndex < maxDataPointsOnChart) ? Array(distancesSlice) + [Double](count: maxDataPointsOnChart-(endIndex-startIndex), repeatedValue: 0.0) : Array(distancesSlice)
+                let dateLabelsSlice = dateLabels[startIndex..<endIndex]
+                let dateLabelsOnChart = (endIndex-startIndex < maxDataPointsOnChart) ? Array(dateLabelsSlice) + [String](count: maxDataPointsOnChart-(endIndex-startIndex), repeatedValue: "") : Array(dateLabelsSlice)
                 chartView.graphPoints = distancesOnChart.reverse()
+                chartView.graphPointXLabels = dateLabelsOnChart.reverse()
                 
             }
-//            let fetchObjectsIndex = getFetchObjectsIndexFromIndexPath(tableView.indexPathsForVisibleRows?.first?)
-//            print(tableView.visibleCells.first)
-//            print(tableView.indexPathsForVisibleRows)
-//            
-//            print(tableView.visibleCells.count)
+
         }
     }
 

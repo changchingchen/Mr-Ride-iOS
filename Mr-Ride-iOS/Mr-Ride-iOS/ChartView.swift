@@ -15,12 +15,15 @@ class ChartView: UIView {
     var graphPoints = [Double]() { didSet { setNeedsDisplay() } }
     var graphPointXLabels = [String]()
     var needsToMarkToday = false
-    var todayLabel: UILabel!
-    var xLabels: [UILabel]?
+    var todayLabel = UILabel()
+    var xLabels = [UILabel]()
     private let maxGraphHeight: CGFloat = 153.0
+    var dataSpace: Int {
+        return graphPoints.count / 7
+    }
     
     override func drawRect(rect: CGRect) {
-    
+
         // Drawing code
         let width = bounds.width
         let height = min(maxGraphHeight, bounds.height)
@@ -117,9 +120,9 @@ class ChartView: UIView {
                 
                 let todayLabelWidth: CGFloat = 30.0
                 let todayLabelHeight: CGFloat = 12.0
-                if todayLabel != nil {
-                    todayLabel.removeFromSuperview()
-                }
+
+                todayLabel.removeFromSuperview()
+                
                 todayLabel = UILabel(frame: CGRectMake(todayPoint.x - todayLabelWidth/2+todayPointRadius, todayPoint.y-todayPointDiameter-todayLabelHeight, todayLabelWidth, todayLabelHeight))
                 todayLabel.text = "Today"
                 todayLabel.textColor = UIColor.mrWhiteColorWithAlpha(0.5)
@@ -128,6 +131,33 @@ class ChartView: UIView {
                 self.addSubview(todayLabel)
             } else {
                 
+                if !xLabels.isEmpty {
+                    for label in xLabels {
+                        label.removeFromSuperview()
+                    }
+                    xLabels.removeAll()
+                }
+
+
+//                let xLabelSpace = width / 7
+                let xLabelSpace = horizontalSpace * CGFloat(dataSpace)
+
+                
+                var labelX: CGFloat = 0.0
+                let labelY = height + 5.0
+                let labelWidth: CGFloat = 40.0
+                let labelHeight: CGFloat = 14.0
+                
+                for (index, labelText) in graphPointXLabels.enumerate() where index % dataSpace == 0 {
+                    let xLabel = UILabel(frame: CGRectMake(labelX, labelY, labelWidth, labelHeight))
+                    xLabel.text = labelText
+                    xLabel.textColor = UIColor.whiteColor()
+                    xLabel.font = UIFont.mrTextStyleFontSFUITextRegular(12.0)
+                    xLabel.textAlignment = .Left
+                    labelX += xLabelSpace
+                    xLabels.append(xLabel)
+                    self.addSubview(xLabel)
+                }
 //                let todayPointRadius: CGFloat = 4.0
 //                let todayPointDiameter = todayPointRadius * 2
 //                for graphPointIndex in 0..<graphPoints.count {
@@ -217,7 +247,6 @@ class ChartView: UIView {
         
         return controlPoint
     }
-
-    
     
 }
+

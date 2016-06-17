@@ -26,8 +26,9 @@ class RecordViewController: UIViewController {
     
     private var record = Record()
     private var calories = 0.0
+    private var weight = 0.0
     let dataRecorder = DataRecorder.sharedManager
-    
+    let caloriesCalculator = CaloriesCalculator()
 //    var resultViewController: ResultViewController?
     
     // Properties for timer => Try to move timer to Model
@@ -69,6 +70,9 @@ class RecordViewController: UIViewController {
         
         elapsedTime += totalElapsedTime
         
+        let elapsedTimeInHour = elapsedTime / 3600
+        
+        
         let hour = UInt8(elapsedTime / 3600.0)
         elapsedTime %= 3600
         let minute = UInt8(elapsedTime / 60.0)
@@ -79,9 +83,17 @@ class RecordViewController: UIViewController {
         timerLabel.text
             = String(format: "%02d:%02d:%02d.%02d", hour, minute, second, tenMillisecond)
         
-        distanceLabel.text = "\(Int(mapViewController.distance)) m"
+        let distance = mapViewController.distance
+        distanceLabel.text = "\(Int(distance)) m"
         let speedInKmPerHour = mapViewController.speed * 3600 / 1000
         speedLabel.text = String(format: "%.2f km/hr", speedInKmPerHour)
+        
+        let averageSpeedInKmPerHour = (elapsedTimeInHour == 0.0) ? 0.0 : distance / elapsedTimeInHour / 1000
+        print(elapsedTimeInHour)
+        print(distance)
+        calories = caloriesCalculator.calculateKCalBurned(.Bike, speed: averageSpeedInKmPerHour, weight: weight, time: elapsedTimeInHour)
+        
+        caloriesLabel.text = String(format: "%.2f kCal", calories)
         
     }
     
@@ -102,16 +114,16 @@ class RecordViewController: UIViewController {
         case .Pause:
             startTimer()
             mapViewController.isTimerRunning = true
-            UIView.animateWithDuration(0.6, animations: {
+            UIView.animateWithDuration(0.6) { [unowned self] in
                 self.timerButton.transform = CGAffineTransformMakeScale(0.5, 0.5)
                 self.timerButton.layer.cornerRadius = 8.0
-            })
+            }
         case .Run:
             stopTimer()
-            UIView.animateWithDuration(0.6, animations: {
+            UIView.animateWithDuration(0.6) { [unowned self] in
                 self.timerButton.transform = CGAffineTransformMakeScale(1.0, 1.0)
                 self.timerButton.layer.cornerRadius = self.timerButton.bounds.size.width / 2
-            })
+            }
             mapViewController.isTimerRunning = false
         }
     }
@@ -138,7 +150,7 @@ class RecordViewController: UIViewController {
         updateCurrentRecord()
         
         self.dataRecorder.createRecord(record)
-       
+        self.dataRecorder.updateUserInfo(record.distance, duration: record.duration)
         self.navigationController?.pushViewController(resultViewController, animated: true)
     }
 
@@ -171,10 +183,10 @@ class RecordViewController: UIViewController {
 //        self.navigationItem.rightBarButtonItem?.enabled = false
 
         initView()
-        
-        
-        
-        
+        if let overallResult = dataRecorder.readUserInfo() {
+            weight = overallResult.weight
+        }
+
         
     }
 
@@ -283,6 +295,7 @@ class RecordViewController: UIViewController {
 //        }
         
     }
+    
 
 
 }

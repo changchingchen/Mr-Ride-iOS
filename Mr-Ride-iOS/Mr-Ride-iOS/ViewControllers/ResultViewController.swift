@@ -8,8 +8,6 @@
 
 import UIKit
 
-
-
 class ResultViewController: UIViewController {
 
     struct Constant {
@@ -26,6 +24,10 @@ class ResultViewController: UIViewController {
     
     private var mapViewController: MapViewController!
     
+    @IBOutlet weak var distanceLabel: UILabel!
+    @IBOutlet weak var averageSpeedLabel: UILabel!
+    @IBOutlet weak var caloriesLabel: UILabel!
+    @IBOutlet weak var totalTimeLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,18 +41,43 @@ class ResultViewController: UIViewController {
             self.navigationItem.leftBarButtonItem?.tintColor = UIColor.whiteColor()
             
             view.backgroundColor = UIColor.clearColor()
+        } else {
+//            self.navigationItem.backBarButtonItem?.tintColor = UIColor.whiteColor()
+//            view.backgroundColor = UIColor.mrLightblueColor()
+//            self.navigationController?.navigationBar.barTintColor = UIColor.mrLightblueColor()
+//            self.navigationController?.navigationBar.barStyle = .Black
+//            self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
+//            self.navigationController?.navigationBar.shadowImage = UIImage()
+//            self.navigationController?.navigationBar.translucent = false
         }
         let calendar = NSCalendar.currentCalendar()
         let components = calendar.components([.Year, .Month, .Day], fromDate: date)
         self.title = String(format: "%4d / %02d / %02d", components.year, components.month, components.day)
         
-        print(totalElapsedTime)
         
-        print(date)
         
         if let record = dataRecorder.readRecord(date) {
             
-            print("read data success!!")
+            let distance = record.distance // unit: m
+            var duration = record.duration // unit: s
+            print(duration)
+            let averageSpeed = (duration == 0.0) ? 0.0 : distance / duration * (3600 / 1000) //unit: km/hr
+
+            let hour = UInt8(duration / 3600.0)
+            duration %= 3600
+            let minute = UInt8(duration / 60.0)
+            duration %= 60
+            let second = UInt8(duration)
+            let tenMillisecond = UInt16(duration * 100) % 100
+            
+            distanceLabel.text = String(format: "%.2f m", distance)
+            
+            averageSpeedLabel.text = String(format: "%.2f km/hr", averageSpeed)
+            
+            totalTimeLabel.text
+                = String(format: "%02d:%02d:%02d.%02d", hour, minute, second, tenMillisecond)
+            caloriesLabel.text = String(format: "%.2f kCal", record.calories)
+            
             mapViewController.paths = record.paths
             mapViewController.drawRoutes()
         }
@@ -66,6 +93,7 @@ class ResultViewController: UIViewController {
     
     func close(sender: UIBarButtonItem) {
         if let homeVC = self.navigationController?.delegate as? HomeViewController {
+            homeVC.updateLabels()
             homeVC.resumeLabels()
             homeVC.updateDistanceData()
         }

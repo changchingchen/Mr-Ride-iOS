@@ -73,16 +73,11 @@ class HomeViewController: UIViewController {
         initAverageSpeedLabels()
         initStartRidingButton()
         
-        // Fetched latest 50 data for chart
-
         updateDistanceData()
        
-        if chartView == nil {
-            print("chartView is nil")
-        }
-        
 
-        navigationController?.navigationBar.clipsToBounds = true
+
+//        navigationController?.navigationBar.clipsToBounds = true // not sure what this for 
 
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
         self.navigationController?.navigationBar.shadowImage = UIImage()

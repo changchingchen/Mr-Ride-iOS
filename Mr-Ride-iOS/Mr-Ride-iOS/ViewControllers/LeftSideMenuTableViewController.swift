@@ -155,7 +155,7 @@ extension LeftSideMenuTableViewController {
 //            (self.navigationController?.parentViewController as! LandingContainerViewController).activeViewController = navigationVC
 
         case .Map:
-            break
+            (self.navigationController?.parentViewController as! LandingContainerViewController).activeViewController = MapInfoViewController.controller()
         }
         
     }

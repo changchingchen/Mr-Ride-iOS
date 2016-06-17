@@ -102,16 +102,16 @@ class RecordViewController: UIViewController {
         case .Pause:
             startTimer()
             mapViewController.isTimerRunning = true
-            UIView.animateWithDuration(0.6, animations: {
+            UIView.animateWithDuration(0.6) { [unowned self] in
                 self.timerButton.transform = CGAffineTransformMakeScale(0.5, 0.5)
                 self.timerButton.layer.cornerRadius = 8.0
-            })
+            }
         case .Run:
             stopTimer()
-            UIView.animateWithDuration(0.6, animations: {
+            UIView.animateWithDuration(0.6) { [unowned self] in
                 self.timerButton.transform = CGAffineTransformMakeScale(1.0, 1.0)
                 self.timerButton.layer.cornerRadius = self.timerButton.bounds.size.width / 2
-            })
+            }
             mapViewController.isTimerRunning = false
         }
     }

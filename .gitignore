@@ -94,4 +94,4 @@ fastlane/screenshots
 fastlane/test_output
 
 # Added by my own
-.DS_Store
+*.DS_Store

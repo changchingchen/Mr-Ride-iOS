@@ -22,11 +22,18 @@ class MapInfoViewController: UIViewController {
         return parentVC.isShowingSideMenu
     }
     
+    @IBOutlet weak var bottomContainerView: UIView! {
+        didSet {
+            bottomContainerView.layer.cornerRadius = 4.0
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         view.backgroundColor = UIColor.mrLightblueColor()
-        // Do any additional setup after loading the view.
+        navigationController?.navigationBar.topItem?.title = "Map"
+        bottomContainerView.layer.cornerRadius = 4.0
     }
 
     override func didReceiveMemoryWarning() {

@@ -4,4 +4,7 @@
    <FileRef
       location = "group:Mr-Ride-iOS.xcodeproj">
    </FileRef>
+   <FileRef
+      location = "group:Pods/Pods.xcodeproj">
+   </FileRef>
 </Workspace>

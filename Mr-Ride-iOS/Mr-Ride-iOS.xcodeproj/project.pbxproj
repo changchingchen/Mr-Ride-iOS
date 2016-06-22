@@ -27,6 +27,8 @@
 		53D465E61CF42CD000B71062 /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D465E51CF42CD000B71062 /* HistoryViewController.swift */; };
 		53D465E81CF435F700B71062 /* MainContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D465E71CF435F700B71062 /* MainContainerViewController.swift */; };
 		840B13531D190CD500E7C8B0 /* LocationInfoDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840B13521D190CD500E7C8B0 /* LocationInfoDataManager.swift */; };
+		840B13571D1A6FDD00E7C8B0 /* LocationInfo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840B13551D1A6FDD00E7C8B0 /* LocationInfo+CoreDataProperties.swift */; };
+		840B13581D1A6FDD00E7C8B0 /* LocationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840B13561D1A6FDD00E7C8B0 /* LocationInfo.swift */; };
 		844B43651D127EAA0024F16D /* MapInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844B43641D127EAA0024F16D /* MapInfoViewController.swift */; };
 		844B43B11D13E4490024F16D /* UserInfo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844B43AF1D13E4490024F16D /* UserInfo+CoreDataProperties.swift */; };
 		844B43B21D13E4490024F16D /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844B43B01D13E4490024F16D /* UserInfo.swift */; };
@@ -83,6 +85,9 @@
 		53D465E51CF42CD000B71062 /* HistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
 		53D465E71CF435F700B71062 /* MainContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainContainerViewController.swift; sourceTree = "<group>"; };
 		840B13521D190CD500E7C8B0 /* LocationInfoDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationInfoDataManager.swift; sourceTree = "<group>"; };
+		840B13541D1A69AB00E7C8B0 /* Mr-Ride-iOS 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Mr-Ride-iOS 2.xcdatamodel"; sourceTree = "<group>"; };
+		840B13551D1A6FDD00E7C8B0 /* LocationInfo+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LocationInfo+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		840B13561D1A6FDD00E7C8B0 /* LocationInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationInfo.swift; sourceTree = "<group>"; };
 		844B43641D127EAA0024F16D /* MapInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapInfoViewController.swift; sourceTree = "<group>"; };
 		844B43AF1D13E4490024F16D /* UserInfo+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UserInfo+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		844B43B01D13E4490024F16D /* UserInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
@@ -224,6 +229,8 @@
 		8469C9291D052B2300D97DB3 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				840B13551D1A6FDD00E7C8B0 /* LocationInfo+CoreDataProperties.swift */,
+				840B13561D1A6FDD00E7C8B0 /* LocationInfo.swift */,
 				844B43AF1D13E4490024F16D /* UserInfo+CoreDataProperties.swift */,
 				844B43B01D13E4490024F16D /* UserInfo.swift */,
 				8469C93F1D05B09900D97DB3 /* RideRecord+CoreDataProperties.swift */,
@@ -393,6 +400,7 @@
 			files = (
 				8469C9361D05AF0A00D97DB3 /* Mr-Ride-iOS.xcdatamodeld in Sources */,
 				8469C9451D05B09900D97DB3 /* PathLocation+CoreDataProperties.swift in Sources */,
+				840B13571D1A6FDD00E7C8B0 /* LocationInfo+CoreDataProperties.swift in Sources */,
 				5306C08E1CF3F08700FAC567 /* RecordViewController.swift in Sources */,
 				844B43B41D141BE70024F16D /* CaloriesCalculator.swift in Sources */,
 				8469C9441D05B09900D97DB3 /* RideRecord.swift in Sources */,
@@ -412,6 +420,7 @@
 				84CAADAC1D0FE18C00EA5AF0 /* HeaderView.swift in Sources */,
 				848D81DB1CFD655E00BD9C98 /* MapViewController.swift in Sources */,
 				532FF3831CF2ED1A00EF9E14 /* Utilities.swift in Sources */,
+				840B13581D1A6FDD00E7C8B0 /* LocationInfo.swift in Sources */,
 				844B43B11D13E4490024F16D /* UserInfo+CoreDataProperties.swift in Sources */,
 				8469C9431D05B09900D97DB3 /* RideRecord+CoreDataProperties.swift in Sources */,
 				53D465E61CF42CD000B71062 /* HistoryViewController.swift in Sources */,
@@ -592,9 +601,10 @@
 		8469C9341D05AF0A00D97DB3 /* Mr-Ride-iOS.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				840B13541D1A69AB00E7C8B0 /* Mr-Ride-iOS 2.xcdatamodel */,
 				8469C9351D05AF0A00D97DB3 /* Mr-Ride-iOS.xcdatamodel */,
 			);
-			currentVersion = 8469C9351D05AF0A00D97DB3 /* Mr-Ride-iOS.xcdatamodel */;
+			currentVersion = 840B13541D1A69AB00E7C8B0 /* Mr-Ride-iOS 2.xcdatamodel */;
 			path = "Mr-Ride-iOS.xcdatamodeld";
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

@@ -10,7 +10,7 @@ import Foundation
 import Alamofire
 import CoreData
 
-struct LocationInfo {
+struct LocationInfomation {
     var name: String
     var id: Int
     var latitude: Double
@@ -39,7 +39,7 @@ class LocationInfoDataManager {
         case YouBikeStation
     }
     
-    var locationInfos = [LocationInfo]()
+    var locationInfos = [LocationInfomation]()
     
 //    private let prefetchedList = [DataSourceURL.PublicToiletsURL, .RiverSideToiletsURL, .YouBikeStationsURL]
     private let prefetchedList = [DataSourceURL.PublicToiletsURL]
@@ -85,10 +85,10 @@ class LocationInfoDataManager {
                     let idString = toilet["_id"] as? String {
                     
                     if let id = Int(idString), latitude = Double(latitudeString), longitude = Double(longitudeString) {
-                        let locationInfo = LocationInfo(name: LocationType.PublicToilet.rawValue,
-                                                        id: id,
-                                                        latitude: latitude,
-                                                        longitude: longitude)
+                        let locationInfo = LocationInfomation(name: LocationType.PublicToilet.rawValue,
+                                                              id: id,
+                                                              latitude: latitude,
+                                                              longitude: longitude)
                         createLocationInfoData(locationInfo)
                     }
                     
@@ -112,7 +112,7 @@ class LocationInfoDataManager {
     
     }
     
-    private func createLocationInfoData(locationInfo: LocationInfo) {
+    private func createLocationInfoData(locationInfo: LocationInfomation) {
 //        if let newLocationInfo = NSEntityDescription.insertNewObjectForEntityForName(LocatioinInfo, inManagedObjectContext: self.locationInfoDataMOC) as? LocationInfo {
 //            
 //        }

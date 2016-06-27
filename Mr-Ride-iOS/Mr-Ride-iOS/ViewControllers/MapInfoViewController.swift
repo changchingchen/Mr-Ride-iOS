@@ -7,10 +7,11 @@
 //
 
 import UIKit
+import MapKit
 
 class MapInfoViewController: UIViewController {
 
-    struct Constant {
+    struct Storyboard {
         static let Identifier = "MapInfoViewController"
     }
 
@@ -28,12 +29,33 @@ class MapInfoViewController: UIViewController {
         }
     }
     
+    @IBOutlet weak var mapView: MKMapView! {
+        didSet {
+            mapView.showsUserLocation = true
+            mapView.delegate = self
+        }
+    }
+    
+    let locationManager = CLLocationManager()
+    var locationInfos: [LocationInfo]?
+    
+    let locationInfoDataManager = LocationInfoDataManager.sharedInstance
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         view.backgroundColor = UIColor.mrLightblueColor()
         navigationController?.navigationBar.topItem?.title = "Map"
         bottomContainerView.layer.cornerRadius = 4.0
+        
+        
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestWhenInUseAuthorization()
+        
+//        locationInfos = 
+        
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -41,6 +63,9 @@ class MapInfoViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    deinit {
+        print("MapInfoViewController destroyed!")
+    }
 
     /*
     // MARK: - Navigation
@@ -54,8 +79,29 @@ class MapInfoViewController: UIViewController {
 
 }
 
+extension MapInfoViewController: CLLocationManagerDelegate {
+    
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let location = locations.last {
+            let center = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+            let region = MKCoordinateRegionMakeWithDistance(center, 500, 500)
+            self.mapView.setRegion(region, animated: true)
+            
+        }
+    }
+    
+    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
+        print("Error: \(error.localizedDescription)")
+    }
+}
+
+
+extension MapInfoViewController: MKMapViewDelegate {
+    
+}
+
 extension MapInfoViewController {
     class func controller() -> MapInfoViewController {
-        return UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(Constant.Identifier) as! MapInfoViewController
+        return UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(Storyboard.Identifier) as! MapInfoViewController
     }
 }

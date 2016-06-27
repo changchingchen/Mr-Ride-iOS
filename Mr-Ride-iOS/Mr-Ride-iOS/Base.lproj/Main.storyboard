@@ -329,6 +329,7 @@
                     </view>
                     <connections>
                         <outlet property="bottomContainerView" destination="ti3-wO-aPX" id="KgI-zx-VRq"/>
+                        <outlet property="mapView" destination="jkK-Lw-Vvh" id="MUa-in-TRX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KEs-vP-kec" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -196,7 +196,7 @@ class LocationInfoDataManager {
             let results = try locationInfoDataMOC.executeFetchRequest(fetchRequest)
             
             if !results.isEmpty {
-                print("Data Exist")
+//                print("Data Exist")
                 if let oldLocationInfo = results.last as? LocationInfo where oldLocationInfo.latitude != locationInfo.latitude || oldLocationInfo.longitude != locationInfo.longitude {
                     oldLocationInfo.latitude = locationInfo.latitude
                     oldLocationInfo.longitude = locationInfo.longitude
@@ -208,7 +208,7 @@ class LocationInfoDataManager {
                     }
                 }
             } else {
-                print("Data Not Exist")
+//                print("Data Not Exist")
                 createLocationInfoData(locationInfo)
             }
         } catch let error {
@@ -216,7 +216,7 @@ class LocationInfoDataManager {
         }
     }
     
-    private func readLocationInfoDataFromCoordinate(latitude currentLatitude: Double, currentLongitude: Double) -> [LocationInformation]? {
+    func readLocationInfoDataFromCoordinate(latitude currentLatitude: Double, currentLongitude: Double, completion: ([LocationInformation])->Void){
         
         let fetchRequest = NSFetchRequest(entityName: EntityID.LocationInfoEntityID)
 //        fetchRequest.predicate = NSPredicate(format: "%K < %i", LocationInfoKeys.Latitude.rawValue, )
@@ -236,6 +236,11 @@ class LocationInfoDataManager {
                         }
                     }
                 }
+                
+                
+                completion(locationInfos)
+                
+//                return locationInfos
             }
             
         } catch let error {
@@ -243,7 +248,7 @@ class LocationInfoDataManager {
         }
         
         
-        return nil
+//        return nil
     }
     
 }

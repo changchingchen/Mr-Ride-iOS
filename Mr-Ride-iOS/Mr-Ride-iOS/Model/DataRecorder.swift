@@ -62,23 +62,42 @@ class DataRecorder {
 // MARK: - Core Data
 extension DataRecorder {
     
-    
+    // This function is for temporary used
     func createUserInfo() {
-        if let newUserInfo = NSEntityDescription.insertNewObjectForEntityForName("UserInfo", inManagedObjectContext: self.dataRecorderMOC) as? UserInfo {
-            newUserInfo.height = 175.0
-            newUserInfo.weight = 65.0
-            newUserInfo.totalDistance = 0.0
-            newUserInfo.totalRidingTimes = 0
-            newUserInfo.totalDuration = 0.0
-            newUserInfo.userEmail = "snakeking0103@gmail.com"
+        
+        let userEmail = "snakeking0103@gmail.com"
+        
+        let userInfoFetchRequest = NSFetchRequest(entityName: "UserInfo")
+        userInfoFetchRequest.predicate = NSPredicate(format: "userEmail = %@", userEmail)
+        
+        do {
+            let results = try self.dataRecorderMOC.executeFetchRequest(userInfoFetchRequest)
             
-            do {
-                try newUserInfo.managedObjectContext?.save()
-            } catch let error {
-                print(error)
+            if results.isEmpty {
+                print("Entered")
+                if let newUserInfo = NSEntityDescription.insertNewObjectForEntityForName("UserInfo", inManagedObjectContext: self.dataRecorderMOC) as? UserInfo {
+                    newUserInfo.height = 175.0
+                    newUserInfo.weight = 65.0
+                    newUserInfo.totalDistance = 0.0
+                    newUserInfo.totalRidingTimes = 0
+                    newUserInfo.totalDuration = 0.0
+                    newUserInfo.userEmail = "snakeking0103@gmail.com"
+                    
+                    do {
+                        try newUserInfo.managedObjectContext?.save()
+                    } catch let error {
+                        print(error)
+                    }
+                    
+                }
+                
             }
-            
+        } catch let error {
+            print(error)
         }
+        
+        
+       
         
     }
     
@@ -86,7 +105,7 @@ extension DataRecorder {
         let userEmail = "snakeking0103@gmail.com"
         
         let userInfoFetchRequest = NSFetchRequest(entityName: "UserInfo")
-        userInfoFetchRequest.predicate = NSPredicate(format: "userEmail == %@", userEmail)
+        userInfoFetchRequest.predicate = NSPredicate(format: "userEmail = %@", userEmail)
         
         do {
             let results = try self.dataRecorderMOC.executeFetchRequest(userInfoFetchRequest)
@@ -115,8 +134,7 @@ extension DataRecorder {
                     print(error)
                 }
                 
-                
-            }
+            } 
         } catch let error {
             print(error)
         }

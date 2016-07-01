@@ -25,7 +25,24 @@ class HistoryViewController: UIViewController {
         return parentVC.isShowingSideMenu
     }
     
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var tableView: UITableView! {
+        didSet {
+            tableView.dataSource = self
+            tableView.delegate = self
+            
+            let cellReuseIdentifier = "ResultTableViewCell"
+            let nib = UINib(nibName: cellReuseIdentifier, bundle: nil)
+            tableView.registerNib(nib, forCellReuseIdentifier: cellReuseIdentifier)
+            
+            let headerViewIdentifier = HeaderView.Constant.Identifier
+            let headerViewNib = UINib(nibName: headerViewIdentifier, bundle: nil)
+            //        tableView.registerNib(headerViewNib, forCellReuseIdentifier: headerViewIdentifier)
+            tableView.registerNib(headerViewNib, forHeaderFooterViewReuseIdentifier: headerViewIdentifier)
+            
+            tableView.backgroundColor = UIColor.clearColor()
+            
+        }
+    }
     
     @IBOutlet weak var chartContainerView: UIView!
     private var chartView: ChartView!
@@ -59,27 +76,8 @@ class HistoryViewController: UIViewController {
         view.backgroundColor = UIColor.mrLightblueColor()
         
         self.navigationController?.navigationBar.topItem?.title = "History"
-        
 //        historyTableViewController.isShowingLeftSideMenu = isShowingLeftSideMenu
 //        historyTableViewController.delegate = self
-        tableView.dataSource = self
-        tableView.delegate = self
-        
-        
-        let cellReuseIdentifier = "ResultTableViewCell"
-        let nib = UINib(nibName: cellReuseIdentifier, bundle: nil)
-        tableView.registerNib(nib, forCellReuseIdentifier: cellReuseIdentifier)
-        
-        let headerViewIdentifier = HeaderView.Constant.Identifier
-        let headerViewNib = UINib(nibName: headerViewIdentifier, bundle: nil)
-//        tableView.registerNib(headerViewNib, forCellReuseIdentifier: headerViewIdentifier)
-        tableView.registerNib(headerViewNib, forHeaderFooterViewReuseIdentifier: headerViewIdentifier)
-        //        self.navigationController?.navigationBarHidden = true
-
-
-        tableView.backgroundColor = UIColor.clearColor()
-
-        
         
         do {
             if let frc = fetchedResultsController {
@@ -115,12 +113,7 @@ class HistoryViewController: UIViewController {
         
     }
     
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
 
-
-    }
-    
     override func viewDidLayoutSubviews() {
         if isFirstLaunched {
             chartView = ChartView(frame: CGRect(x: 0.0, y: 0.0, width: chartContainerView.bounds.size.width, height: chartContainerView.bounds.size.height))

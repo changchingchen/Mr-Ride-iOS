@@ -67,6 +67,10 @@ extension UIFont {
         return systemFontOfSize(fontSize, weight: UIFontWeightBold)
     }
     
+    class func mrTextStyleFontSFUITextLight(fontSize: CGFloat) -> UIFont? {
+        return systemFontOfSize(fontSize, weight: UIFontWeightLight)
+    }
+    
     class func mrTextStyleFontSFUITextMedium(fontSize: CGFloat) -> UIFont? {
         return systemFontOfSize(fontSize, weight: UIFontWeightMedium)
     }

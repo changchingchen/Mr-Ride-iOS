@@ -75,12 +75,14 @@ class HomeViewController: UIViewController {
         
         updateDistanceData()
        
-//        dataRecorder.createUserInfo()
+        dataRecorder.createUserInfo() // Temporary, Need to modify later
         updateLabels()
 
 
-//        navigationController?.navigationBar.clipsToBounds = true // not sure what this for 
-
+//        navigationController?.navigationBar.clipsToBounds = true
+        self.navigationController?.navigationBar.topItem?.title = "Mr. Ride"
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+        
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.translucent = true
@@ -95,7 +97,6 @@ class HomeViewController: UIViewController {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-//        self.navigationController?.navigationBar.topItem?.title = "Home"
     }
     
     override func viewWillAppear(animated: Bool) {

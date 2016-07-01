@@ -14,7 +14,11 @@ class LandingContainerViewController: UIViewController {
         static let Identifier = "LandingContainerViewController"
     }
     
-    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var scrollView: UIScrollView! {
+        didSet {
+            scrollView.delegate = self
+        }
+    }
     @IBOutlet weak var mainPageContainerView: UIView!
     @IBOutlet weak var leftSideMenuContainerView: UIView!
     
@@ -23,6 +27,8 @@ class LandingContainerViewController: UIViewController {
     }
     
     private var mainContainerViewController: MainContainerViewController?
+    
+    let locationInfoDataManager = LocationInfoDataManager.sharedInstance
     
     var isShowingSideMenu = false
     
@@ -38,13 +44,16 @@ class LandingContainerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-
-        scrollView.delegate = self
+        print("\(self.dynamicType) + \(#function)")
+        locationInfoDataManager.getLocationInfoFromDataTaipei{}
+        
         scrollView.showsHorizontalScrollIndicator = false
         // Initially close menu programmatically.  This needs to be done on the main thread initially in order to work.
         dispatch_async(GlobalMainQueue) {
             self.showLeftSideMenu(show: self.isShowingSideMenu, animated: false)
         }
+        
+        
 
     }
 

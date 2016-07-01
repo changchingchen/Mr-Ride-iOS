@@ -46,7 +46,7 @@ class MapViewController: UIViewController {
     }
     
     deinit {
-        print("MapViewController destroyed!!")
+        print("MapViewController destroyed!")
     }
     
     func startUpdatingLocation() {

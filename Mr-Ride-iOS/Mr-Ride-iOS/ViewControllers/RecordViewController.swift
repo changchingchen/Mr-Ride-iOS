@@ -89,8 +89,8 @@ class RecordViewController: UIViewController {
         speedLabel.text = String(format: "%.2f km/hr", speedInKmPerHour)
         
         let averageSpeedInKmPerHour = (elapsedTimeInHour == 0.0) ? 0.0 : distance / elapsedTimeInHour / 1000
-        print(elapsedTimeInHour)
-        print(distance)
+//        print(elapsedTimeInHour)
+//        print(distance)
         calories = caloriesCalculator.calculateKCalBurned(.Bike, speed: averageSpeedInKmPerHour, weight: weight, time: elapsedTimeInHour)
         
         caloriesLabel.text = String(format: "%.2f kCal", calories)
@@ -190,6 +190,12 @@ class RecordViewController: UIViewController {
         
     }
 
+//    override func viewWillAppear(animated: Bool) {
+//        super.viewWillAppear(animated)
+//        self.modalPresentationStyle = .OverCurrentContext
+//    }
+//    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -199,6 +205,8 @@ class RecordViewController: UIViewController {
         print("RecordViewController destroy!")
     }
 
+
+    
     
     func initView() {
         let calendar = NSCalendar.currentCalendar()

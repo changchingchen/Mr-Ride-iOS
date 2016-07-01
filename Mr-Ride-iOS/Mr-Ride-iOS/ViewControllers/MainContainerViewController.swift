@@ -19,10 +19,6 @@ class MainContainerViewController: UIViewController {
             removeInactiveViewController(oldValue)
             updateActiveViewController(activeViewController)
         }
-//        willSet {
-//            updateActiveViewController(newValue)
-//        }
-        
     }
     
     @IBAction func tapLeftSideMenuBarButton(sender: UIBarButtonItem) {

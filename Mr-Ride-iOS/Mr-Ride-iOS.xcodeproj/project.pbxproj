@@ -29,6 +29,10 @@
 		840B13531D190CD500E7C8B0 /* LocationInfoDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840B13521D190CD500E7C8B0 /* LocationInfoDataManager.swift */; };
 		840B13571D1A6FDD00E7C8B0 /* LocationInfo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840B13551D1A6FDD00E7C8B0 /* LocationInfo+CoreDataProperties.swift */; };
 		840B13581D1A6FDD00E7C8B0 /* LocationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840B13561D1A6FDD00E7C8B0 /* LocationInfo.swift */; };
+		840DDD241D23BCC700A6A3D1 /* YBStationInfo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840DDD201D23BCC700A6A3D1 /* YBStationInfo+CoreDataProperties.swift */; };
+		840DDD251D23BCC700A6A3D1 /* YBStationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840DDD211D23BCC700A6A3D1 /* YBStationInfo.swift */; };
+		840DDD261D23BCC700A6A3D1 /* ToiletInfo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840DDD221D23BCC700A6A3D1 /* ToiletInfo+CoreDataProperties.swift */; };
+		840DDD271D23BCC700A6A3D1 /* ToiletInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840DDD231D23BCC700A6A3D1 /* ToiletInfo.swift */; };
 		844B43651D127EAA0024F16D /* MapInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844B43641D127EAA0024F16D /* MapInfoViewController.swift */; };
 		844B43B11D13E4490024F16D /* UserInfo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844B43AF1D13E4490024F16D /* UserInfo+CoreDataProperties.swift */; };
 		844B43B21D13E4490024F16D /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844B43B01D13E4490024F16D /* UserInfo.swift */; };
@@ -88,6 +92,10 @@
 		840B13541D1A69AB00E7C8B0 /* Mr-Ride-iOS 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Mr-Ride-iOS 2.xcdatamodel"; sourceTree = "<group>"; };
 		840B13551D1A6FDD00E7C8B0 /* LocationInfo+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LocationInfo+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		840B13561D1A6FDD00E7C8B0 /* LocationInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationInfo.swift; sourceTree = "<group>"; };
+		840DDD201D23BCC700A6A3D1 /* YBStationInfo+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "YBStationInfo+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		840DDD211D23BCC700A6A3D1 /* YBStationInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YBStationInfo.swift; sourceTree = "<group>"; };
+		840DDD221D23BCC700A6A3D1 /* ToiletInfo+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ToiletInfo+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		840DDD231D23BCC700A6A3D1 /* ToiletInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToiletInfo.swift; sourceTree = "<group>"; };
 		844B43641D127EAA0024F16D /* MapInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapInfoViewController.swift; sourceTree = "<group>"; };
 		844B43AF1D13E4490024F16D /* UserInfo+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UserInfo+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		844B43B01D13E4490024F16D /* UserInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
@@ -229,6 +237,10 @@
 		8469C9291D052B2300D97DB3 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				840DDD201D23BCC700A6A3D1 /* YBStationInfo+CoreDataProperties.swift */,
+				840DDD211D23BCC700A6A3D1 /* YBStationInfo.swift */,
+				840DDD221D23BCC700A6A3D1 /* ToiletInfo+CoreDataProperties.swift */,
+				840DDD231D23BCC700A6A3D1 /* ToiletInfo.swift */,
 				840B13551D1A6FDD00E7C8B0 /* LocationInfo+CoreDataProperties.swift */,
 				840B13561D1A6FDD00E7C8B0 /* LocationInfo.swift */,
 				844B43AF1D13E4490024F16D /* UserInfo+CoreDataProperties.swift */,
@@ -403,6 +415,7 @@
 				840B13571D1A6FDD00E7C8B0 /* LocationInfo+CoreDataProperties.swift in Sources */,
 				5306C08E1CF3F08700FAC567 /* RecordViewController.swift in Sources */,
 				844B43B41D141BE70024F16D /* CaloriesCalculator.swift in Sources */,
+				840DDD241D23BCC700A6A3D1 /* YBStationInfo+CoreDataProperties.swift in Sources */,
 				8469C9441D05B09900D97DB3 /* RideRecord.swift in Sources */,
 				53D465E81CF435F700B71062 /* MainContainerViewController.swift in Sources */,
 				532FF3931CF2F42C00EF9E14 /* UIFont+YBKAdditions.swift in Sources */,
@@ -415,7 +428,10 @@
 				8469C9461D05B09900D97DB3 /* PathLocation.swift in Sources */,
 				532FF39D1CF3011D00EF9E14 /* LeftSideMenuTableViewController.swift in Sources */,
 				532FF3A61CF3025400EF9E14 /* LeftSideMenuTableViewCell.swift in Sources */,
+				840DDD251D23BCC700A6A3D1 /* YBStationInfo.swift in Sources */,
+				840DDD271D23BCC700A6A3D1 /* ToiletInfo.swift in Sources */,
 				84CAAD6D1D0BB4E900EA5AF0 /* ChartView.swift in Sources */,
+				840DDD261D23BCC700A6A3D1 /* ToiletInfo+CoreDataProperties.swift in Sources */,
 				5357B4B71CF5A0CA006357F3 /* ResultTableViewCell.swift in Sources */,
 				84CAADAC1D0FE18C00EA5AF0 /* HeaderView.swift in Sources */,
 				848D81DB1CFD655E00BD9C98 /* MapViewController.swift in Sources */,

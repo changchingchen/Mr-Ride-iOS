@@ -9,6 +9,13 @@
 import UIKit
 import MapKit
 
+struct DashboardInfo {
+    var title: String
+    var detail: String
+    var address: String
+    var distanceInTime: String
+}
+
 class MapInfoViewController: UIViewController {
 
     struct Storyboard {
@@ -45,6 +52,38 @@ class MapInfoViewController: UIViewController {
             dashboardView.hidden = true
         }
     }
+    
+    
+
+    
+    @IBOutlet weak var dashboardDetailLabel: UILabel!
+    @IBOutlet weak var dashboardTitleLabel: UILabel!
+    @IBOutlet weak var dashboardAddressLabel: UILabel!
+    @IBOutlet weak var dashboardDistanceLabel: UILabel!
+    
+    private func setupDashboardLabelStyle() {
+        dashboardDetailLabel.textColor = UIColor.whiteColor()
+        dashboardDetailLabel.textAlignment = .Center
+        dashboardDetailLabel.font = UIFont.mrTextStyleFontSFUITextLight(10.0)
+        dashboardDetailLabel.layer.borderColor = UIColor.whiteColor().CGColor
+        dashboardDetailLabel.layer.borderWidth = 0.5
+        dashboardDetailLabel.layer.cornerRadius = 2.0
+        
+        dashboardTitleLabel.textColor = UIColor.whiteColor()
+        dashboardTitleLabel.textAlignment = .Left
+        dashboardTitleLabel.font = UIFont.mrTextStyleFontSFUITextRegular(24.0)
+        
+        dashboardAddressLabel.textColor = UIColor.whiteColor()
+        dashboardAddressLabel.font = UIFont.mrTextStyleFontSFUITextRegular(12.0)
+//        dashboardAddressLabel.numberOfLines = 2
+
+        dashboardDistanceLabel.textColor = UIColor.whiteColor()
+        dashboardDistanceLabel.font = UIFont.mrTextStyleFontSFUITextRegular(10.0)
+        dashboardDistanceLabel.textAlignment = .Right
+        
+    }
+    
+    
     @IBOutlet weak var mapView: MKMapView! {
         didSet {
             mapView.showsUserLocation = true
@@ -54,12 +93,23 @@ class MapInfoViewController: UIViewController {
     
     
     // Picker
-    enum Place: String {
+    private enum Place: String {
         case UbikeStation = "Ubike Station"
         case Toilet
     }
     
-    private var places = [Place.Toilet, .UbikeStation]
+    private var places = [Place.UbikeStation, .Toilet ]
+    private var annotationImageNamed: String? {
+        if let pickerButtonTitle = pickerButtonTitleLabel.text,
+            let place = Place(rawValue: pickerButtonTitle) {
+            switch place {
+            case .UbikeStation: return "icon-station"
+            case .Toilet: return "icon-toilet"
+            }
+        }
+        return nil
+    }
+    
     
     // Since directly set button title is not fast enough => use this label to set title
     @IBOutlet weak var pickerButtonTitleLabel: UILabel! {
@@ -120,16 +170,50 @@ class MapInfoViewController: UIViewController {
     @IBAction func donePicker(sender: UIBarButtonItem) {
         
         let pickerButtonTitle = places[pickerView.selectedRowInComponent(0)].rawValue
-
         pickerButtonTitleLabel.text = pickerButtonTitle
+        
         hidePickerView()
         
         if let place = Place(rawValue: pickerButtonTitle) {
+            mapView.removeAnnotations(annotations)
+            annotations.removeAll()
             switch place {
-            case .Toilet:
-                break
             case .UbikeStation:
-                break
+                locationInfoDataManager.readYBStationData {
+                    ybStations in
+                    if ybStations.count > 0 {
+                        
+                        for ybStation in ybStations {
+                            let location = CLLocationCoordinate2D(latitude: ybStation.latitude, longitude: ybStation.longitude)
+                            let dashboardInfo = DashboardInfo(title: ybStation.placeNameCn, detail: ybStation.districtCn, address: ybStation.addressCn, distanceInTime: "0")
+                            let annotation = CustomizedAnnotation(identifier: place.rawValue, coordinate: location, imageNamed: self.annotationImageNamed, dashboardInfo: dashboardInfo, title: "\(ybStation.availableBikes) Bike(s) Left", subtitle: nil)
+                            annotation.coordinate = location
+                            self.annotations.append(annotation)
+                        }
+                        
+                        self.mapView.addAnnotations(self.annotations)
+                        
+                    }
+                }
+            case .Toilet:
+                locationInfoDataManager.readToiletData {
+                    toilets in
+                    if toilets.count > 0 {
+                        
+                        for toilet in toilets {
+                            let location = CLLocationCoordinate2D(latitude: toilet.latitude, longitude: toilet.longitude)
+                            let dashboardInfo = DashboardInfo(title: toilet.placeName, detail: toilet.placeType, address: toilet.address, distanceInTime: "0")
+                            let annotation = CustomizedAnnotation(identifier: place.rawValue, coordinate: location, imageNamed: self.annotationImageNamed, dashboardInfo: dashboardInfo, title: toilet.placeName, subtitle: nil)
+                            annotation.coordinate = location
+                            self.annotations.append(annotation)
+                        }
+                        
+                        self.mapView.addAnnotations(self.annotations)
+                        
+                    }
+                }
+                
+                
             }
         }
         
@@ -140,6 +224,8 @@ class MapInfoViewController: UIViewController {
     let locationManager = CLLocationManager()
     var locationInfos: [LocationInformation]?
     
+    private var annotations = [CustomizedAnnotation]()
+    
     let locationInfoDataManager = LocationInfoDataManager.sharedInstance
     
     override func viewDidLoad() {
@@ -147,30 +233,34 @@ class MapInfoViewController: UIViewController {
 
         view.backgroundColor = UIColor.mrLightblueColor()
         navigationController?.navigationBar.topItem?.title = "Map"
-        bottomContainerView.layer.cornerRadius = 4.0
+
+        
+        setupDashboardLabelStyle()
         
         locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
         locationManager.requestWhenInUseAuthorization()
-        locationManager.startUpdatingHeading()
+        locationManager.startUpdatingLocation()
         
-        locationInfoDataManager.readLocationInfoDataFromCoordinate(latitude: 0.0, currentLongitude: 0.0) { locationInfos in
-            if locationInfos.count > 0 {
-                var annotations = [CustomizedAnnotation]()
-//                var annotations = [MKPointAnnotation]()
+        
+        locationInfoDataManager.readYBStationData {
+            ybStations in
+            if ybStations.count > 0 {
                 
-                for locationInfo in locationInfos {
-                    let location = CLLocationCoordinate2D(latitude: locationInfo.latitude, longitude: locationInfo.longitude)
-                    let annotation = CustomizedAnnotation(coordinate: location, imageNamed: "icon-toilet", title: "Toilet", subtitle: nil)
-//                    let annotation = MKPointAnnotation()
+                for ybStation in ybStations {
+                    let location = CLLocationCoordinate2D(latitude: ybStation.latitude, longitude: ybStation.longitude)
+                    let dashboardInfo = DashboardInfo(title: ybStation.placeNameCn, detail: ybStation.districtCn, address: ybStation.addressCn, distanceInTime: "0")
+                    let annotation = CustomizedAnnotation(identifier: Place.UbikeStation.rawValue,coordinate: location, imageNamed: self.annotationImageNamed, dashboardInfo: dashboardInfo, title: "\(ybStation.availableBikes) Bike(s) Left", subtitle: nil)
                     annotation.coordinate = location
-                    annotations.append(annotation)
+                    self.annotations.append(annotation)
                 }
-
-                self.mapView.addAnnotations(annotations)
-
+                
+                self.mapView.addAnnotations(self.annotations)
+                
             }
         }
+
+        
         
         
     }
@@ -201,9 +291,10 @@ extension MapInfoViewController: CLLocationManagerDelegate {
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.last {
             let center = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
-            let region = MKCoordinateRegionMakeWithDistance(center, 500, 500)
+            let region = MKCoordinateRegionMakeWithDistance(center, 1000, 1000)
             self.mapView.setRegion(region, animated: true)
-            
+            locationManager.stopUpdatingLocation()
+
         }
     }
     
@@ -218,12 +309,13 @@ extension MapInfoViewController: MKMapViewDelegate {
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
         
         if let annotation = annotation as? CustomizedAnnotation {
-            let identifier = CustomizedAnnotation.Identifier
+//            let identifier = CustomizedAnnotation.Identifier
+            let identifier = annotation.identifier
             var annotationView = mapView.dequeueReusableAnnotationViewWithIdentifier(identifier) as? CircleAnnotationView
             
             if annotationView == nil {
                 annotationView = CircleAnnotationView(annotation: annotation, reuseIdentifier: identifier)
-                annotationView?.setup()
+                annotationView?.setup(annotation.imageNamed)
                 annotationView?.canShowCallout = true
 //                if let annotationViewTemp = annotationView as? CircleAnnotationView {
 //                    annotationViewTemp.setup(radius: 40.0, imageNamed: annotation.imageNamed)
@@ -242,11 +334,22 @@ extension MapInfoViewController: MKMapViewDelegate {
     }
     
     func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView) {
+        
+        
         view.backgroundColor = UIColor.mrLightblueColor()
-        if let newCenter = view.annotation?.coordinate {
+        
+        if let annotation = view.annotation as? CustomizedAnnotation {
+            let newCenter = annotation.coordinate
             let newRegion = MKCoordinateRegionMakeWithDistance(newCenter, 1000, 1000)
             mapView.setRegion(newRegion, animated: true)
+            
+            dashboardTitleLabel.text = annotation.dashboardInfo.title
+            dashboardDetailLabel.text = " \(annotation.dashboardInfo.detail) "
+            dashboardAddressLabel.text = annotation.dashboardInfo.address
+            dashboardDistanceLabel.text = "\(annotation.dashboardInfo.distanceInTime) min(s)"
+
         }
+        
         
         dashboardView.hidden = false
         
@@ -267,18 +370,23 @@ extension MapInfoViewController {
 
 class CustomizedAnnotation: NSObject, MKAnnotation {
     
-    static let Identifier = "CustomizedAnnotation"
-    
-    var coordinate: CLLocationCoordinate2D
+//    static let Identifier = "CustomizedAnnotation"
     var title: String?
     var subtitle: String?
-    var imageNamed: String
+
+    var identifier: String
+    var coordinate: CLLocationCoordinate2D
+    var imageNamed: String?
+
+    var dashboardInfo: DashboardInfo
     
-    init(coordinate: CLLocationCoordinate2D, imageNamed: String, title: String? = nil, subtitle: String? = nil) {
+    init(identifier: String, coordinate: CLLocationCoordinate2D, imageNamed: String?, dashboardInfo: DashboardInfo, title: String? = nil, subtitle: String? = nil) {
+        self.identifier = identifier
         self.coordinate = coordinate
+        self.imageNamed = imageNamed
+        self.dashboardInfo = dashboardInfo
         self.title = title
         self.subtitle = subtitle
-        self.imageNamed = imageNamed
     }
     
 }
@@ -320,9 +428,9 @@ class CircleAnnotationView: MKAnnotationView {
 //        fatalError("init(coder:) has not been implemented")
 //    }
 //
-    func setup() {
+    func setup(imageNamed: String?) {
         let radius = 20.0
-        let imageNamed = "icon-toilet"
+
         let diameter = radius * 2
         self.backgroundColor = .whiteColor()
         self.frame.size = CGSize(width: diameter, height: diameter)
@@ -334,7 +442,7 @@ class CircleAnnotationView: MKAnnotationView {
         self.layer.shadowColor = UIColor.blackColor().CGColor
         self.layer.shadowOpacity = 0.5
         
-        if let image = UIImage(named: imageNamed) {
+        if let iconImageNamed = imageNamed, let image = UIImage(named: iconImageNamed) {
             let imageView = UIImageView(image: image)
             imageView.center = self.center
             imageView.frame.size = CGSize(width: radius, height: radius)

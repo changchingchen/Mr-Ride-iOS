@@ -45,7 +45,7 @@ class LandingContainerViewController: UIViewController {
         super.viewDidLoad()
 
         print("\(self.dynamicType) + \(#function)")
-//        locationInfoDataManager.getToiletInfoFromDataTaipei{}
+        locationInfoDataManager.getLocationInfoFromDataTaipei{}
         
         scrollView.showsHorizontalScrollIndicator = false
         // Initially close menu programmatically.  This needs to be done on the main thread initially in order to work.

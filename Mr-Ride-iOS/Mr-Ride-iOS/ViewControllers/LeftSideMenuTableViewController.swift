@@ -10,7 +10,7 @@ import UIKit
 
 class LeftSideMenuTableViewController: UITableViewController {
 
-    struct Constant {
+    struct Storyboard {
         static let Identifier = "LeftSideMenuTableViewController"
     }
     
@@ -60,7 +60,6 @@ class LeftSideMenuTableViewController: UITableViewController {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         tableView.selectRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), animated: false, scrollPosition: .None)
-        
     }
     
     /*

@@ -12,7 +12,7 @@ import CoreData
 
 class HomeViewController: UIViewController {
 
-    struct Constant {
+    struct Storyboard {
         static let Identifier = "HomeViewController"
     }
     
@@ -79,13 +79,8 @@ class HomeViewController: UIViewController {
         updateLabels()
 
 
-//        navigationController?.navigationBar.clipsToBounds = true
         self.navigationController?.navigationBar.topItem?.title = "Mr. Ride"
-        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
-        
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
-        self.navigationController?.navigationBar.shadowImage = UIImage()
-        self.navigationController?.navigationBar.translucent = true
+
 
     }
 
@@ -93,16 +88,6 @@ class HomeViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
         
-    }
-    
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        print("\(self.dynamicType): \(#function)")
-
     }
     
     func updateLabels() {
@@ -241,6 +226,6 @@ extension HomeViewController: UINavigationControllerDelegate {
 
 extension HomeViewController {
     class func controller() -> HomeViewController {
-        return UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(Constant.Identifier) as! HomeViewController
+        return UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(Storyboard.Identifier) as! HomeViewController
     }
 }

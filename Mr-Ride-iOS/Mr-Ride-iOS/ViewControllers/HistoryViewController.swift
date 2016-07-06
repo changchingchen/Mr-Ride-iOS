@@ -76,8 +76,6 @@ class HistoryViewController: UIViewController {
         view.backgroundColor = UIColor.mrLightblueColor()
         
         self.navigationController?.navigationBar.topItem?.title = "History"
-//        historyTableViewController.isShowingLeftSideMenu = isShowingLeftSideMenu
-//        historyTableViewController.delegate = self
         
         do {
             if let frc = fetchedResultsController {
@@ -108,8 +106,11 @@ class HistoryViewController: UIViewController {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        print("\(HistoryViewController.Constant.Identifier) viewDidAppear")
+        print("\(self.dynamicType): \(#function)")
+
         parentVC.scrollView.scrollEnabled = true
+        print(self.navigationController?.viewControllers)
+//        self.automaticallyAdjustsScrollViewInsets = false
         
     }
     
@@ -136,7 +137,6 @@ class HistoryViewController: UIViewController {
     
 //    override func viewWillAppear(animated: Bool) {
 //        super.viewWillAppear(animated)
-//        UIApplication.sharedApplication().statusBarStyle = .LightContent
 //    }
     
     deinit {
@@ -268,7 +268,7 @@ extension HistoryViewController: UITableViewDelegate {
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if !isShowingLeftSideMenu {
-            let resultVC = self.storyboard?.instantiateViewControllerWithIdentifier(ResultViewController.Constant.Identifier) as! ResultViewController
+            let resultVC = self.storyboard?.instantiateViewControllerWithIdentifier(ResultViewController.Storyboard.Identifier) as! ResultViewController
             if let rideRecord = fetchedResultsController?.objectAtIndexPath(indexPath) as? RideRecord {
                 resultVC.date = rideRecord.date!
             }

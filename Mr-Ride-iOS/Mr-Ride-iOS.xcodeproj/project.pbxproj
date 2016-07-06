@@ -48,7 +48,6 @@
 		84CAAD6D1D0BB4E900EA5AF0 /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CAAD6C1D0BB4E900EA5AF0 /* ChartView.swift */; };
 		84CAADAC1D0FE18C00EA5AF0 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CAADAB1D0FE18C00EA5AF0 /* HeaderView.swift */; };
 		84CAADB01D0FE1E100EA5AF0 /* HeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84CAADAF1D0FE1E100EA5AF0 /* HeaderView.xib */; };
-		84F7C3581D0263A600BA08E7 /* HistoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F7C3571D0263A600BA08E7 /* HistoryTableViewController.swift */; };
 		84F7C3631D02782100BA08E7 /* RobotoMono-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 84F7C3591D02779700BA08E7 /* RobotoMono-Bold.ttf */; };
 		84F7C3641D02783300BA08E7 /* RobotoMono-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 84F7C35A1D02779800BA08E7 /* RobotoMono-BoldItalic.ttf */; };
 		84F7C3651D02783300BA08E7 /* RobotoMono-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 84F7C35B1D02779800BA08E7 /* RobotoMono-Italic.ttf */; };
@@ -111,7 +110,6 @@
 		84CAAD6C1D0BB4E900EA5AF0 /* ChartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
 		84CAADAB1D0FE18C00EA5AF0 /* HeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		84CAADAF1D0FE1E100EA5AF0 /* HeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HeaderView.xib; sourceTree = "<group>"; };
-		84F7C3571D0263A600BA08E7 /* HistoryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryTableViewController.swift; sourceTree = "<group>"; };
 		84F7C3591D02779700BA08E7 /* RobotoMono-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoMono-Bold.ttf"; sourceTree = "<group>"; };
 		84F7C35A1D02779800BA08E7 /* RobotoMono-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoMono-BoldItalic.ttf"; sourceTree = "<group>"; };
 		84F7C35B1D02779800BA08E7 /* RobotoMono-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoMono-Italic.ttf"; sourceTree = "<group>"; };
@@ -228,7 +226,6 @@
 				53D465E31CF4288C00B71062 /* ResultViewController.swift */,
 				53D465E51CF42CD000B71062 /* HistoryViewController.swift */,
 				848D81DA1CFD655E00BD9C98 /* MapViewController.swift */,
-				84F7C3571D0263A600BA08E7 /* HistoryTableViewController.swift */,
 				844B43641D127EAA0024F16D /* MapInfoViewController.swift */,
 			);
 			path = ViewControllers;
@@ -308,6 +305,7 @@
 				TargetAttributes = {
 					532FF3671CF2AB6300EF9E14 = {
 						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = AVCAA2S7Y9;
 					};
 				};
 			};
@@ -421,7 +419,6 @@
 				532FF3931CF2F42C00EF9E14 /* UIFont+YBKAdditions.swift in Sources */,
 				532FF39C1CF3011D00EF9E14 /* LandingContainerViewController.swift in Sources */,
 				5306C0841CF3E06E00FAC567 /* HomeViewController.swift in Sources */,
-				84F7C3581D0263A600BA08E7 /* HistoryTableViewController.swift in Sources */,
 				532FF3921CF2F42C00EF9E14 /* UIColor+YBKAdditions.swift in Sources */,
 				53D465E41CF4288C00B71062 /* ResultViewController.swift in Sources */,
 				844B43651D127EAA0024F16D /* MapInfoViewController.swift in Sources */,
@@ -569,11 +566,14 @@
 			baseConfigurationReference = E14F81B989F303C1AA23A22F /* Pods-Mr-Ride-iOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "Mr-Ride-iOS/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.appworks-school-snakeking.Mr-Ride-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -582,11 +582,14 @@
 			baseConfigurationReference = ADC278E3F420400276D8AE3B /* Pods-Mr-Ride-iOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "Mr-Ride-iOS/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.appworks-school-snakeking.Mr-Ride-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

@@ -10,7 +10,7 @@ import UIKit
 
 class ResultViewController: UIViewController {
 
-    struct Constant {
+    struct Storyboard {
         static let Identifier = "ResultViewController"
     }
     
@@ -89,6 +89,13 @@ class ResultViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        print("\(self.dynamicType): \(#function)")
+        print(self.navigationController?.viewControllers)
+
     }
     
     func close(sender: UIBarButtonItem) {

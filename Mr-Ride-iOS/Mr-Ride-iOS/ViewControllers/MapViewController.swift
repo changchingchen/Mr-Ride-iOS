@@ -11,7 +11,7 @@ import MapKit
 
 class MapViewController: UIViewController {
 
-    struct Constant {
+    struct Storyboard {
         static let Identifier = "MapViewController"
     }
     
@@ -92,7 +92,7 @@ class MapViewController: UIViewController {
 
 extension MapViewController {
     class func controller() -> MapViewController {
-        return UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(Constant.Identifier) as! MapViewController
+        return UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(Storyboard.Identifier) as! MapViewController
     }
 }
 

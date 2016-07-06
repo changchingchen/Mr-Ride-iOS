@@ -292,7 +292,7 @@ extension MapInfoViewController: CLLocationManagerDelegate {
         if let location = locations.last {
             let center = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
             let region = MKCoordinateRegionMakeWithDistance(center, 1000, 1000)
-            self.mapView.setRegion(region, animated: true)
+            self.mapView.setRegion(region, animated: false)
             locationManager.stopUpdatingLocation()
 
         }

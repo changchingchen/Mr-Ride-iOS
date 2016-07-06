@@ -10,7 +10,7 @@ import UIKit
 
 class LandingContainerViewController: UIViewController {
 
-    struct Constant {
+    struct Storyboard {
         static let Identifier = "LandingContainerViewController"
     }
     
@@ -52,7 +52,6 @@ class LandingContainerViewController: UIViewController {
         dispatch_async(GlobalMainQueue) {
             self.showLeftSideMenu(show: self.isShowingSideMenu, animated: false)
         }
-        
         
 
     }

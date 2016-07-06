@@ -11,7 +11,7 @@ import UIKit
 
 class RecordViewController: UIViewController {
 
-    struct Constant {
+    struct Storyboard {
         static let Identifier = "RecordViewController"
     }
     
@@ -141,12 +141,10 @@ class RecordViewController: UIViewController {
     
         stopTimer()
        
-        let resultViewController = self.storyboard?.instantiateViewControllerWithIdentifier(ResultViewController.Constant.Identifier) as! ResultViewController
+        let resultViewController = self.storyboard?.instantiateViewControllerWithIdentifier(ResultViewController.Storyboard.Identifier) as! ResultViewController
         resultViewController.isPushedFromRecordViewController = true
         resultViewController.date = date
-//        print("爸我在這")
 //        resultViewController?.date = date
-//        print(date)
         updateCurrentRecord()
         
         self.dataRecorder.createRecord(record)

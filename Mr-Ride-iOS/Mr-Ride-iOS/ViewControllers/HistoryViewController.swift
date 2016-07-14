@@ -51,7 +51,6 @@ class HistoryViewController: UIViewController {
     private var dateLabels = [String]()
     private let maxDataPointsOnChart = 7 * 2 // this should be multiple of 7
     
-//    private var historyTableViewController: HistoryTableViewController!
 
     
     var managedObjectContext: NSManagedObjectContext? = (UIApplication.sharedApplication().delegate as? AppDelegate)?.managedObjectContext
@@ -75,6 +74,7 @@ class HistoryViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = UIColor.mrLightblueColor()
         
+        self.navigationController?.navigationBar.topItem?.titleView = nil
         self.navigationController?.navigationBar.topItem?.title = "History"
         
         do {
@@ -135,34 +135,13 @@ class HistoryViewController: UIViewController {
         }
     }
     
-//    override func viewWillAppear(animated: Bool) {
-//        super.viewWillAppear(animated)
-//    }
-    
     deinit {
         print("HistoryViewController destroy!")
     }
 
-    
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-//    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-        
-//        historyTableViewController = segue.destinationViewController as! HistoryTableViewController
-        
-//    }
  
 
 }
-
-
-
-//extension HistoryViewController: HistoryTableViewControllerDelegate {
-//    
-//}
 
 
 extension HistoryViewController: NSFetchedResultsControllerDelegate {

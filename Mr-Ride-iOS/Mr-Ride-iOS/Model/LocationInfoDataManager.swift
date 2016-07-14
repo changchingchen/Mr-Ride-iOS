@@ -43,32 +43,6 @@ struct Toilet {
     var toiletSource: String
 }
 
-/*
-enum ToiletType: String {
-    case PublicToilet
-    case RiverSideToilet
-    case YouBikeStation
-}
-
-struct DataSourceURL {
-    
-    static let DataTaipei: [ToiletType:String] = [
-        .PublicToilet : "http://data.taipei/opendata/datalist/apiAccess?scope=resourceAquire&rid=008ed7cf-2340-4bc4-89b0-e258a5573be2",
-        .RiverSideToilet : "http://data.taipei/opendata/datalist/apiAccess?scope=resourceAquire&rid=fe49c753-9358-49dd-8235-1fcadf5bfd3f",
-        .YouBikeStation: ""
-    ]
-    
-    static func DataTaipeiSource(:ToiletType) -> NSURL? {
-        if let urlString = DataTaipei[] {
-            return NSURL(string: urlString)
-        } else {
-            return nil
-        }
-    }
-}
-*/
-
-
 class LocationInfoDataManager {
     static let sharedInstance = LocationInfoDataManager()
     private init() { }
@@ -216,8 +190,6 @@ class LocationInfoDataManager {
                     print("Returned")
                     return
                 }
-                
-//                print(ybStation)
                 
                 if let addressCn = ybStation["ar"] as? String,
                     let addressEn = ybStation["aren"] as? String,
@@ -500,8 +472,9 @@ class LocationInfoDataManager {
                     }
                 }
                 
-                
-                completion(ybStationInfos)
+                dispatch_async(dispatch_get_main_queue()) {
+                    completion(ybStationInfos)
+                }
                 
                 //                return locationInfos
             }

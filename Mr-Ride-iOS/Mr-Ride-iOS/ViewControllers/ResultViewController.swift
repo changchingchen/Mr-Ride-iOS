@@ -42,13 +42,9 @@ class ResultViewController: UIViewController {
             
             view.backgroundColor = UIColor.clearColor()
         } else {
-//            self.navigationItem.backBarButtonItem?.tintColor = UIColor.whiteColor()
-//            view.backgroundColor = UIColor.mrLightblueColor()
-//            self.navigationController?.navigationBar.barTintColor = UIColor.mrLightblueColor()
-//            self.navigationController?.navigationBar.barStyle = .Black
-//            self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
-//            self.navigationController?.navigationBar.shadowImage = UIImage()
-//            self.navigationController?.navigationBar.translucent = false
+            self.navigationController?.navigationBar.barTintColor = UIColor.mrLightblueColor()
+            self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+            self.navigationController?.navigationBar.translucent = false
         }
         let calendar = NSCalendar.currentCalendar()
         let components = calendar.components([.Year, .Month, .Day], fromDate: date)
@@ -91,18 +87,12 @@ class ResultViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-        print("\(self.dynamicType): \(#function)")
-        print(self.navigationController?.viewControllers)
-
-    }
-    
     func close(sender: UIBarButtonItem) {
         if let homeVC = self.navigationController?.delegate as? HomeViewController {
             homeVC.updateLabels()
             homeVC.resumeLabels()
             homeVC.updateDistanceData()
+            homeVC.parentVC.scrollView.scrollEnabled = true
         }
         dismissViewControllerAnimated(true, completion: nil)
     }

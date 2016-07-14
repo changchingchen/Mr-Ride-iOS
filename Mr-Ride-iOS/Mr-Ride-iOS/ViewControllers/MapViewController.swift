@@ -15,7 +15,12 @@ class MapViewController: UIViewController {
         static let Identifier = "MapViewController"
     }
     
-    @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var mapView: MKMapView! {
+        didSet {
+            mapView.showsUserLocation = true
+            mapView.delegate = self
+        }
+    }
     
     let locationManager = CLLocationManager()
     var previousLocation: CLLocation?
@@ -29,15 +34,18 @@ class MapViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
+    
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestWhenInUseAuthorization()
-        
-        mapView.showsUserLocation = true
-        
-        mapView.delegate = self
+//        
+//        if let location = locationManager.location {
+//            let center = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+//            let region = MKCoordinateRegionMakeWithDistance(center, 500, 500)
+//            self.mapView.setRegion(region, animated: false)
+//        }
+
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -77,16 +85,6 @@ class MapViewController: UIViewController {
         mapView.setVisibleMapRect(allPolylines.boundingMapRect, edgePadding: UIEdgeInsetsMake(20.0, 20.0, 20.0, 20.0), animated: true)
 
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
 
@@ -114,16 +112,15 @@ extension MapViewController: CLLocationManagerDelegate {
             let region = MKCoordinateRegionMakeWithDistance(center, 500, 500)
             self.mapView.setRegion(region, animated: true)
             
+
             let locationRecord = LocationRecord(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude, timestamp: location.timestamp)
             path.append(locationRecord)
             
             if previousLocation != nil {
                 distance += location.distanceFromLocation(previousLocation!)
-                print("Distance: \(distance)")
             }
             previousLocation = location
-            speed = location.speed
-            print(location)
+            speed = (location.speed < 0) ? 0.0 : location.speed
             
         }
     }
@@ -134,7 +131,6 @@ extension MapViewController: CLLocationManagerDelegate {
 }
 
 extension MapViewController: MKMapViewDelegate {
-    
     
     func mapView(mapView: MKMapView, rendererForOverlay overlay: MKOverlay) -> MKOverlayRenderer {
         let renderer = MKPolylineRenderer(polyline: overlay as! MKPolyline)

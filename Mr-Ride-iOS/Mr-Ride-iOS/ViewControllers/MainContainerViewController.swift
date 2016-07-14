@@ -36,7 +36,7 @@ class MainContainerViewController: UIViewController {
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.translucent = true
-        self.navigationController?.navigationBar.barStyle = .Black
+
         
 
         activeViewController = HomeViewController.controller()
@@ -47,7 +47,7 @@ class MainContainerViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+
 
     /*
     // MARK: - Navigation

@@ -163,7 +163,6 @@ extension DataRecorder {
                 overallResult.totalDuration = userInfo.totalDuration!.doubleValue
                 overallResult.weight = userInfo.weight!.doubleValue
                 if let totalRidingTimes = userInfo.totalRidingTimes as? Int {
-                    print(totalRidingTimes)
                     overallResult.totalRidingTimes = totalRidingTimes
                 }
                 
@@ -411,7 +410,6 @@ extension DataRecorder {
         
         do {
             let results = try self.dataRecorderMOC.executeFetchRequest(rideRecordFetchRequest)
-            print(results.count)
             for result in results {
                 if let rideRecord = result as? RideRecord {
                     if let distance = rideRecord.distance as? Double {

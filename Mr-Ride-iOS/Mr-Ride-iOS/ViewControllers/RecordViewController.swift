@@ -7,7 +7,6 @@
 //
 
 import UIKit
-//import MapKit
 
 class RecordViewController: UIViewController {
 
@@ -29,7 +28,7 @@ class RecordViewController: UIViewController {
     private var weight = 0.0
     let dataRecorder = DataRecorder.sharedManager
     let caloriesCalculator = CaloriesCalculator()
-//    var resultViewController: ResultViewController?
+
     
     // Properties for timer => Try to move timer to Model
     private enum TimerState {
@@ -50,16 +49,24 @@ class RecordViewController: UIViewController {
         timer = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
         startTime = NSDate.timeIntervalSinceReferenceDate()
         mapViewController.startUpdatingLocation()
+        UIView.animateWithDuration(0.6) { [unowned self] in
+            self.timerButton.transform = CGAffineTransformMakeScale(0.5, 0.5)
+            self.timerButton.layer.cornerRadius = 8.0
+        }
 
     }
     
     func stopTimer() {
-        
         timerState = .Pause
         timer.invalidate()
         totalElapsedTime += elapsedTimeOneRound // Calculate the total elapsed time from the beginning
         mapViewController.stopUpdatingLocation()
         mapViewController.previousLocation = nil
+        UIView.animateWithDuration(0.6) { [unowned self] in
+            self.timerButton.transform = CGAffineTransformMakeScale(1.0, 1.0)
+            self.timerButton.layer.cornerRadius = self.timerButton.bounds.size.width / 2
+        }
+        
     }
     
     func updateTime() {
@@ -89,8 +96,7 @@ class RecordViewController: UIViewController {
         speedLabel.text = String(format: "%.2f km/hr", speedInKmPerHour)
         
         let averageSpeedInKmPerHour = (elapsedTimeInHour == 0.0) ? 0.0 : distance / elapsedTimeInHour / 1000
-//        print(elapsedTimeInHour)
-//        print(distance)
+
         calories = caloriesCalculator.calculateKCalBurned(.Bike, speed: averageSpeedInKmPerHour, weight: weight, time: elapsedTimeInHour)
         
         caloriesLabel.text = String(format: "%.2f kCal", calories)
@@ -106,34 +112,35 @@ class RecordViewController: UIViewController {
             self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Finish", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(finish(_:)))
             self.navigationItem.rightBarButtonItem?.tintColor = UIColor.whiteColor()
 //            self.navigationItem.rightBarButtonItem?.enabled = true
-            
-
         }
         
         switch timerState {
         case .Pause:
             startTimer()
             mapViewController.isTimerRunning = true
-            UIView.animateWithDuration(0.6) { [unowned self] in
-                self.timerButton.transform = CGAffineTransformMakeScale(0.5, 0.5)
-                self.timerButton.layer.cornerRadius = 8.0
-            }
         case .Run:
             stopTimer()
-            UIView.animateWithDuration(0.6) { [unowned self] in
-                self.timerButton.transform = CGAffineTransformMakeScale(1.0, 1.0)
-                self.timerButton.layer.cornerRadius = self.timerButton.bounds.size.width / 2
-            }
             mapViewController.isTimerRunning = false
         }
     }
     
     @IBAction func cancel(sender: UIBarButtonItem) {
         stopTimer()
-        if let homeViewVC = self.navigationController?.delegate as? HomeViewController {
-            homeViewVC.resumeLabels()
+
+        let cancelAlert = UIAlertController(title: "Notice", message: "Are you sure you want to cancel this ride record?", preferredStyle: UIAlertControllerStyle.Alert)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+        let okAction = UIAlertAction(title: "OK", style: .Default) { action in
+            
+            if let homeViewVC = self.navigationController?.delegate as? HomeViewController {
+                homeViewVC.resumeLabels()
+                homeViewVC.parentVC.scrollView.scrollEnabled = true
+            }
+            self.dismissViewControllerAnimated(true, completion: nil)
         }
-        dismissViewControllerAnimated(true, completion: nil)
+        cancelAlert.addAction(cancelAction)
+        cancelAlert.addAction(okAction)
+        self.presentViewController(cancelAlert, animated: true, completion: nil)
+
     }
     
 //    @IBAction func finish(sender: UIBarButtonItem) {
@@ -187,12 +194,6 @@ class RecordViewController: UIViewController {
 
         
     }
-
-//    override func viewWillAppear(animated: Bool) {
-//        super.viewWillAppear(animated)
-//        self.modalPresentationStyle = .OverCurrentContext
-//    }
-//    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -204,8 +205,6 @@ class RecordViewController: UIViewController {
     }
 
 
-    
-    
     func initView() {
         let calendar = NSCalendar.currentCalendar()
         let components = calendar.components([.Year, .Month, .Day], fromDate: date)
@@ -215,7 +214,6 @@ class RecordViewController: UIViewController {
         // Set Navigation Bar
         self.navigationController?.navigationBar.topItem?.title = String(format: "%4d / %02d / %02d", components.year, components.month, components.day)
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
-//        navigationController?.navigationBar.backgroundColor = UIColor.mrLightblueColor()
         self.navigationController?.navigationBar.barTintColor = UIColor.mrLightblueColor()
         self.navigationController?.navigationBar.barStyle = .Black
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
@@ -232,7 +230,7 @@ class RecordViewController: UIViewController {
         gradientBackgroundLayer.locations = [0.0, 1.0]
         gradientBackgroundLayer.frame = view.frame
         view.layer.insertSublayer(gradientBackgroundLayer, atIndex: 0)
-//
+
         
         timerButtonContainerView.backgroundColor = .clearColor()
         timerButtonContainerView.layer.cornerRadius = timerButtonContainerView.bounds.size.width / 2
@@ -264,42 +262,8 @@ class RecordViewController: UIViewController {
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
-//        var destinationVC = segue.destinationViewController
-//        
-//        
-//        if let identifier = segue.identifier {
-//            switch identifier {
-//            case "showResultView":
-//                if let resultVC = segue.destinationViewController as? ResultViewController {
-//
-//                    print("finished button")
-//
-//                    resultViewController = resultVC
-//                    
-//                    resultVC.isPushedFromRecordViewController = true
-//                    resultVC.date = self.date
-//
-//                    let calendar = NSCalendar.currentCalendar()
-//                    let components = calendar.components([.Year, .Month, .Day], fromDate: date)
-//                    
-//                    resultVC.navigationItem.title = String(format: "%4d / %02d / %02d", components.year, components.month, components.day)
-//
-//                    print("媽我在這")
-//                    
-//                }
-//            default:
-//                break
-//            }
-//        }
-        
         mapViewController = segue.destinationViewController as? MapViewController
-//        if segue.destinationViewController is MapViewController {
-//            print("MapViewController")
-//        }
-//        if segue.destinationViewController is ResultViewController {
-//            print("ResultViewController")
-//        }
-        
+
     }
     
 

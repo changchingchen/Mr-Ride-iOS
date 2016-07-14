@@ -355,10 +355,6 @@
                                             <constraint firstAttribute="bottom" secondItem="jeV-2E-6TH" secondAttribute="bottom" constant="20" id="vhg-Ut-toh"/>
                                         </constraints>
                                     </view>
-                                    <view alpha="0.25" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CjM-HV-5Bo">
-                                        <rect key="frame" x="-22" y="-40" width="600" height="340"/>
-                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -370,6 +366,10 @@
                                     <constraint firstItem="raN-6o-oIM" firstAttribute="centerX" secondItem="xh0-PU-BM6" secondAttribute="centerX" id="ci9-WC-VBe"/>
                                     <constraint firstItem="raN-6o-oIM" firstAttribute="width" secondItem="xh0-PU-BM6" secondAttribute="width" id="t6v-Ie-QQ7"/>
                                 </constraints>
+                            </view>
+                            <view alpha="0.25" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CjM-HV-5Bo">
+                                <rect key="frame" x="0.0" y="-44" width="600" height="384"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fDb-ru-fcb">
                                 <rect key="frame" x="0.0" y="340" width="600" height="260"/>
@@ -416,9 +416,13 @@
                         </subviews>
                         <color key="backgroundColor" red="0.38823530077934265" green="0.84313726425170898" blue="0.96470588445663452" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="CjM-HV-5Bo" firstAttribute="centerX" secondItem="nRM-4E-olW" secondAttribute="centerX" id="3hx-SW-U1m"/>
+                            <constraint firstItem="CjM-HV-5Bo" firstAttribute="width" secondItem="nRM-4E-olW" secondAttribute="width" id="BIR-0K-ccY"/>
                             <constraint firstItem="fDb-ru-fcb" firstAttribute="width" secondItem="nRM-4E-olW" secondAttribute="width" id="F2i-rV-QOZ"/>
+                            <constraint firstItem="fDb-ru-fcb" firstAttribute="top" secondItem="CjM-HV-5Bo" secondAttribute="bottom" id="F9o-96-Zqs"/>
                             <constraint firstAttribute="trailing" secondItem="xh0-PU-BM6" secondAttribute="trailing" constant="22" id="JlE-jv-45t"/>
                             <constraint firstItem="xh0-PU-BM6" firstAttribute="top" secondItem="WkU-v9-gDa" secondAttribute="bottom" constant="20" id="Q9I-Us-zwf"/>
+                            <constraint firstItem="CjM-HV-5Bo" firstAttribute="top" secondItem="WkU-v9-gDa" secondAttribute="bottom" constant="-64" id="SyC-8r-Jsf"/>
                             <constraint firstItem="xh0-PU-BM6" firstAttribute="leading" secondItem="nRM-4E-olW" secondAttribute="leading" constant="22" id="Uvu-7n-QBo"/>
                             <constraint firstAttribute="trailing" secondItem="ti3-wO-aPX" secondAttribute="trailing" constant="20" id="era-2c-qpZ"/>
                             <constraint firstItem="ti3-wO-aPX" firstAttribute="top" secondItem="xh0-PU-BM6" secondAttribute="bottom" constant="17" id="f17-aK-sNn"/>
@@ -439,7 +443,6 @@
                         <outlet property="mapView" destination="jkK-Lw-Vvh" id="MUa-in-TRX"/>
                         <outlet property="pickerButtonTitleLabel" destination="jkt-Bi-jfZ" id="xgd-G2-UXW"/>
                         <outlet property="pickerContainerView" destination="fDb-ru-fcb" id="wxt-fX-zqW"/>
-                        <outlet property="pickerContainerViewHeight" destination="zFr-qf-vUb" id="IQu-Vq-Kbz"/>
                         <outlet property="pickerView" destination="2Cy-4j-joN" id="qBW-fp-GvA"/>
                         <outlet property="pickerViewToolBar" destination="J0s-FQ-1mq" id="rvF-ZJ-kMa"/>
                         <outlet property="shelterView" destination="CjM-HV-5Bo" id="bch-Nr-YLc"/>
@@ -788,7 +791,7 @@
                                     <constraint firstAttribute="width" constant="51" id="ETO-56-3Ee"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Speed" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wtt-iV-muM">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Average Speed" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wtt-iV-muM">
                                 <rect key="frame" x="54" y="150" width="267" height="14"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="14" id="r9X-D8-Erx"/>

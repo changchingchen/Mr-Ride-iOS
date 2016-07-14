@@ -48,6 +48,7 @@ class HomeViewController: UIViewController {
             for subview in view.subviews where subview is UILabel {
                 subview.hidden = true
             }
+            parentVC.scrollView.scrollEnabled = false
             self.navigationController?.presentViewController(recordNVC, animated: true, completion: nil)
         }
 
@@ -78,9 +79,11 @@ class HomeViewController: UIViewController {
         dataRecorder.createUserInfo() // Temporary, Need to modify later
         updateLabels()
 
-
-        self.navigationController?.navigationBar.topItem?.title = "Mr. Ride"
-
+        if let titleImage = UIImage(named: "icon-bike")?.imageWithRenderingMode(.AlwaysTemplate) {
+            let titleImageView = UIImageView(image: titleImage)
+            titleImageView.tintColor = UIColor.whiteColor()
+            self.navigationController?.navigationBar.topItem?.titleView = titleImageView
+        }
 
     }
 

@@ -35,7 +35,7 @@ class LeftSideMenuTableViewController: UITableViewController {
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.translucent = true
-        navigationController!.navigationBar.barStyle = .Black
+//        self.navigationController?.navigationBar.barStyle = .Black
 
         
         self.tableView.backgroundColor = UIColor.mrDarkSlateBlueColor()

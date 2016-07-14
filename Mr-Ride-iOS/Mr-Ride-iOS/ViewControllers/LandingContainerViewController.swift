@@ -52,7 +52,6 @@ class LandingContainerViewController: UIViewController {
         dispatch_async(GlobalMainQueue) {
             self.showLeftSideMenu(show: self.isShowingSideMenu, animated: false)
         }
-        
 
     }
 
@@ -68,6 +67,9 @@ class LandingContainerViewController: UIViewController {
     }
 
 
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return UIStatusBarStyle.LightContent
+    }
     
     // MARK: - Navigation
 

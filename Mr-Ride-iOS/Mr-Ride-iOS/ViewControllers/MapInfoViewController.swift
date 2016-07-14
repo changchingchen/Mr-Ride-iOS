@@ -22,7 +22,7 @@ class MapInfoViewController: UIViewController {
         static let Identifier = "MapInfoViewController"
     }
 
-    var parentVC: LandingContainerViewController {
+    private var parentVC: LandingContainerViewController {
         return self.navigationController?.parentViewController as! LandingContainerViewController
     }
     
@@ -136,9 +136,7 @@ class MapInfoViewController: UIViewController {
         didSet {
             pickerViewToolBar.barStyle = .Default
             pickerViewToolBar.translucent = true
-
             pickerViewToolBar.userInteractionEnabled = true
-//            pickerViewToolBar.hidden = true
         }
     }
     @IBOutlet weak var pickerView: UIPickerView! {
@@ -154,13 +152,6 @@ class MapInfoViewController: UIViewController {
             shelterView.hidden = true
         }
     }
-    
-    @IBOutlet weak var pickerContainerViewHeight: NSLayoutConstraint!
-//    {
-//        didSet {
-//            pickerContainerViewHeight.constant = 0.0
-//        }
-//    }
 
     
     @IBAction func cancelPicker(sender: UIBarButtonItem) {
@@ -176,6 +167,7 @@ class MapInfoViewController: UIViewController {
         
         if let place = Place(rawValue: pickerButtonTitle) {
             mapView.removeAnnotations(annotations)
+            mapView.removeAnnotations(toiletAnnotations)
             annotations.removeAll()
             switch place {
             case .UbikeStation:
@@ -196,23 +188,32 @@ class MapInfoViewController: UIViewController {
                     }
                 }
             case .Toilet:
-                locationInfoDataManager.readToiletData {
-                    toilets in
-                    if toilets.count > 0 {
-                        
-                        for toilet in toilets {
-                            let location = CLLocationCoordinate2D(latitude: toilet.latitude, longitude: toilet.longitude)
-                            let dashboardInfo = DashboardInfo(title: toilet.placeName, detail: toilet.placeType, address: toilet.address, distanceInTime: "0")
-                            let annotation = CustomizedAnnotation(identifier: place.rawValue, coordinate: location, imageNamed: self.annotationImageNamed, dashboardInfo: dashboardInfo, title: toilet.placeName, subtitle: nil)
-                            annotation.coordinate = location
-                            self.annotations.append(annotation)
+                if toiletAnnotations.isEmpty {
+                    locationInfoDataManager.readToiletData {
+                        toilets in
+                        if toilets.count > 0 {
+                            
+                            for toilet in toilets {
+                                let location = CLLocationCoordinate2D(latitude: toilet.latitude, longitude: toilet.longitude)
+                                let dashboardInfo = DashboardInfo(title: toilet.placeName, detail: toilet.placeType, address: toilet.address, distanceInTime: "0")
+                                let annotation = CustomizedAnnotation(identifier: place.rawValue, coordinate: location, imageNamed: self.annotationImageNamed, dashboardInfo: dashboardInfo, title: toilet.placeName, subtitle: nil)
+                                annotation.coordinate = location
+                                self.toiletAnnotations.append(annotation)
+                            }
+                            
+                            self.mapView.addAnnotations(self.toiletAnnotations)
+                            
                         }
-                        
-                        self.mapView.addAnnotations(self.annotations)
-                        
                     }
+                } else {
+                    for (index, toiletAnnotation) in toiletAnnotations.enumerate() {
+//                        toiletAnnotation.coordinate
+//                        toiletAnnotation.dashboardInfo.distanceInTime
+                    }
+                    
+                    self.mapView.addAnnotations(toiletAnnotations)
+
                 }
-                
                 
             }
         }
@@ -225,14 +226,16 @@ class MapInfoViewController: UIViewController {
     var locationInfos: [LocationInformation]?
     
     private var annotations = [CustomizedAnnotation]()
-    
+    private var toiletAnnotations = [CustomizedAnnotation]()
+    private var expectedTravelTimeInMin = 10.0
     let locationInfoDataManager = LocationInfoDataManager.sharedInstance
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = UIColor.mrLightblueColor()
-        navigationController?.navigationBar.topItem?.title = "Map"
+        self.view.backgroundColor = UIColor.mrLightblueColor()
+        self.navigationController?.navigationBar.topItem?.titleView = nil
+        self.navigationController?.navigationBar.topItem?.title = "Map"
 
         
         setupDashboardLabelStyle()
@@ -241,28 +244,47 @@ class MapInfoViewController: UIViewController {
         locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
+        if let center = locationManager.location?.coordinate {
+            let region = MKCoordinateRegionMakeWithDistance(center, 1000, 1000)
+            self.mapView.setRegion(region, animated: false)
+//            locationManager.stopUpdatingLocation()
+        }
+
         
+        let currentLocation = locationManager.location?.coordinate
+
+        let sourceLocation = CLLocationCoordinate2D(latitude: 25.043442, longitude: 121.564951)
+        let destinationLocation = CLLocationCoordinate2D(latitude: 25.044442, longitude: 121.565951)
+        getEstimatedTimeBetweenTwoLocations(from: sourceLocation, to: destinationLocation)
         
         locationInfoDataManager.readYBStationData {
             ybStations in
+            
+            print("Enter readYBStationData")
+            
             if ybStations.count > 0 {
                 
                 for ybStation in ybStations {
                     let location = CLLocationCoordinate2D(latitude: ybStation.latitude, longitude: ybStation.longitude)
-                    let dashboardInfo = DashboardInfo(title: ybStation.placeNameCn, detail: ybStation.districtCn, address: ybStation.addressCn, distanceInTime: "0")
-                    let annotation = CustomizedAnnotation(identifier: Place.UbikeStation.rawValue,coordinate: location, imageNamed: self.annotationImageNamed, dashboardInfo: dashboardInfo, title: "\(ybStation.availableBikes) Bike(s) Left", subtitle: nil)
+
+                    
+                    
+                    if let currentLocation = currentLocation {
+                        print("currentLocation = \(currentLocation)")
+                        self.getEstimatedTimeBetweenTwoLocations(from: currentLocation, to: location)
+                    }
+                    
+                    let dashboardInfo = DashboardInfo(title: ybStation.placeNameCn, detail: ybStation.districtCn, address: ybStation.addressCn, distanceInTime: "\(self.expectedTravelTimeInMin)")
+                    let annotation = CustomizedAnnotation(identifier: Place.UbikeStation.rawValue, coordinate: location, imageNamed: self.annotationImageNamed, dashboardInfo: dashboardInfo, title: "\(ybStation.availableBikes) Bike(s) Left", subtitle: nil)
                     annotation.coordinate = location
                     self.annotations.append(annotation)
                 }
                 
                 self.mapView.addAnnotations(self.annotations)
-                
+
             }
         }
 
-        
-        
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -274,29 +296,22 @@ class MapInfoViewController: UIViewController {
         print("MapInfoViewController destroyed!")
     }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
 
 extension MapInfoViewController: CLLocationManagerDelegate {
     
-    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if let location = locations.last {
-            let center = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
-            let region = MKCoordinateRegionMakeWithDistance(center, 1000, 1000)
-            self.mapView.setRegion(region, animated: false)
-            locationManager.stopUpdatingLocation()
-
-        }
-    }
+//    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+//        
+////        print("locationManager didUpdateLocations")
+//        if let location = locations.last {
+//            let center = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+//            let region = MKCoordinateRegionMakeWithDistance(center, 1000, 1000)
+//            self.mapView.setRegion(region, animated: false)
+//            locationManager.stopUpdatingLocation()
+//
+//        }
+//    }
     
     func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
         print("Error: \(error.localizedDescription)")
@@ -359,6 +374,39 @@ extension MapInfoViewController: MKMapViewDelegate {
     func mapView(mapView: MKMapView, didDeselectAnnotationView view: MKAnnotationView) {
         view.backgroundColor = UIColor.whiteColor()
         dashboardView.hidden = true
+    }
+    
+    
+    private func getEstimatedTimeBetweenTwoLocations(from sourceLocation: CLLocationCoordinate2D, to destinationLocation: CLLocationCoordinate2D) {
+        
+        let request = MKDirectionsRequest()
+        request.source = MKMapItem(placemark: MKPlacemark(coordinate: sourceLocation, addressDictionary: nil))
+        request.destination = MKMapItem(placemark: MKPlacemark(coordinate: destinationLocation, addressDictionary: nil))
+        request.transportType = .Walking
+        request.requestsAlternateRoutes = false
+        let direction = MKDirections(request: request)
+        
+        direction.calculateDirectionsWithCompletionHandler { [unowned self] resp, err in
+            
+            print("Enter DirectionsWithCompletionHandler")
+            
+            
+            if let error = err {
+//                print(error)
+                return
+            }
+            
+            
+            
+            
+            guard let response = resp else { return }
+            
+            if let route = response.routes.last {
+                print("route.expectedTravelTime = \(route.expectedTravelTime)")
+                self.expectedTravelTimeInMin = route.expectedTravelTime / 60
+            }
+            
+        }
     }
 }
 
@@ -458,16 +506,14 @@ extension MapInfoViewController: UIPickerViewDataSource {
     
     private func showPickerView() {
         pickerContainerView.hidden = false
-//        pickerContainerViewHeight.constant = 260.0
-//        pickerViewToolBar.hidden = false
-//        shelterView.hidden = false
+        parentVC.scrollView.scrollEnabled = false
+        shelterView.hidden = false
     }
     
     private func hidePickerView() {
         pickerContainerView.hidden = true
-//        pickerContainerViewHeight.constant = 0.0
-//        pickerViewToolBar.hidden = true
-//        shelterView.hidden = true
+        parentVC.scrollView.scrollEnabled = true
+        shelterView.hidden = true
     }
     
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
